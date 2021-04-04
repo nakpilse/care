@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="620.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CashierUXController">
+   <children>
+      <JFXTabPane fx:id="mainTabPane" layoutX="456.0" layoutY="192.0" styleClass="vtab-pane" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab fx:id="terminalTab" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox layoutX="171.0" layoutY="105.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="350.0" styleClass="hover-panel">
+                                 <children>
+                                    <Label style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="SCAN CHARGE NUMBER" />
+                                    <AnchorPane maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="t1chargeF" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <JFXButton fx:id="t1chargeBtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="4.0" maxHeight="30.0" maxWidth="35.0" minHeight="30.0" minWidth="35.0" onAction="#searchChargeNumber" prefHeight="30.0" prefWidth="35.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView glyphName="SEARCH" size="16" style="-fx-fill: mutted-color;" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <Label layoutX="20.0" layoutY="15.0" style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="ENTER PATIENT NAME" />
+                                    <AnchorPane layoutX="20.0" layoutY="34.0" maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" prefHeight="30.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="t1patientF" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <JFXButton fx:id="t1patientBtn" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" layoutX="122.0" layoutY="4.0" maxHeight="30.0" maxWidth="35.0" minHeight="30.0" minWidth="35.0" onAction="#searchPatientCharges" prefHeight="30.0" prefWidth="35.0" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <graphic>
+                                                <FontAwesomeIconView glyphName="SEARCH" size="16" style="-fx-fill: mutted-color;" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </AnchorPane>
+                                    <Label maxHeight="20.0" maxWidth="1.7976931348623157E308" minHeight="20.0" prefHeight="20.0" />
+                                    <JFXComboBox fx:id="pendingchargeCombo" maxWidth="1.7976931348623157E308" />
+                                    <TableView fx:id="t1resultsTbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                    <Separator prefWidth="200.0" />
+                                    <HBox maxHeight="27.0" prefHeight="27.0" prefWidth="200.0">
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" styleClass="anton-font" text="ITEMS : " />
+                                          <Label fx:id="t1resultsLbl" layoutX="18.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="anton-font" text="0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" styleClass="hover-panel" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: primary-color; -fx-border-radius: 8 8 0 0; -fx-background-radius: 8 8 0 0;" styleClass="hover-panel">
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" style="-fx-font-size: 16px;" styleClass="anton-font" text="CHARGES" textFill="WHITE" />
+                                          <Label fx:id="t1pnameLbl" layoutX="18.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" style="-fx-text-fill: #34495e; -fx-font-size: 16px;" styleClass="anton-font" textFill="WHITE" HBox.hgrow="ALWAYS" />
+                                          <Label fx:id="t1phidLbl" alignment="CENTER_RIGHT" layoutX="161.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="100.0" style="-fx-font-size: 16px;" styleClass="anton-font" textFill="WHITE" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="t1pchargeitemsTbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <VBox.margin>
+                                          <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                                       </VBox.margin>
+                                    </TableView>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox maxHeight="27.0" prefHeight="27.0" prefWidth="200.0">
+                                       <padding>
+                                          <Insets left="8.0" right="8.0" />
+                                       </padding>
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" styleClass="anton-font" text="ITEMS : " />
+                                          <Label fx:id="t1chargescountLbl" layoutX="18.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="anton-font" text="0" />
+                                          <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
+                                          <JFXButton fx:id="t1clearBtn" alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="24.0" onAction="#clearTransaction" styleClass="gbtn-danger" text="CLEAR TRANSACTION">
+                                             <graphic>
+                                                <FontAwesomeIconView glyphName="RECYCLE" size="12" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="200.0" prefWidth="260.0" styleClass="hover-panel" HBox.hgrow="SOMETIMES">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <children>
+                                    <AnchorPane prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: primary-color; -fx-background-radius: 8 8 0 0;" styleClass="hover-panel">
+                                       <children>
+                                          <Label layoutX="14.0" layoutY="14.0" style="-fx-text-fill: white; -fx-font-size: 16px;" styleClass="anton-font" text="TOTAL SALES" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="5.0" />
+                                          <Label fx:id="t1subtotalLbl" alignment="CENTER_RIGHT" layoutX="69.0" layoutY="32.0" style="-fx-font-size: 24;" styleClass="anton-font" text="0.00" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="20.0" />
+                                          <Label layoutX="97.0" layoutY="10.0" style="-fx-text-fill: white;" text="(VAT Inclusive)" textFill="#fcfcfc" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="7.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <HBox>
+                                       <children>
+                                          <JFXButton fx:id="t1scpwddiscountBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="86.66666667" onAction="#addSCPWDDiscount" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-warning" text="SC/PWD &gt; EMPLOYEE &gt; OTHER DISCOUNTS" HBox.hgrow="ALWAYS">
+                                             <graphic>
+                                                <FontAwesomeIconView fill="WHITE" glyphName="PERCENT" size="18" />
+                                             </graphic>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                    <GridPane maxHeight="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="12.0" minWidth="12.0" prefWidth="12.0" />
+                                        <ColumnConstraints hgrow="NEVER" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="24.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                        <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="LESS VAT/VAT EXEMPT" GridPane.rowIndex="6" />
+                                          <Label layoutX="10.0" layoutY="33.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="LESS SC/PWD Disc" GridPane.rowIndex="7" />
+                                          <Label layoutX="10.0" layoutY="57.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="LESS EMP Disc" GridPane.rowIndex="8" />
+                                          <Label alignment="CENTER" layoutX="10.0" layoutY="9.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" layoutX="121.0" layoutY="33.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <Label alignment="CENTER" layoutX="121.0" layoutY="57.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Label layoutX="10.0" layoutY="81.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="LESS OTHER Disc" GridPane.rowIndex="9" />
+                                          <Label alignment="CENTER" layoutX="121.0" layoutY="81.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <Label layoutX="10.0" layoutY="105.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="VATable SALES" />
+                                          <Label layoutX="10.0" layoutY="9.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="NON-VAT SALES" GridPane.rowIndex="1" />
+                                          <Label layoutX="10.0" layoutY="33.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="ZERO RATED SALES" GridPane.rowIndex="2" />
+                                          <Label layoutX="10.0" layoutY="57.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="VAT" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" layoutX="126.0" layoutY="153.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" />
+                                          <Label alignment="CENTER" layoutX="126.0" layoutY="9.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" layoutX="126.0" layoutY="33.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" layoutX="126.0" layoutY="57.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label layoutX="10.0" layoutY="153.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="NET of VAT" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" layoutX="126.0" layoutY="153.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="-" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label fx:id="t1vatsalesLbl" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="9.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" />
+                                          <Label fx:id="t1vatexLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="9.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label fx:id="t1zeroLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="33.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <Label fx:id="t1taxLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="57.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <Label fx:id="t1netvatLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="81.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <Label fx:id="t1lessvatLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="134.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <Label fx:id="t1scpwdLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="158.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <Label fx:id="t1empLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="182.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                          <Label fx:id="t1otherLbl" alignment="CENTER_RIGHT" layoutX="138.0" layoutY="206.0" maxWidth="1.7976931348623157E308" style="-fx-text-fill: mutted-color; -fx-font-size: 16px;" styleClass="anton-font" text="0.00" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="8.0" right="8.0" />
+                                       </VBox.margin>
+                                    </GridPane>
+                                    <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: primary-color;" VBox.vgrow="NEVER">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="2.0" style="-fx-text-fill: white; -fx-font-size: 16px;" styleClass="anton-font" text="NET SALES / TOTAL PAYABLES" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="2.0" />
+                                          <Label fx:id="t1netLbl" alignment="CENTER_RIGHT" layoutX="8.0" layoutY="20.0" maxHeight="35.0" prefHeight="35.0" style="-fx-font-size: 24;" styleClass="anton-font" text="0.00" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="20.0" />
+                                       </children>
+                                    </AnchorPane>
+                                    <JFXButton fx:id="t1invoiceBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayInvoice" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-success" text="PAY / PRINT INVOICE">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="t1orBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayOR" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-danger" text="PAY / PRINT OR        ">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="t1payBtn" graphicTextGap="10.0" layoutX="10.0" layoutY="473.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#doPaymentOnly" prefHeight="32.0" style="-fx-background-radius: 0 0 8 8; -jfx-button-type: FLAT;" styleClass="btn-primary" text="PAYMENT ONLY       ">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="chargesTab" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <TableView fx:id="t2Tbl" layoutX="31.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <HBox layoutX="-25.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t2resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField fx:id="t2searchF" labelFloat="true" layoutX="26.0" layoutY="14.0" prefWidth="250.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="283.0" layoutY="34.0" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="32.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="paymentsTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <TableView fx:id="t3Tbl" layoutX="31.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <HBox layoutX="-25.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t3resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField fx:id="t3searchF" labelFloat="true" layoutX="26.0" layoutY="14.0" prefWidth="250.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="283.0" layoutY="34.0" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="32.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="advancesTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <TableView fx:id="t4Tbl" layoutX="31.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <HBox layoutX="-25.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t4resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField fx:id="t4searchF" labelFloat="true" layoutX="26.0" layoutY="14.0" prefWidth="250.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="283.0" layoutY="34.0" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="32.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="billingTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <TableView fx:id="t5Tbl" layoutX="31.0" layoutY="63.0" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <HBox layoutX="-25.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t5resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField fx:id="t5searchF" labelFloat="true" layoutX="26.0" layoutY="14.0" prefWidth="250.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="283.0" layoutY="34.0" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="32.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <HBox alignment="CENTER_LEFT" layoutX="73.0" layoutY="526.0" prefHeight="85.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: derive( dark-color,70%);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXToggleNode fx:id="terminalBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" maxHeight="60.0" maxWidth="140.0" onAction="#showPaymentTerminal" prefHeight="60.0" prefWidth="140.0" selected="true" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Payment Terminal" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Cash%20Register_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="chargesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="20.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showCharges" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Hospital Charges" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Check_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="paymentHistoryBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="170.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showPaymentHistory" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Payment History" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Accounting_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="advancesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="320.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showAdvances" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Cash Advances" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profiles_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="billingBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="480.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showBillings" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Billing Statements" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profiles_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+      <JFXButton fx:id="unpaidHCBtn" maxHeight="25.0" maxWidth="50.0" minHeight="25.0" minWidth="40.0" onAction="#showUnpaidHospitalCharges" prefHeight="25.0" prefWidth="40.0" style="-fx-font-size: 12px;" styleClass="btn-danger" text="233" textFill="WHITE" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="270.0" />
+   </children>
+</AnchorPane>

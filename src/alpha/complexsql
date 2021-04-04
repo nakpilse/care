@@ -1,0 +1,26 @@
+SELECT 
+i.id,
+i.code,
+i.description,
+i.genericname,
+i.category
+`i.type`,
+cd.quantity,
+i.unit_measure,
+i.form,
+i.stregnth,
+cd.unitcost,
+cd.unitselling,
+cd.taxable,
+cd.pnf,
+cd.available,
+cd.pharmacyitem_id,
+cd.id as pharmacystock_id
+FROM pharmacyitems i
+JOIN  (
+              SELECT    MAX(pharmacystocks.id) max_id, pharmacystocks.pharmacyitem_id ,SUM(pharmacystocks.quantity)
+              FROM      pharmacystocks 
+              GROUP BY  pharmacystocks.pharmacyitem_id
+              order by pharmacystocks.created_at desc
+          ) pharmacystocks ON (pharmacystocks.pharmacyitem_id = i.id)
+JOIN      pharmacystocks cd ON (cd.id = max_id);

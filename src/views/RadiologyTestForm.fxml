@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="650.0" maxWidth="900.0" minHeight="650.0" minWidth="900.0" prefHeight="650.0" prefWidth="900.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RadiologyTestFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="55.0" minHeight="55.0" style="-fx-background-color: info-gradient;" styleClass="form-title-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLbl" graphicTextGap="10.0" maxHeight="55.0" maxWidth="1.7976931348623157E308" minHeight="55.0" prefHeight="55.0" styleClass="form-title-label" text="Radiology Test" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Box_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <JFXButton fx:id="closeBtn" cancelButton="true" focusTraversable="false" onAction="#formClose" styleClass="btn-close" text="Close" />
+         </children>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </HBox>
+      <VBox layoutX="25.0" layoutY="80.0" prefHeight="200.0" prefWidth="350.0" spacing="25.0" styleClass="hover-panel" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox maxHeight="28.0" prefHeight="28.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <JFXTextField fx:id="testnumF" labelFloat="true" promptText="Record #" />
+                  <JFXDatePicker fx:id="testdateF" overLay="true" promptText="Record Date" />
+               </children>
+            </HBox>
+            <JFXTextField fx:id="testnameF" editable="false" labelFloat="true" promptText="Test" />
+            <HBox maxHeight="28.0" prefHeight="28.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <JFXTextField fx:id="testcategF" editable="false" labelFloat="true" promptText="Category" />
+                  <JFXTextField fx:id="testgrpF" editable="false" layoutX="10.0" layoutY="10.0" promptText="Group" />
+               </children>
+            </HBox>
+            <JFXTextField fx:id="physicianF" labelFloat="true" promptText="Physician" />
+            <JFXTextArea fx:id="findingsF" labelFloat="true" maxHeight="100.0" promptText="Findings" />
+            <JFXTextArea fx:id="remarksF" labelFloat="true" layoutX="25.0" layoutY="255.0" maxHeight="100.0" promptText="Remarks" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="15.0" right="15.0" top="25.0" />
+         </padding>
+      </VBox>
+      <Label layoutX="250.0" layoutY="60.0" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" style="-fx-text-fill: gray-gradient;" styleClass="title-label" text="Information" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="80.0">
+         <padding>
+            <Insets left="-10.0" top="-20.0" />
+         </padding>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="591.0" prefHeight="45.0" prefWidth="200.0" spacing="10.0" styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <JFXTextField fx:id="medtechF" labelFloat="true" prefWidth="250.0" promptText="RAD Technologist" />
+            <JFXTextField fx:id="pathoF" labelFloat="true" layoutX="20.0" layoutY="18.0" prefWidth="250.0" promptText="Radiologist / Sonologist" />
+            <JFXTextField fx:id="orF" editable="false" labelFloat="true" layoutX="230.0" layoutY="18.0" prefWidth="100.0" promptText="OR #" />
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="printBtn" contentDisplay="GRAPHIC_ONLY" graphicTextGap="6.0" layoutX="780.0" layoutY="10.0" maxHeight="45.0" maxWidth="45.0" minWidth="45.0" onAction="#formPrint" prefHeight="45.0" prefWidth="45.0" styleClass="btn-control" text="Save">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="16" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="saveBtn" graphicTextGap="6.0" maxHeight="45.0" maxWidth="90.0" minWidth="90.0" onAction="#formSave" prefHeight="45.0" prefWidth="90.0" styleClass="btn-success" text="Save">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="14" />
+               </graphic>
+               <HBox.margin>
+                  <Insets right="-10.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </HBox>
+      <VBox layoutX="376.0" layoutY="48.0" spacing="25.0" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="200.0" spacing="10.0" styleClass="hover-panel">
+               <children>
+                  <JFXTextField fx:id="patientF" editable="false" labelFloat="true" promptText="Patient Name" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="ageF" labelFloat="true" layoutX="20.0" layoutY="28.0" maxWidth="45.0" prefWidth="45.0" promptText="Age" />
+                  <JFXTextField fx:id="yearsF" layoutX="187.0" layoutY="28.0" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" promptText="Years / Months old" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="495.0" styleClass="hover-panel" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label maxHeight="20.0" minHeight="20.0" prefHeight="20.0" style="-fx-text-fill: gray-gradient;" styleClass="title-label" text="Results" AnchorPane.rightAnchor="10.0">
+                     <padding>
+                        <Insets left="-10.0" top="-20.0" />
+                     </padding>
+                  </Label>
+                  <GridPane hgap="10.0" layoutX="8.600000381469727" layoutY="18.600000381469727" vgap="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="238.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="237.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <TableView fx:id="resultsTbl" prefHeight="130.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                        <JFXTextField fx:id="techniqueF" editable="false" labelFloat="true" promptText="Technique" />
+                        <JFXTextField fx:id="historyF" editable="false" labelFloat="true" layoutX="10.0" layoutY="20.0" promptText="Clinical History" GridPane.columnIndex="1" />
+                        <JFXTextField fx:id="comparisonF" editable="false" labelFloat="true" layoutX="10.0" layoutY="20.0" promptText="Comparison" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <JFXTextArea fx:id="impresionF" labelFloat="true" maxHeight="100.0" promptText="Impression" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

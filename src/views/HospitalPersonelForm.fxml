@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" maxHeight="600.0" maxWidth="450.0" minHeight="600.0" minWidth="450.0" prefHeight="600.0" prefWidth="450.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HospitalPersonelFormController">
+   <children>
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="100.0" />
+      <HBox layoutX="-9.0" layoutY="-9.0" style="-fx-background-color: info-gradient;" styleClass="form-title-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label graphicTextGap="10.0" maxHeight="55.0" minHeight="55.0" prefHeight="55.0" styleClass="form-title-label" text="Hospital Personel Information">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Male%20User_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </HBox>
+      <GridPane hgap="10.0" layoutX="197.0" layoutY="250.0" prefHeight="500.0" prefWidth="450.0" vgap="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="120.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXTextField fx:id="nameF" labelFloat="true" promptText="Name" GridPane.columnSpan="2" />
+            <JFXDatePicker fx:id="bdateF" promptText="Birthdate" styleClass="icon-hidden" GridPane.rowIndex="1" />
+            <JFXButton fx:id="bdateBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="text-field-icon-btn" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <graphic>
+                  <FontAwesomeIconView glyphName="CALENDAR_ALT" size="16" />
+               </graphic>
+            </JFXButton>
+            <JFXComboBox fx:id="genderF" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Gender" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="specializationF" labelFloat="true" layoutX="10.0" layoutY="23.0" promptText="Specialization" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="licenseF" labelFloat="true" layoutX="180.0" layoutY="153.0" promptText="License #" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="consultationF" disable="true" editable="false" labelFloat="true" layoutX="10.0" layoutY="218.0" promptText="Consultation Fee" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <JFXTextField fx:id="emailF" labelFloat="true" layoutX="10.0" layoutY="218.0" promptText="Email" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <JFXTextField fx:id="mobileF" labelFloat="true" layoutX="10.0" layoutY="283.0" promptText="Mobile #" GridPane.rowIndex="5" />
+            <JFXTextField fx:id="phoneF" labelFloat="true" layoutX="10.0" layoutY="348.0" promptText="Phone #" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <JFXTextField fx:id="occupationF" labelFloat="true" layoutX="180.0" layoutY="153.0" promptText="Hospital Occupation" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <JFXButton fx:id="closeBtn" layoutX="389.0" layoutY="55.0" onAction="#formClose" styleClass="btn-close" text="Close" AnchorPane.bottomAnchor="557.5" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="12.5" />
+      <JFXButton fx:id="saveBtn" graphicTextGap="6.0" layoutX="363.0" layoutY="522.0" maxHeight="40.0" maxWidth="90.0" onAction="#formSave" prefHeight="40.0" prefWidth="90.0" styleClass="btn-success" text="Save" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="35.0">
+         <graphic>
+            <FontAwesomeIconView fx:id="saveIcon" fill="WHITE" glyphName="SAVE" size="14" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

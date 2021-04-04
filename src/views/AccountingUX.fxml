@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AccountingUXController">
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <JFXToggleNode fx:id="paymentsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadPaymentsMenu" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="PAYMENTS" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Accounting_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="expensesMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="10.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadExpencesMenu" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="EXPENSES" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Clipboard_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="15.0" layoutY="90.0" styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="90.0">
+         <children>
+            <JFXTabPane fx:id="mainTabPane" styleClass="vtab-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab fx:id="paymentsTab" text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t1Tbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t1searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="30.0" />
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t1resultsLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="t1detailsLbl" alignment="CENTER_RIGHT" contentDisplay="TEXT_ONLY" focusTraversable="false" layoutX="10.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="expencesTab" text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t2Tbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t2searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="25.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="30.0" />
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                 <children>
+                                    <Label fx:id="t2resultsLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="t2detailsLbl" alignment="CENTER_RIGHT" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <JFXButton fx:id="t2addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addExpense" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Expense" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="620.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BillingUXController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="60.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <JFXToggleNode fx:id="billingMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadBillingMenu" prefHeight="60.0" prefWidth="140.0" selected="true" styleClass="tab-toggle-btn" text="Billing Statements" wrapText="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profiles_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="chargeMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="10.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadChargeMenu" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Charge Records" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Check_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="paymentMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="160.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadPaymentMenu" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Payment Records" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Clipboard_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="benefitsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="310.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadBenefitsMenu" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Benefits Records" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Unit_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+         </children>
+      </HBox>
+      <JFXTabPane fx:id="mainTabPane" layoutX="135.0" layoutY="228.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="vtab-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
+         <tabs>
+            <Tab fx:id="billingTab" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="t1searchF" labelFloat="true" maxWidth="250.0" promptText="Search" styleClass="anton-font" GridPane.hgrow="NEVER" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon">
+                                 <GridPane.margin>
+                                    <Insets left="230.0" />
+                                 </GridPane.margin>
+                              </FontAwesomeIconView>
+                              <JFXButton fx:id="newt1Btn" focusTraversable="false" maxHeight="30.0" onAction="#addNewBillStatement" prefHeight="30.0" style="-fx-background-radius: 3;" text="Create New Record" GridPane.halignment="RIGHT">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <TableView fx:id="t1table" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <Label fx:id="t1resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="footer-panel" />
+                                    <String fx:value="anton-font" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="15.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="chargeTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="t2searchF" labelFloat="true" maxWidth="250.0" promptText="Search" styleClass="anton-font" GridPane.hgrow="NEVER" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon">
+                                 <GridPane.margin>
+                                    <Insets left="230.0" />
+                                 </GridPane.margin>
+                              </FontAwesomeIconView>
+                              <JFXButton fx:id="newt2Btn" focusTraversable="false" maxHeight="30.0" onAction="#addNewHospitalCharge" prefHeight="30.0" style="-fx-background-radius: 3;" text="Create New Record" GridPane.halignment="RIGHT">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <TableView fx:id="t2table" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <Label fx:id="t2resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="footer-panel" />
+                                    <String fx:value="anton-font" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="15.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="paymentsTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="t3searchF" labelFloat="true" maxWidth="250.0" promptText="Search" styleClass="anton-font" GridPane.hgrow="NEVER" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon">
+                                 <GridPane.margin>
+                                    <Insets left="230.0" />
+                                 </GridPane.margin>
+                              </FontAwesomeIconView>
+                              <TableView fx:id="t3table" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <Label fx:id="t3resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="footer-panel" />
+                                    <String fx:value="anton-font" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="15.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="benefitsTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="65.0" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="t4searchF" labelFloat="true" maxWidth="250.0" promptText="Search" styleClass="anton-font" GridPane.hgrow="NEVER" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon">
+                                 <GridPane.margin>
+                                    <Insets left="230.0" />
+                                 </GridPane.margin>
+                              </FontAwesomeIconView>
+                              <TableView fx:id="t4table" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <Label fx:id="t4resLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" GridPane.rowIndex="2">
+                                 <styleClass>
+                                    <String fx:value="footer-panel" />
+                                    <String fx:value="anton-font" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="15.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

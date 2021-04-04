@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: transparent;" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientInfoUIController">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="130.0" styleClass="hover-panel" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0">
+         <children>
+            <JFXTabPane side="LEFT" styleClass="vtab-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+               <tabs>
+                  <Tab text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Consultation Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New Cunsultation" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Admission Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New Admission" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Emergency Room Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New ER Record" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Laboratory Examination Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New Laboratory Record" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Radiology Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New Radiology Record" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Operation Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="New Cunsultation" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Transaction History" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Billing Records" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="452.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: gray-gradient;" styleClass="title-label" text="Schedules" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <TableView layoutX="14.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
+                              <HBox maxHeight="30.0" prefHeight="30.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label maxHeight="1.7976931348623157E308" text="Results : 0" />
+                                 </children>
+                              </HBox>
+                              <JFXTextField labelFloat="true" layoutX="14.0" layoutY="36.0" minWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="11.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="215.0" layoutY="55.0" size="16" styleClass="gray-icon" />
+                              <JFXButton layoutX="822.0" layoutY="75.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="FILTER" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton graphicTextGap="8.0" layoutX="814.0" layoutY="36.0" prefHeight="30.0" styleClass="btn-primary" text="Create Schedule" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="37.0">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PLUS_SQUARE" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
+      <HBox layoutX="117.0" layoutY="47.0" prefHeight="75.0" prefWidth="200.0" styleClass="hover-panel" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <JFXButton contentDisplay="TOP" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Profile" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profile_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="85.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="82.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Consultations" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Stethoscope_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="160.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Admissions" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Hotel%20Bed_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="242.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Emergency" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/gAmbulance_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="385.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Laboratory" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Lab%20Items_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="485.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Radiology" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/X-ray_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="452.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="75.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Operations" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Heart%20with%20Pulse_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="527.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="79.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Transactions" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/gCash%20Register_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="602.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="79.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Bills" textAlignment="CENTER" wrapText="true" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/gCheck_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton contentDisplay="TOP" layoutX="762.0" layoutY="10.0" maxHeight="75.0" maxWidth="1.7976931348623157E308" minHeight="75.0" minWidth="60.0" prefWidth="79.0" style="-fx-font-size: 11px;" styleClass="gbtn-primary" text="Schedules" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Calendar_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets left="65.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="182.0" layoutY="324.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label maxHeight="1.7976931348623157E308" style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="Patient Name : " HBox.hgrow="NEVER" />
+            <Label fx:id="displayNameLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: primary-gradient;" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="2.0" />
+               </HBox.margin>
+            </Label>
+            <Label layoutX="681.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="Birth : " />
+            <Label fx:id="displayBirthLbl" layoutX="699.0" layoutY="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: primary-gradient;" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="2.0" />
+               </HBox.margin>
+            </Label>
+            <Label layoutX="408.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="Age : " />
+            <Label fx:id="displayAgeLbl" layoutX="424.0" layoutY="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-text-fill: primary-gradient;" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="2.0" />
+               </HBox.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" style="-fx-text-fill: mutted-color;" styleClass="anton-font" text="ID : " />
+            <Label fx:id="displayIdLbl" alignment="CENTER_RIGHT" layoutX="82.0" layoutY="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="120.0" style="-fx-text-fill: primary-gradient;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets top="2.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <Rectangle fx:id="profileView" arcHeight="5.0" arcWidth="5.0" cache="true" cacheHint="QUALITY" fill="#b4b6b9" height="105.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="profile-rectangle" width="105.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+   </children>
+</AnchorPane>

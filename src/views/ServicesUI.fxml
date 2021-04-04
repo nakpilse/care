@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ServicesUIController">
+   <children>
+      <BorderPane layoutX="20.0" layoutY="90.0" styleClass="hover-panel" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="90.0">
+         <center>
+            <JFXTabPane fx:id="mainTab" styleClass="vtab-pane">
+               <tabs>
+                  <Tab fx:id="servicesTab" text="Untitled Tab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t1Tbl" layoutX="83.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t1searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="27.0" />
+                              <JFXButton fx:id="t1addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addService" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Service" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <HBox layoutX="254.0" layoutY="-15.0" prefHeight="24.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label fx:id="t1resultLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="labservicesTab" text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t2Tbl" layoutX="83.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t2searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="27.0" />
+                              <JFXButton fx:id="t2addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addLabService" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Laboratory Service" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <HBox layoutX="254.0" layoutY="-15.0" prefHeight="24.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label fx:id="t2resultLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="radservicesTab" text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t3Tbl" layoutX="83.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t3searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="27.0" />
+                              <JFXButton fx:id="t3addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addRadService" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Radiology Service" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <HBox layoutX="254.0" layoutY="-15.0" prefHeight="24.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label fx:id="t3resultLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="roomsTab" text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t4Tbl" layoutX="83.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t4searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="27.0" />
+                              <JFXButton fx:id="t4addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addRoomRate" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Room Rate" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <HBox layoutX="254.0" layoutY="-15.0" prefHeight="24.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label fx:id="t4resultLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="packagesTab" text="Untitled Tab">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="t5Tbl" layoutX="83.0" layoutY="126.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                              <JFXTextField fx:id="t5searchF" focusTraversable="false" labelFloat="true" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" />
+                              <FontAwesomeIconView fill="#838383" glyphName="SEARCH" size="16" styleClass="gray-icon" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="27.0" />
+                              <JFXButton fx:id="t5addBtn" focusTraversable="false" maxHeight="30.0" onAction="#addPackage" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Package" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="btn-primary" />
+                                    <String fx:value="cell-btn" />
+                                 </styleClass>
+                              </JFXButton>
+                              <HBox layoutX="254.0" layoutY="-15.0" prefHeight="24.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <children>
+                                    <Label fx:id="t5resultLbl" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </center>
+      </BorderPane>
+      <HBox layoutX="20.0" layoutY="14.0" prefHeight="60.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
+         <children>
+            <JFXToggleNode fx:id="servicesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" maxHeight="60.0" maxWidth="140.0" onAction="#allServices" prefHeight="60.0" prefWidth="140.0" selected="true" styleClass="tab-toggle-btn" text="ALL Services" wrapText="true">
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Hospital%203_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="labservicesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="10.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#labServices" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Laboratory Services" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Lab%20Items_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="radservicesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="160.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#radServices" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Radiology Services" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Skeleton_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="roomratesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="310.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#roomRates" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Room Rates" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Hotel%20Bed_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="packagesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="460.0" layoutY="10.0" maxHeight="60.0" maxWidth="140.0" onAction="#packages" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Packages" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Unit_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="620.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ManagementUIController">
+   <children>
+      <JFXTabPane fx:id="mainTabPane" layoutX="87.0" layoutY="135.0" styleClass="vtab-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0">
+         <tabs>
+            <Tab fx:id="userTab" closable="false" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="33.0" layoutY="57.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="usersTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <JFXTextField fx:id="usersearchF" focusTraversable="false" labelFloat="true" layoutX="15.0" layoutY="21.0" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                                    <FontAwesomeIconView fill="#838383" glyphName="SEARCH" layoutX="220.0" layoutY="50.0" size="16" styleClass="gray-icon" />
+                                    <JFXButton fx:id="userfilterBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" focusTraversable="false" layoutX="613.0" layoutY="76.0" maxHeight="24.0" maxWidth="45.0" minHeight="24.0" minWidth="45.0" onAction="#filterUserTable" prefHeight="24.0" prefWidth="45.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="76.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FILTER" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="usersresultLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <JFXButton fx:id="useraddBtn" focusTraversable="false" layoutX="1040.0" layoutY="30.0" maxHeight="30.0" onAction="#addUser" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add User" AnchorPane.rightAnchor="15.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn-primary" />
+                                          <String fx:value="cell-btn" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="roomTab" closable="false" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="33.0" layoutY="57.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnSpan="4" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="roomsTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <JFXTextField fx:id="roomsearchF" focusTraversable="false" labelFloat="true" layoutX="15.0" layoutY="21.0" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                                    <FontAwesomeIconView fill="#838383" glyphName="SEARCH" layoutX="220.0" layoutY="50.0" size="16" styleClass="gray-icon" />
+                                    <JFXButton fx:id="roomfilterBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" focusTraversable="false" layoutX="613.0" layoutY="76.0" maxHeight="26.0" maxWidth="45.0" minHeight="26.0" minWidth="45.0" onAction="#filterRoomTable" prefHeight="26.0" prefWidth="45.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="76.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FILTER" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="roomresultsLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <JFXButton fx:id="addroomBtn" focusTraversable="false" layoutX="636.0" layoutY="31.0" maxHeight="30.0" onAction="#addRoom" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Room" AnchorPane.rightAnchor="15.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn-primary" />
+                                          <String fx:value="cell-btn" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="bedTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="bedresultsLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Beds : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="employeeTab" closable="false" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="33.0" layoutY="57.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="employeesTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <JFXTextField fx:id="employeessearchF" focusTraversable="false" labelFloat="true" layoutX="15.0" layoutY="21.0" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                                    <FontAwesomeIconView fill="#838383" glyphName="SEARCH" layoutX="220.0" layoutY="50.0" size="16" styleClass="gray-icon" />
+                                    <JFXButton fx:id="employeesfilterBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" focusTraversable="false" layoutX="613.0" layoutY="76.0" maxHeight="26.0" maxWidth="45.0" minHeight="24.0" minWidth="45.0" onAction="#filterEmployeesTable" prefHeight="26.0" prefWidth="45.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="76.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FILTER" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="employeesresultLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <JFXButton fx:id="addemployeeBtn" focusTraversable="false" layoutX="1038.0" layoutY="30.0" maxHeight="30.0" onAction="#addEmployee" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Employee" AnchorPane.rightAnchor="15.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn-primary" />
+                                          <String fx:value="cell-btn" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="facilityTab" closable="false" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="33.0" layoutY="57.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="facilityTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <JFXTextField fx:id="facilitysearchF" focusTraversable="false" labelFloat="true" layoutX="15.0" layoutY="21.0" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                                    <FontAwesomeIconView fill="#838383" glyphName="SEARCH" layoutX="220.0" layoutY="50.0" size="16" styleClass="gray-icon" />
+                                    <JFXButton fx:id="facilityfilterBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" focusTraversable="false" layoutX="613.0" layoutY="76.0" maxHeight="26.0" maxWidth="45.0" minHeight="26.0" minWidth="45.0" onAction="#filterFacilityTable" prefHeight="26.0" prefWidth="45.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="76.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FILTER" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="facilityresultLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                    <JFXButton fx:id="addfacilityBtn" focusTraversable="false" layoutX="1038.0" layoutY="30.0" maxHeight="30.0" onAction="#addFacility" prefHeight="30.0" style="-fx-background-radius: 3;" text="Add Facility" AnchorPane.rightAnchor="15.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn-primary" />
+                                          <String fx:value="cell-btn" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="logsTab" closable="false" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="33.0" layoutY="57.0" prefHeight="700.0" prefWidth="1200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="225.0" prefWidth="225.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="hover-panel" GridPane.columnSpan="2147483647" GridPane.rowSpan="2147483647">
+                                 <children>
+                                    <TableView fx:id="logsTbl" focusTraversable="false" layoutX="14.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+                                    <JFXTextField fx:id="logssearchF" focusTraversable="false" labelFloat="true" layoutX="15.0" layoutY="21.0" prefWidth="225.0" promptText="Search" styleClass="anton-font" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
+                                    <FontAwesomeIconView fill="#838383" glyphName="SEARCH" layoutX="220.0" layoutY="50.0" size="16" styleClass="gray-icon" />
+                                    <JFXButton fx:id="logsfilterBtn" alignment="BASELINE_LEFT" contentDisplay="RIGHT" focusTraversable="false" layoutX="613.0" layoutY="76.0" maxHeight="26.0" maxWidth="45.0" minHeight="24.0" minWidth="45.0" onAction="#filterLogsTable" prefHeight="26.0" prefWidth="45.0" styleClass="tbl-filter-btn" text="Filter" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="76.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FILTER" size="13" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <HBox layoutY="616.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="200.0" styleClass="footer-panel" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                                       <children>
+                                          <Label fx:id="logsresultLbl" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Results : 0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <HBox alignment="BOTTOM_LEFT" layoutX="84.0" prefHeight="90.0" prefWidth="200.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXToggleNode fx:id="userMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadUsers" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Users" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Male%20User_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="roomMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="30.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadRooms" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Rooms" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Door_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="employeeMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="168.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadEmployees" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Employees" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Management_64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="facilityMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="180.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadFacilities" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Facilities" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Unit_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="logsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="480.0" layoutY="30.0" maxHeight="60.0" maxWidth="140.0" onAction="#loadLogs" prefHeight="60.0" prefWidth="140.0" styleClass="tab-toggle-btn" text="Logs" toggleGroup="$menuGroup" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/LOG_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </JFXToggleNode>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>

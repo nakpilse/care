@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXBadge?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.MaskerPane?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1000.0" prefHeight="720.0" prefWidth="1200.0" style="-fx-background-color: light-color;" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainUIController">
+   <children>
+      <StackPane fx:id="mainStack" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="primaryPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <BorderPane fx:id="mainPane" layoutX="11.0" layoutY="9.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0" />
+                  <AnchorPane cache="true" cacheHint="QUALITY" layoutX="11.0" layoutY="9.0" maxHeight="55.0" maxWidth="1.7976931348623157E308" prefHeight="55.0" prefWidth="200.0" styleClass="top-nav-bar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="systemTitle" alignment="TOP_LEFT" graphicTextGap="8.0" layoutX="61.0" prefHeight="20.0" prefWidth="300.0" styleClass="anton-font" text="NAKPIL SOFTWARES" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="5.0">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Label>
+                        <Label fx:id="systemDesc" layoutX="64.0" layoutY="35.0" prefHeight="17.0" prefWidth="300.0" styleClass="anton-font" text="Health Care Information System" textFill="WHITE" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="30.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="systemLogo" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../assets/HeartPulse_64px.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER_RIGHT" layoutX="986.0" layoutY="-20.0" prefHeight="55.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXBadge minHeight="15.0" minWidth="15.0" text="25" />
+                              <JFXButton fx:id="msgBtn" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="258.0" layoutY="21.0" maxHeight="42.0" maxWidth="42.0" minHeight="42.0" minWidth="42.0" onAction="#loadMsg">
+                                 <graphic>
+                                    <ImageView fitHeight="26.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Chat_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <AnchorPane layoutX="425.0" layoutY="10.0" maxWidth="500.0" minWidth="120.0" prefHeight="30.0" prefWidth="350.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 5; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 5;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="470.0" AnchorPane.rightAnchor="470.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <JFXTextField focusTraversable="false" layoutX="52.0" layoutY="5.0" promptText="Search" style="-jfx-unfocus-color: transparent; -jfx-focus-color: transparent; -fx-text-fill: white; -fx-prompt-text-fill: rgba(255,255,255,0.8);" styleClass="anton-font" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0" />
+                              <FontAwesomeIconView glyphName="SEARCH" layoutX="212.42856788635254" layoutY="24.0" size="20" style="-fx-fill: rgba(255,255,255,0.8);" AnchorPane.rightAnchor="10.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="navPane" layoutX="11.0" layoutY="64.0" maxHeight="1.7976931348623157E308" maxWidth="200.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" styleClass="left-nav-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0">
+                     <children>
+                        <VBox layoutX="14.0" layoutY="14.0" maxWidth="200.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <JFXToggleNode fx:id="dashboardMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadDashboard" style="-fx-background-radius: 0;" styleClass="left-nav-button" text="Dashboard" textAlignment="CENTER" textFill="#709acf" wrapText="true" VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="navigationGroup" />
+                                 </toggleGroup>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Speedometer_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="patientsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadPatients" styleClass="left-nav-button" text="Patient" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Wheelchair_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="pharmacyMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="100.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadPharmacy" styleClass="left-nav-button" text="Pharmacy" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Pharmacy_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="inventoryMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="145.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadInventory" styleClass="left-nav-button" text="Inventory" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Box_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="laboratoryMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="388.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadLaboratory" styleClass="left-nav-button" text="Laboratory" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/DNA%20Helix_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="radiologyMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="430.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadRadiology" styleClass="left-nav-button" text="Radiology" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Skeleton_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="servicesMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadServices" styleClass="left-nav-button" text="Services" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Hospital%203_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="physiciansMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="346.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadHospitalPersonels" styleClass="left-nav-button" text="Health Personels" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Doctor%20Male_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="transactionsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadTransactions" styleClass="left-nav-button" text="Transactions" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Cash%20Register_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="billsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="235.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadBills" styleClass="left-nav-button" text="Bills" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Check_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="accountingMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="280.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadAccounting" styleClass="left-nav-button" text="Accounting" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Accounting_50px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <JFXToggleNode fx:id="reportsMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="310.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadReports" styleClass="left-nav-button" text="Reports" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Combo%20Chart_52px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                              <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="0.0" visible="false" VBox.vgrow="ALWAYS" />
+                              <JFXToggleNode fx:id="managementMenu" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="20.0" layoutX="10.0" layoutY="504.0" maxHeight="50.0" maxWidth="1.7976931348623157E308" minHeight="42.0" onAction="#loadManagement" styleClass="left-nav-button" text="Management" textAlignment="CENTER" textFill="#757575" toggleGroup="$navigationGroup" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="25.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/Conference_48px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXToggleNode>
+                           </children>
+                        </VBox>
+                        <JFXButton fx:id="settingsMenu" focusTraversable="false" graphicTextGap="20.0" maxWidth="1.7976931348623157E308" onAction="#loadSettings" prefHeight="42.0" styleClass="left-nav-button" text="Settings" textFill="#757575" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Settings_50px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+                  <Circle fx:id="profileCircle" cache="true" cacheHint="QUALITY" fill="WHITE" radius="28.0" stroke="#b2b2b2" strokeMiterLimit="2.0" style="-fx-stroke: gray-gradient;" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                     <effect>
+                        <DropShadow color="#c5c5c5" height="10.0" radius="4.5" width="10.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Circle>
+               </children>
+            </AnchorPane>
+            <MaskerPane fx:id="maskerPane" focusTraversable="false" visible="false" />
+         </children></StackPane>
+   </children>
+</AnchorPane>

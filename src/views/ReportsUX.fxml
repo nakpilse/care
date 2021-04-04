@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1000.0" prefHeight="620.0" prefWidth="1200.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ReportsUXController">
+   <children>
+      <VBox layoutX="245.0" layoutY="24.0" prefHeight="200.0" prefWidth="100.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="200.0" spacing="10.0" styleClass="hover-panel">
+               <children>
+                  <Label minWidth="120.0" style="-fx-font-size: 16px; -fx-text-fill: mutted-color;" styleClass="anton-font" text="Reports Generator" />
+                  <Separator maxWidth="1.7976931348623157E308" minWidth="300.0" prefWidth="800.0" visible="false" HBox.hgrow="ALWAYS" />
+                  <JFXComboBox fx:id="moduleF" minWidth="200.0" promptText="Select Module" />
+                  <JFXButton fx:id="generateBtn" graphicTextGap="8.0" minWidth="95.0" onAction="#generateReport" styleClass="btn-primary" text="Generate">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/WinRAR_50px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="saveBtn" graphicTextGap="8.0" layoutX="965.0" layoutY="18.0" minWidth="75.0" onAction="#saveReport" styleClass="btn-success" text="Save">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/Microsoft%20Excel_64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+               </padding>
+            </HBox>
+            <AnchorPane fx:id="tablePane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="440.0" prefWidth="200.0" styleClass="hover-panel" VBox.vgrow="ALWAYS" />
+            <FlowPane fx:id="resultsPane" maxWidth="1.7976931348623157E308" minHeight="85.0" minWidth="200.0" prefHeight="85.0" prefWidth="200.0" styleClass="hover-panel" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

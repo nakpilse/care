@@ -1,0 +1,33 @@
+v1.0.2
+added sssid,philhealthid on patient table
+added billstatement
+added billstatementitem
+added payment
+added patientbenefit
+
+v1.0.3 NakpilSE Care BETA-Final
+updated admission
+updated laboratorytest
+updated radiologytest
+updated consultations
+updated erconsultations
+updated cashadvance
+enabled Billing Modules
+enabled Accounting Modules
+enabled Report Modules
+enabled Admission Modules
+enabled Excel Generators
+enabled Terminal Keyboard Shortcuts
+enabled Accounting Modules
+enabled Expenses Module
+
+v1.0.4 
+Initial Git @nakpilpilsoftwares.com
+Fix Installer files
+Migration to nakpilse cryptic code base v32767
+Added Admission Counter
+
+v1.0.5
+Added PrintTemplate on HospitalService
+Added HospitalService ID on Laboratory
+Added HospitalService ID on Radiology

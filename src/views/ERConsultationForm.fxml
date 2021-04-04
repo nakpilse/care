@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ERConsultationFormController">
+   <children>
+      <AnchorPane prefHeight="55.0" prefWidth="200.0" style="-fx-background-color: info-gradient;" styleClass="form-title-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLbl" graphicTextGap="10.0" prefHeight="55.0" prefWidth="290.0" styleClass="form-title-label" text="Consultation Information" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <padding>
+                  <Insets left="15.0" right="15.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profiles_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <JFXButton fx:id="closeBtn" focusTraversable="false" onAction="#formClose" styleClass="btn-close" text="Close" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+         </children>
+      </AnchorPane>
+      <VBox prefHeight="200.0" prefWidth="125.0" styleClass="form-nav-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <JFXToggleNode fx:id="recordMenu" contentDisplay="TOP" focusTraversable="false" maxHeight="85.0" maxWidth="1.7976931348623157E308" minHeight="85.0" onAction="#loadRecord" selected="true" text="Record" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Profiles_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+               <styleClass>
+                  <String fx:value="vtab-toggle-btn" />
+                  <String fx:value="anton-font" />
+               </styleClass>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="transferMenu" contentDisplay="TOP" focusTraversable="false" layoutX="10.0" layoutY="95.0" maxHeight="85.0" maxWidth="1.7976931348623157E308" minHeight="85.0" onAction="#loadTransferInfo" text="Transfer Info" textAlignment="CENTER" textFill="WHITE" toggleGroup="$menuGroup" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Ambulance_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="vtab-toggle-btn" />
+                  <String fx:value="anton-font" />
+               </styleClass>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="chargesMenu" contentDisplay="TOP" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="85.0" maxWidth="1.7976931348623157E308" minHeight="85.0" onAction="#loadCharges" text="Charges" textAlignment="CENTER" textFill="WHITE" toggleGroup="$menuGroup" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Accounting_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="vtab-toggle-btn" />
+                  <String fx:value="anton-font" />
+               </styleClass>
+            </JFXToggleNode>
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="200.0" visible="false" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+      <JFXTabPane fx:id="mainTabPane" layoutX="247.0" layoutY="173.0" styleClass="vtab-pane" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <tabs>
+            <Tab fx:id="recordTab" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="162.0" layoutY="93.0" vgap="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="ernumF" labelFloat="true" promptText="ER Number" />
+                              <JFXDatePicker fx:id="dateF" promptText="Date" GridPane.columnIndex="4" />
+                              <JFXTimePicker fx:id="timeF" promptText="Time" GridPane.columnIndex="5" />
+                              <TitledPane animated="false" collapsible="false" prefHeight="200.0" prefWidth="200.0" text="Chief Complains" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                                 <content>
+                                    <JFXTextArea fx:id="complainsF" />
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" collapsible="false" layoutX="10.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" text="Statistics" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.rowSpan="2">
+                                 <content>
+                                    <JFXTextArea fx:id="statisticsF" />
+                                 </content>
+                              </TitledPane>
+                              <JFXTextField fx:id="physicianF" labelFloat="true" layoutX="10.0" layoutY="23.0" promptText="Physician" GridPane.columnIndex="2" GridPane.columnSpan="2" />
+                              <TitledPane animated="false" collapsible="false" layoutX="10.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" text="Diagnosis" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                                 <content>
+                                    <JFXTextArea fx:id="diagnosisF" />
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" collapsible="false" layoutX="262.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" text="Plan / Remarks / Notes" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="4" GridPane.rowSpan="2">
+                                 <content>
+                                    <JFXTextArea fx:id="planF" />
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" collapsible="false" layoutX="262.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" text="Case" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="3">
+                                 <content>
+                                    <JFXTextField fx:id="caseF" />
+                                 </content>
+                              </TitledPane>
+                              <TitledPane animated="false" collapsible="false" layoutX="262.0" layoutY="205.0" prefHeight="200.0" prefWidth="200.0" text="Admitted By" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                                 <content>
+                                    <JFXTextField fx:id="admittedF" />
+                                 </content>
+                              </TitledPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="chargesTab" text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="188.0" layoutY="143.0" vgap="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT">
+                                 <children>
+                                    <JFXButton fx:id="addchargesBtn" focusTraversable="false" maxHeight="30.0" onAction="#addCharges" prefHeight="30.0" style="-fx-background-radius: 3;" text="ADD Charges">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="PLUS" size="16" />
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="btn-primary" />
+                                          <String fx:value="cell-btn" />
+                                       </styleClass>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <TableView fx:id="chargesTbl" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="1" GridPane.rowSpan="3" />
+                              <Label fx:id="totalChargesLbl" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Total Amount : 0.00" GridPane.columnSpan="4" GridPane.rowIndex="4">
+                                 <styleClass>
+                                    <String fx:value="footer-panel" />
+                                    <String fx:value="anton-font" />
+                                 </styleClass>
+                              </Label>
+                              <JFXButton fx:id="printchargeBtn" focusTraversable="false" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="120.0" onAction="#printCharge" styleClass="gbtn-success" text="Print Charge Slip" GridPane.rowIndex="4">
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="14" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="transferTab" text="Untitled Tab">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="188.0" layoutY="143.0" vgap="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="25.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="transferfromF" promptText="Transferred From" GridPane.columnSpan="2" />
+                              <JFXDatePicker fx:id="tfromdateF" promptText="Date" GridPane.rowIndex="1" />
+                              <JFXTimePicker fx:id="tfromtimeF" promptText="Time" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TitledPane animated="false" collapsible="false" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" text="Transferred From &quot;NOTES/REMARKS&quot;" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
+                                 <content>
+                                    <JFXTextArea fx:id="transferfromnoteF" />
+                                 </content>
+                              </TitledPane>
+                              <JFXTextField fx:id="transfertoF" layoutX="10.0" layoutY="23.0" promptText="Transferred To" GridPane.columnIndex="2" GridPane.columnSpan="2" />
+                              <JFXDatePicker fx:id="ttodateF" layoutX="10.0" layoutY="88.0" promptText="Date" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TitledPane animated="false" collapsible="false" layoutX="10.0" layoutY="140.0" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" text="Transferred To &quot;NOTES/REMARKS&quot;" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
+                                 <content>
+                                    <JFXTextArea fx:id="transfertonoteF" />
+                                 </content>
+                              </TitledPane>
+                              <JFXTimePicker fx:id="ttotimeF" layoutX="201.0" layoutY="88.0" promptText="Time" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXButton fx:id="saveBtn" focusTraversable="false" graphicTextGap="6.0" layoutX="796.0" layoutY="546.0" maxHeight="40.0" maxWidth="90.0" onAction="#formSave" prefHeight="40.0" prefWidth="90.0" styleClass="btn-success" text="Save" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="15.0">
+         <graphic>
+            <FontAwesomeIconView fx:id="saveIcon" fill="WHITE" glyphName="SAVE" size="14" />
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

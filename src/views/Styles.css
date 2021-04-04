@@ -1,0 +1,1327 @@
+/* 
+    Created on : 03 18, 20, 3:51:30 PM
+    Author     : Duskmourne
+*/
+
+@font-face {
+    font-family: Anton, sans-serif;
+    src: url('Anton-Regular.ttf');
+}
+
+
+.root {
+    -fx-padding : 0;
+}
+
+*{    
+    
+    danger-color : #ff4444;
+    danger-color-dark : #cc0000;  
+    warning-color : #ffbb33;
+    warning-color-dark : #ff8800;
+    success-color : #00c851;
+    success-color-dark : #007e33;
+    info-color : #33b5e5;
+    info-color-dark : #0099cc;
+
+    default-color : #2bbbad;
+    default-color-dark : #00695c;
+    primary-color : #4285f4 /*#229954*/;
+    primary-color-dark : #0d47a1 /*#196f3d*/;
+    secondary-color : #aa66cc;
+    secondary-color-dark : #9933cc;
+
+    mutted-color : #6c757d;
+    mutted-color-dark : #494F54;
+    
+    dark-color : #242635;
+    light-color : #f8f9fa;
+    white-color : #ffffff;
+    shadow-color : #C5C5C5;    
+    cborder-color : #474a57;
+    mask-color : rgba(0,0,0,0.4);
+    
+    
+    pinkish-color : #eb345b;
+    pinkish-color-dark : #c92c4e;
+    
+    primary-gradient : linear-gradient(from 25% 50% to 100% 100%, primary-color-dark, primary-color);
+    primary-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(primary-color-dark,-30%), derive(primary-color,-30%));
+    
+    secondary-gradient : linear-gradient(from 25% 50% to 100% 100%, secondary-color-dark, secondary-color);
+    secondary-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(secondary-color-dark,-30%), derive(secondary-color,-30%));
+    
+    danger-gradient : linear-gradient(from 25% 50% to 100% 100%, danger-color-dark, danger-color);
+    danger-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(danger-color-dark,-30%), derive(danger-color,-30%));
+    
+    success-gradient : linear-gradient(from 25% 50% to 100% 100%, success-color-dark, success-color);
+    success-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(success-color-dark,-30%), derive(success-color,-30%));
+    
+    warning-gradient : linear-gradient(from 25% 50% to 100% 100%, warning-color-dark, warning-color);
+    warning-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(warning-color-dark,-30%), derive(warning-color,-30%));
+    
+    info-gradient : linear-gradient(from 25% 50% to 100% 100%, info-color-dark, info-color);
+    info-gradient-light : linear-gradient(from 25% 50% to 100% 100%, derive(info-color-dark,30%), derive(info-color,30%));
+    info-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(info-color-dark,-30%), derive(info-color,-30%));
+    
+    default-gradient : linear-gradient(from 25% 50% to 100% 100%, default-color-dark, default-color);
+    default-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(default-color-dark,-30%), derive(default-color,-30%));
+    
+    dark-gradient : linear-gradient(from 25% 50% to 100% 100%, dark-color, mutted-color);
+    dark-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(dark-color,-30%), derive(mutted-color,-30%));
+    
+    gray-gradient : linear-gradient(from 25% 50% to 100% 100%, mutted-color-dark, mutted-color);
+    gray-gradient-dark : linear-gradient(from 25% 50% to 100% 100%, derive(mutted-color-dark,-30%), derive(mutted-color,-30%));
+    
+    ctable-header-bg : derive(mutted-color,70%);
+    ctable-header-fg : white;
+}
+
+/* Icons */
+
+.glyph-icon{ 
+    -fx-font-family:"FontAwesome"; 
+}
+
+.gray-icon {
+    -fx-fill : mutted-color;
+}
+
+.icon-btn {
+    -fx-background-color : derive(mutted-color,70%);
+    -fx-text-fill : mutted-color;
+    -fx-background-radius : 0;
+}
+
+.cell-btn {
+    -fx-text-fill : light-color;
+    -fx-background-radius : 3;
+    -fx-min-width : 32;
+    -fx-min-height : 30;
+    -jfx-button-type : FLAT;
+}
+
+.cell-btn > .glyph-icon{
+    -fx-fill : light-color;
+}
+
+.cell-btn:disabled  {
+    -fx-cursor: default;
+    -fx-background-color: mutted-color;
+}
+
+.cell-btn:disabled .cell-btn:hover {
+    -fx-background-color: mutted-color;
+}
+
+
+.icon-btn >  .glyph-icon{
+    -fx-fill : mutted-color;
+}
+
+/* Input Fields */
+
+.jfx-text-field, .jfx-password-field , .jfx-text-area{
+    -fx-font-size:1.17em;
+    -jfx-focus-color: primary-color;
+    -fx-min-height:30px;
+    -fx-text-fill: mutted-color;    
+}
+
+.jfx-text-field > StackPane > .text{    
+    -fx-font-family : 'Anton';
+}
+
+
+TitledPane:disabled,TitledPane:disabled > *,JFXComboBox:disabled,TextField:disabled,Spinner:disabled,JFXTextField:disabled, JFXPasswordField:disabled ,JFXTextArea:disabled,JFXDatePicker:disabled,JFXTimePicker:disabled,JFXDatePicker:disabled > *,JFXTimePicker:disabled > *{
+    -fx-cursor: default;
+    -fx-opacity:1.0;
+}
+
+/* Combo Box */
+.jfx-combo-box {
+    -fx-font-size:1.17em;
+    -jfx-focus-color: primary-color;
+    -fx-min-height:30px;
+    -fx-text-fill: mutted-color;
+}
+
+
+.jfx-combo-box .text-field
+{
+    -fx-text-fill: mutted-color;
+    -fx-font-size:1.17em;    
+}
+
+/* Date & Time Pickers */
+.jfx-date-picker:focused,.jfx-time-picker:focused {
+    -jfx-default-color:primary-color;
+}
+
+.jfx-date-picker,.jfx-time-picker {
+    -jfx-default-color:mutted-color;
+    -jfx-focus-color: primary-color; 
+    -fx-font-size:1.17em;
+    -fx-min-height:30px;    
+    -fx-min-width:110px;
+    -fx-text-fill: mutted-color;
+}
+
+.jfx-date-picker .jfx-text-field, .jfx-time-picker .jfx-text-field{
+    -jfx-label-float: true;
+}
+
+.jfx-date-picker > .arrow-button > .jfx-svg-glyph {
+
+}
+
+.jfx-date-picker > .arrow-button{
+    -fx-padding: 1 0 1 8;
+}
+
+
+.icon-hidden  > .arrow-button > .jfx-svg-glyph {
+    -fx-padding: 0;
+    -fx-min-width : 0;
+    -fx-max-width : 0;
+    -fx-pref-width : 0;
+}
+
+.icon-hidden > .arrow-button{
+    -fx-padding:0;
+    -fx-min-width : 0;
+    -fx-max-width : 0;
+    -fx-pref-width : 0;
+}
+
+
+
+.jfx-time-picker > .arrow-button{
+    -fx-padding: 1 0 1 8;
+}
+
+.jfx-date-picker > .arrow-button,.jfx-time-picker > .arrow-button{
+    -fx-cursor:hand;
+}
+
+.jfx-text-field:error, .jfx-password-field:error, .jfx-text-area:error {
+    -jfx-focus-color: danger-color;
+    -jfx-unfocus-color: danger-color;
+}
+
+.jfx-text-field .error-label, .jfx-password-field .error-label, .jfx-text-area .error-label {
+    -fx-text-fill: danger-color;
+    -fx-font-size: 0.7em;    
+    -fx-font-family : 'Sans Serif';    
+}
+
+.jfx-text-field .error-label-container, .jfx-password-field .error-label-container, .jfx-text-area .error-label-container {
+    -fx-alignment : CENTER_RIGHT;
+}
+
+.jfx-text-field .error-icon, .jfx-password-field .error-icon, .jfx-text-area .error-icon {
+    -fx-font-size: 1em;    
+    -fx-text-fill: danger-color;
+}
+
+.jfx-text-field:focused .error-icon, .jfx-password-field:focused .error-icon, .jfx-text-area:focused .error-icon {
+    -fx-font-size: 1em;    
+    -fx-text-fill: danger-color;
+}
+
+/* Navigation Menus */
+.top-nav-bar {
+    -fx-background-color: primary-gradient;
+    /*-fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 5.0);*/
+}
+
+.left-nav-bar {
+    -fx-background-color: dark-color;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 10.0);
+    -fx-max-width: 200px;
+}
+
+.left-nav-button {
+    -fx-font-family : 'Anton';
+    -fx-font-size : 13px;
+    -fx-background-radius: 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 18;    
+    -fx-text-fill : light-color;
+    -fx-cursor : hand;
+}
+
+
+.left-nav-button:hover {
+    -fx-background-color: linear-gradient(from 25% 50% to 100% 100%, derive(primary-color-dark,-50%), derive(primary-color,-50%));
+}
+
+.left-nav-button:selected {
+    -fx-background-color: linear-gradient(from 25% 50% to 100% 100%, primary-color-dark, primary-color);
+}
+
+.left-nav-item-container {
+    -fx-background-color : derive(dark-color,10%);
+    /*-fx-effect: innershadow( gaussian, shadow-color, 6, 0.0, 1, 1 );*/
+}
+
+.left-nav-button-item {
+    -fx-font-family : 'Anton';
+    -fx-font-size : 12px;
+    -fx-background-radius: 0;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 0 0 40;
+    -fx-cursor : hand;
+}
+
+/* wizard form */
+
+
+.wizard-form-title {
+    -fx-text-fill : gray-gradient;
+    -fx-font-weight : bold;
+    -fx-font-size : 2em;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 5.0);
+}
+
+.wizard-form-description {
+    -fx-text-fill : mutted-color;
+    -fx-font-size : 1em;
+}
+
+
+.wizard-nav-button {
+    -fx-font-size : 0.9em;
+    -fx-font-weight : bold;
+    -fx-text-fill: success-color;
+    -jfx-toggle-color : transparent !important;
+    -jfx-untoggle-color : transparent;
+    -glyph-name: "CLOUD";
+}
+
+.wizard-nav-button > .glyph-icon {
+    -fx-font-size : 1.7em;
+    -glyph-name: "CHECK_CIRCLE_ALT";
+    -fx-fill: success-color !important;
+}
+
+
+.wizard-nav-button:selected {
+    -fx-text-fill: default-color;
+    -jfx-toggle-color: transparent !important;
+}
+
+.wizard-nav-button:selected > .glyph-icon {
+    -fx-font-size : 1.7em;
+    -fx-fill: default-color !important;
+    -glyph-name: "CIRCLE";
+}
+
+
+
+.wizard-nav-button:disabled {
+    -fx-text-fill : mutted-color !important;
+}
+
+.wizard-nav-button:disabled > .glyph-icon {
+    -glyph-name: "CIRCLE_ALT";
+    -fx-fill : mutted-color !important;
+}
+
+
+
+.wizard-form-btn-close {
+    -fx-font-size:14px;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-pref-width : 60;
+    -fx-pref-height : 30;
+}
+
+.wizard-form-btn-close:hover {
+    -fx-text-fill: danger-color;
+    -jfx-rippler-fill : light-color;
+}
+
+
+
+/* Buttons */
+.tbl-filter-btn {
+    -fx-font-family : 'Anton';
+    -fx-font-size : 9px;
+    -fx-text-fill : light-color;
+    -fx-min-height: 26px;
+    -fx-max-height: 26px;
+    -fx-pref-height: 26px;
+    -fx-min-width: 45px;
+    -fx-max-width: 45px;
+    -fx-pref-width: 45px;
+}
+
+.tbl-filter-btn > .glyph-icon {
+    -fx-font-size : 13px;
+    -fx-fill : light-color;
+}
+
+
+.text-field-icon-btn {
+    -fx-content-display: graphic-only;
+}
+
+.text-field-icon-btn > .glyph-icon{    
+    -fx-font-size:1.17em;
+    -fx-fill : mutted-color;
+}
+
+.text-field-icon-btn:hover > .glyph-icon{    
+    -fx-font-size:1.17em;
+    -fx-fill : primary-color;
+}
+
+.tab-toggle-btn {
+    -fx-font-family : 'Anton';
+    -fx-background-color: derive(dark-color,20%);
+    -fx-background-radius : 4;
+    -fx-text-fill : light-color;
+    -fx-font-size : 1em;
+    -fx-font-weight : bold;
+    -fx-padding: 0 15 0 15;
+    /*-fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 10.0);*/
+}
+
+.tab-toggle-btn:hover {
+    -fx-background-color : derive(primary-color,30%);
+}
+
+.tab-toggle-btn:selected {
+    -fx-background-color : primary-color;
+}
+
+
+.vtab-toggle-btn {
+    -fx-background-color: dark-color;
+    -fx-background-radius : 0;
+    -fx-text-fill : light-color;
+    -fx-font-size : 1em;
+    -fx-font-weight : bold;
+}
+
+.vtab-toggle-btn:hover {
+    -fx-background-color : derive(primary-color,20%);
+}
+
+.vtab-toggle-btn:selected {
+    -fx-background-color : primary-color;
+}
+
+.jfx-button , .jfx-toggle-node{
+    -fx-cursor : hand;
+}
+
+
+.admission-available {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: mutted-color;
+    -fx-text-fill: white;
+    -fx-cursor : hand;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.admission-occupied {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: default-color;
+    -fx-text-fill: white;
+    -fx-cursor : hand;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-underline : false;
+}
+
+
+.admission-occupied:hover {
+    -fx-underline : true;
+}
+
+.admission-infant {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: pinkish-color;
+    -fx-text-fill: white;
+    -fx-cursor : hand;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.btn-control {    
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: mutted-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-control:hover {
+    -fx-background-color: mutted-color-dark;
+}
+
+
+.btn-control-light {    
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: derive(mutted-color,30%);
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-control-light:hover {
+    -fx-background-color: derive(mutted-color-dark,30%);
+}
+
+.btn-primary {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: primary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-primary:hover {
+    -fx-background-color:primary-color-dark;
+}
+
+
+.btn-secondary {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: secondary-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-secondary:hover {
+    -fx-background-color:secondary-color-dark;
+}
+
+.btn-danger {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: danger-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-danger:hover {
+    -fx-background-color:danger-color-dark;
+}
+
+
+.btn-warning {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: warning-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-warning:hover {
+    -fx-background-color:warning-color-dark;
+}
+
+
+
+.btn-success {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: success-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-success:hover {
+    -fx-background-color:success-color-dark;
+}
+
+
+.btn-info {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: info-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-info:hover {
+    -fx-background-color:info-color-dark;
+}
+
+
+.btn-default {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1.17em;
+    -fx-font-weight:bold;
+    -fx-background-color: default-color;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-cursor : hand;
+    -jfx-button-type: RAISED;
+}
+
+.btn-default:hover {
+    -fx-background-color:default-color-dark;
+}
+
+
+.btn-close {
+    -fx-font-family : 'Anton';
+    -fx-font-size:14px;
+    -fx-font-weight:bold;
+    -fx-text-fill: white;
+    -fx-pref-width : 60;
+    -fx-pref-height : 30;
+}
+
+.btn-close:hover {
+    -fx-text-fill: danger-color;
+    -jfx-rippler-fill : light-color;
+}
+
+
+.gbtn-default {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-default > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-default:hover {
+    -fx-text-fill:default-color;
+}
+
+
+.gbtn-default:hover  > .glyph-icon{
+    -fx-fill:default-color;
+}
+
+
+.gbtn-primary {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-primary > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-primary:hover {
+    -fx-text-fill:primary-color;
+}
+
+
+.gbtn-primary:hover  > .glyph-icon{
+    -fx-fill:primary-color;
+}
+
+.gbtn-secondary {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-secondary > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-secondary:hover {
+    -fx-text-fill:secondary-color;
+}
+
+
+.gbtn-secondary:hover  > .glyph-icon{
+    -fx-fill:secondary-color;
+}
+
+
+.gbtn-danger {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-danger > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-danger:hover {
+    -fx-text-fill:danger-color;
+}
+
+
+.gbtn-danger:hover  > .glyph-icon{
+    -fx-fill:danger-color;
+}
+
+.gbtn-warning {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-warning > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-warning:hover {
+    -fx-text-fill:warning-color;
+}
+
+
+.gbtn-warning:hover  > .glyph-icon{
+    -fx-fill:warning-color;
+}
+
+
+.gbtn-success {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-success > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-success:hover {
+    -fx-text-fill:success-color;
+}
+
+
+.gbtn-success:hover  > .glyph-icon{
+    -fx-fill:success-color;
+}
+
+.gbtn-info {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-font-weight:bold;
+    -fx-text-fill: mutted-color;
+    -fx-cursor : hand;
+}
+
+.gbtn-info > .glyph-icon{
+    -fx-font-size:1.17em;
+    -fx-fill: mutted-color;
+}
+
+.gbtn-info:hover {
+    -fx-text-fill:info-color;
+}
+
+
+.gbtn-info:hover  > .glyph-icon{
+    -fx-fill:info-color;
+}
+
+.grp-btn-left {
+    -fx-border-color :  #dcdee5;
+    -fx-border-radius :  5 0 0 5;
+    -fx-background-radius: 5 0 0 5;
+    -fx-border-width :  1 0 1 1;
+    -fx-text-fill: mutted-color;
+}
+
+.grp-btn-left:hover {
+    -fx-background-color: primary-color;
+    -fx-border-color :  primary-color;
+    -fx-text-fill: white;
+}
+
+.grp-btn-left:selected {
+    -fx-background-color: #dcdee5;
+    -fx-border-color :  #dcdee5;
+    -fx-text-fill: white;
+}
+
+.grp-btn-center {
+    -fx-border-color :  #dcdee5;
+    -fx-text-fill: mutted-color;
+}
+
+.grp-btn-center:hover {
+    -fx-background-color: primary-color;
+    -fx-border-color :  primary-color;
+    -fx-text-fill: white;
+}
+
+.grp-btn-center:selected {
+    -fx-background-color: #dcdee5;
+    -fx-border-color :  #dcdee5;
+    -fx-text-fill: white;
+}
+
+.grp-btn-right {    
+    -fx-border-color :  #dcdee5;
+    -fx-border-radius :  0 5 5 0;
+    -fx-background-radius: 0 5 5 0;
+    -fx-border-width :  1 1 1 0;
+    -fx-text-fill: mutted-color;
+}
+
+.grp-btn-right:hover {
+    -fx-background-color: primary-color;
+    -fx-border-color :  primary-color;
+    -fx-text-fill: white;
+}
+
+.grp-btn-right:selected {
+    -fx-background-color: #dcdee5;
+    -fx-border-color :  #dcdee5;
+    -fx-text-fill: white;
+}
+
+
+/* Popover */
+.cpopover-btn {
+    -fx-font-family : 'Anton';
+    -fx-font-size:1em;
+    -fx-text-fill: mutted-color;
+    -fx-font-weight : bold;
+}
+
+.cpopover-btn:hover {
+     -fx-text-fill: primary-color;
+}
+
+.cpopover-btn > .glyph-icon{
+     -fx-font-size:1.1em;
+     -fx-fill: mutted-color;
+}
+
+.cpopover-btn:hover > .glyph-icon{
+     -fx-fill: primary-color;
+}
+
+.cpopover-title {
+    -fx-font-family : 'Anton';
+    -fx-text-fill : gray-gradient;
+    -fx-font-weight : bold;
+    -fx-font-size : 1.5em;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 5.0);
+}
+
+
+.cpopover-description {
+    -fx-text-fill : primary-color;
+    -fx-font-size : 1.1em;
+}
+
+
+/* Dialog */
+
+.jfx-dialog-overlay-pane {
+    -fx-background-color : mask-color;
+}
+
+.dialog-heading {    
+    -fx-font-family : 'Anton';
+    -fx-background-color: transparent;
+    -fx-text-fill: mutted-color;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-danger {
+    -fx-font-family : 'Anton';
+    -fx-background-color: danger-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-success {
+    -fx-font-family : 'Anton';
+    -fx-background-color: success-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+
+.dialog-heading-info {
+    -fx-font-family : 'Anton';
+    -fx-background-color: info-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-warning {
+    -fx-font-family : 'Anton';
+    -fx-background-color: warning-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-default {
+    -fx-font-family : 'Anton';
+    -fx-background-color: default-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-primary {
+    -fx-font-family : 'Anton';
+    -fx-background-color: primary-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-secondary {
+    -fx-font-family : 'Anton';
+    -fx-background-color: secondary-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.dialog-heading-dark {
+    -fx-font-family : 'Anton';
+    -fx-background-color: dark-gradient;
+    -fx-text-fill:  white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-padding:5 10 5 10;
+}
+
+.jfx-dialog-layout > .jfx-layout-heading {
+    -fx-padding: 0;
+}
+
+.jfx-dialog-layout > .jfx-layout-body {
+    -fx-padding: 15 15 0 15;
+}
+
+.jfx-dialog-layout > .jfx-layout-actions {
+    -fx-padding: 15 15 15 15;
+}
+
+.form-dialog > * > .jfx-dialog-layout > * {
+    -fx-padding: 0;
+}
+
+/* TabPane */
+
+.vtab-pane {
+    -fx-tab-min-height:0px;    
+    -fx-tab-max-height:0px;        
+}
+
+.vtab-pane .control-buttons-tab .tab-down-button{
+    -fx-opacity: 0;
+}
+
+/* Label */
+
+.title-label {
+    -fx-font-family : 'Anton';
+    -fx-text-fill : gray-gradient;
+    -fx-font-weight : bold;
+    -fx-font-size : 1.5em;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 5.0);
+}
+
+.anton-font {
+    -fx-font-family : 'Anton';
+}
+
+
+/* Forms */
+.form-title-pane > .label {
+    -fx-font-family : 'Anton';
+    -fx-text-fill : light-color;
+    -fx-font-weight : bold;
+    -fx-font-size : 16px;
+    -fx-alighment : CENTER_LEFT;
+    -fx-text-alignment : left;
+}
+
+.form-title-label {    
+    -fx-font-family : 'Anton';
+    -fx-text-fill : light-color;
+    -fx-font-weight : bold;
+    -fx-font-size : 16px;
+    -fx-alighment : CENTER_LEFT;
+    -fx-text-alignment : left;
+}
+
+
+.form-nav-bar {
+    -fx-background-color: dark-color;
+    -fx-max-width: 200px;
+}
+
+/* Panels */
+.masker-pane *,.masker-pane > *{
+    -fx-font-family : 'Anton';
+}
+
+.hover-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,10, 0.0, 0.0, 0.0);
+}
+
+
+.hover-panel-top-pane {
+    -fx-background-color: primary-gradient;
+    -fx-border-width : 0 0 1 0;
+    -fx-border-color : mutted-color;
+    -fx-background-radius: 8 8 0 0;
+    
+}
+
+.footer-panel {
+    -fx-border-width : 1 0 0 0;
+    -fx-border-color : ctable-header-bg;
+}
+
+.footer-panel > .label{
+    -fx-font-family : 'Anton';
+    -fx-text-fill : mutted-color;
+    -fx-font-size : 1em;
+    -fx-font-weight : bold;
+}
+
+.box-shadowed {
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 3.0, 5.0);
+}
+
+
+/* TABLEVIEW */
+
+.table-view {
+  -fx-background-color: transparent /* or transparent or other preferred color */,transparent,transparent;
+  -fx-background-insets: -1.4, 0, 1;
+  -fx-background-radius: 1.4, 0, 0;
+  /*....*/
+  -fx-padding: 1; /* 0.083333em; */
+}
+
+.table-view:focused {
+  -fx-background-color: transparent /* or transparent or other preferred color */,transparent,transparent;
+  -fx-background-insets: -1.4, 0, 1;
+  -fx-background-radius: 1.4, 0, 0;
+  /*....*/
+  -fx-padding: 1; /* 0.083333em; */
+}
+
+.table-view .show-hide-columns-button {
+    -fx-background-color : ctable-header-bg;
+    -fx-cursor : hand;    
+}
+
+.table-view .show-hide-columns-button .show-hide-columns-icon {
+    -fx-fill : white;
+}
+.table-view .show-hide-columns-button:hover .show-hide-columns-icon{
+    -fx-fill : primary-color;   
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  ctable-header-bg; 
+    -fx-border-width: 0 0 0 0;
+}
+
+.table-view .column-header .label{
+    -fx-font-family : 'Anton';
+    -fx-text-fill: ctable-header-fg;
+    -fx-font-weight: bold; 
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 4;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER_LEFT;
+}
+.table-cell {
+    /*-fx-padding: 0;*/
+     -fx-font-family : 'Sans Serif';    
+}
+
+/*
+.table-view .cell{
+    -fx-cell-size: 35;
+    -fx-alignment: center-left;
+    -fx-background-color: #29292D;
+    -fx-border-color: #29292D;
+    -fx-text-fill: lightgray;
+    -fx-alignment: CENTER_LEFT;
+
+}
+*/
+
+.table-row-cell{
+    -fx-background-color: #E4E4E4;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    /*-fx-font-size:13px;*/
+    /*-fx-border-color : red;*/
+    -fx-cell-size: 30px;
+}
+
+.table-row-cell:hover,.table-row-cell:odd:hover{
+    -fx-background-color: derive(primary-color,90%);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    /*-fx-font-size:13px;*/
+    /*-fx-border-color : red;*/
+}
+
+.table-row-cell:selected,.table-row-cell:odd:selected {
+    -fx-background-color: derive(primary-color,50%); 
+    -fx-text-background-color:  white;  
+
+}
+
+.table-row-cell:selected:hover,.table-row-cell:odd:selected:selected {
+    -fx-background-color: derive(primary-color,50%); 
+    -fx-text-background-color:  white;  
+}
+
+.table-row-cell:odd{
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.noheader .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}
+
+/* Custom Table */
+.fxc-table .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}
+
+.fxc-table .table-row-cell{
+    -fx-background-color: #E4E4E4;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-font-size:12px;
+    /*-fx-border-color : red;*/
+    -fx-cell-size: 22px;
+}
+
+.fxc-table .table-row-cell:hover,.table-row-cell:odd:hover{
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+    -fx-font-size:12px;
+    /*-fx-border-color : red;*/
+}
+
+.fxc-table .table-row-cell:selected,.table-row-cell:odd:selected {
+    -fx-text-background-color:  black;  
+}
+
+.fxc-table .table-row-cell:selected:hover,.table-row-cell:odd:selected:selected {
+    -fx-text-background-color:  black;  
+}
+
+.fxc-table .table-row-cell:odd{
+    -fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button ,.table-view .decrement-button {
+    -fx-background-color:transparent;
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color:derive( cborder-color,80%);
+
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color:derive( cborder-color,90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+/* Combo Box */
+
+.combo-box .list-cell
+{
+    -fx-padding: 0;
+    -fx-font-size:1.17em;
+    -fx-text-fill: mutted-color;
+}
+
+.combo-box-popup .list-cell
+{
+    -fx-padding: 8;
+    -fx-cursor:hand;
+    -fx-text-fill: dark-color;
+}
+
+
+.combo-box-popup .list-cell:hover
+{
+    -fx-text-fill: white;
+}
+
+
+.combo-box-popup .list-cell:selected
+{
+    -fx-text-fill: white;
+}
+
+/* Radio Button */
+.jfx-radio-button {
+    -jfx-selected-color : info-color;
+    -jfx-unselected-color : mutted-color;
+    -fx-text-fill: mutted-color;
+    -fx-font-size : 1.17em;
+    -fx-min-height : 30;
+}
+
+/* Tab Pane */
+.jfx-tab-pane .headers-region {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: gray-gradient;
+}
+
+.jfx-tab-pane .tab-label { 
+    -fx-font-family : 'Anton';
+    -fx-text-fill: light-color;
+    -fx-font-size : 14px;
+    -fx-alignment: CENTER;
+    -fx-graphic-text-gap : 8px;
+}
+
+.jfx-tab-pane .tab-label > *{ 
+    -fx-font-family : 'Anton';
+    -fx-text-fill: light-color;
+    -fx-font-size : 14px;
+    -fx-alignment: CENTER;
+}
+
+.jfx-tab-pane .tab-header-area .tab-selected-line {
+    -fx-background-color: info-gradient;
+    -fx-stroke-width: 4pt;
+}
+
+/* Image */
+.profile-circle {
+    -fx-stroke : dark-color;
+    -fx-stroke-type : centered;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,10, 0.0, 0.0, 0.0);
+}
+
+.profile-rectangle {
+    -fx-stroke-width : 0;
+    -fx-effect: dropshadow(three-pass-box, shadow-color,15, 0.0, 0.0, 0.0);
+    -fx-arc-height : 14;
+    -fx-arc-width : 14;
+}
+
+/* TOAST */
+.fx-toast {
+    -fx-background-color: success-gradient;
+    -fx-background-radius : 8 8 0 0;
+    -fx-text-fill: light-color;
+    -fx-padding: 15 24 15 24;
+}

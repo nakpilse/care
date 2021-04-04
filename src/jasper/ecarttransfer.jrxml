@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ECartTransferSlip" language="groovy" pageWidth="162" pageHeight="115" columnWidth="155" leftMargin="0" rightMargin="7" topMargin="3" bottomMargin="3" isIgnorePagination="true" uuid="e1ab46cd-3ee2-408e-859b-02bdcb76340c">
+	<property name="ireport.zoom" value="6.115909044841474"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="198"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="facility" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<parameter name="ecarttime" class="java.lang.String"/>
+	<parameter name="ecartnumber" class="java.lang.String"/>
+	<parameter name="requestor" class="java.lang.String"/>
+	<parameter name="approved" class="java.lang.String"/>
+	<parameter name="tofacility" class="java.lang.String"/>
+	<parameter name="fromfacility" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Integer"/>
+	<field name="tr_item" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="49" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="134" height="17" uuid="43549284-e79a-49c0-a117-e8f4afb6c2bc"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+					<paragraph lineSpacing="Single" tabStopWidth="40"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="32" width="134" height="11" uuid="fa7e7e77-bda3-4d9e-ad6f-4e03ea15e31a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{facility}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="16" width="134" height="11" uuid="7679db86-b4f2-4a60-8703-5fbb5796e7a0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ECART TRANSFER SLIP]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="13" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="31" height="12" uuid="2c9b68dc-e257-43e8-aa30-546bb6df0a79"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="0" width="103" height="12" uuid="6605bdb0-4a37-472b-b8f6-5a9b0a1f47e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITEM]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="12" width="134" height="1" uuid="9ab1fcd4-fd65-4fd3-93fc-b138cc251f60"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="31" height="21" uuid="ec05d13d-513b-46d6-a157-f86698bb7f14"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="31" y="0" width="103" height="21" uuid="bc5028ae-0045-4895-b3c8-f4a32c8f22b4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tr_item}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="109" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="134" height="1" uuid="3c4e5d2c-f7a7-4afc-9ecd-9019cc6e2b75"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="34" width="46" height="9" uuid="d0ff9b67-246b-49cb-b144-d4b9c1ff1eef"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIME:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="34" width="88" height="9" backcolor="#FFFFFF" uuid="e7e660c2-dc77-43e4-98cd-ff771259574d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ecarttime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="25" width="88" height="9" backcolor="#FFFFFF" uuid="65ef4ad2-22e2-470b-ba2b-396280471f3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fromfacility}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="16" width="88" height="9" backcolor="#FFFFFF" uuid="f05c57da-324f-416c-9735-a46b4b93a6c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tofacility}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="16" width="46" height="9" uuid="fb3b44a0-713e-4750-9aeb-4c328791ede3"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TO FACILITY:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="25" width="46" height="9" uuid="15a60e8b-bfda-420d-be78-37e95bf75a7e"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FR FACILITY:]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="0" y="77" width="134" height="32" uuid="4870b116-0d4e-4a6e-b3b7-45de049c2133"/>
+				<jr:Code39 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$P{ecartnumber}]]></jr:codeExpression>
+				</jr:Code39>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="43" width="46" height="9" uuid="9be6be30-8e40-4aaf-a7cd-d6df5ff982d5">
+					<printWhenExpression><![CDATA[$P{requestor} != '']]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REQUESTOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="52" width="46" height="9" uuid="cd350f6a-8c78-4135-a290-719aa2206af1">
+					<printWhenExpression><![CDATA[$P{approved} != '']]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[APPROVED:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="43" width="88" height="9" backcolor="#FFFFFF" uuid="6ed2cf0d-3e9c-4c18-9955-ddf09ec82470"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{requestor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="52" width="88" height="9" backcolor="#FFFFFF" uuid="ff043020-c5fa-4174-b027-e40a210abcde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{approved}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="46" y="24" width="88" height="1" uuid="d80722f6-758e-49ad-95d7-c490240c16fd"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="46" y="33" width="88" height="1" uuid="8a862923-f609-4bb6-9927-e205941fc1ad"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="46" y="42" width="88" height="1" uuid="ab6babaa-002f-4f96-8842-8414481eee50"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="46" y="51" width="88" height="1" uuid="f491d0c6-86fa-40fa-8afb-7f80d95e3412">
+					<printWhenExpression><![CDATA[$P{requestor} != '']]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="46" y="60" width="88" height="1" uuid="525d125e-9464-4b5d-bc58-7893b0a01ad6">
+					<printWhenExpression><![CDATA[$P{approved} != '']]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="46" y="7" width="88" height="9" backcolor="#FFFFFF" uuid="3c3eb7e5-5fb6-4ce0-8b41-d9c806d181f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+					<paragraph leftIndent="4"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="7" width="46" height="9" uuid="eaf3f31b-48cb-48cc-a954-624a0f4d7b47"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENCODER:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="46" y="15" width="88" height="1" uuid="c9a620e7-cb61-4dd7-9383-7cc4338e2780"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
