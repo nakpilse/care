@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +43,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import models.ERConsultation;
+import models.HospitalCharge;
+import models.HospitalChargeItem;
 import models.HospitalPersonel;
 import models.Patient;
 import nse.dcfx.controls.FXButtonsBuilderFactory;
@@ -50,6 +53,7 @@ import nse.dcfx.controls.FXField;
 import nse.dcfx.controls.FXTable;
 import nse.dcfx.controls.FXTask;
 import nse.dcfx.controls.UIController;
+import nse.dcfx.models.GlobalOption;
 import nse.dcfx.mysql.SQLTable;
 import nse.dcfx.utils.FileKit;
 import org.controlsfx.control.MaskerPane;
@@ -253,16 +257,40 @@ public class ERUXController implements Initializable,UIController {
                                     viewBtn.getStyleClass().add("btn-control");
                                     viewBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     viewBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                                    /*
-                                    JFXButton voidBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.TIMES_CIRCLE, "14px", evt -> {
-                                        
+                                    
+                                    JFXButton printBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.PRINT, "14px", evt -> {
+                                        FXTask task = new FXTask() {
+                                            @Override
+                                            protected void load() {
+                                                try {
+                                                    Platform.runLater(()->{
+                                                        maskerPane.setVisible(true);
+                                                    });
+                                                    HospitalCharge charge = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.RECORDTABLEID+"="+String.valueOf(row_data.getId())+" AND "+HospitalCharge.RECORDTABLE+"='"+ERConsultation.TABLE_NAME+"'");
+                                                    if(charge!= null){
+                                                        List<HospitalChargeItem> charge_items = SQLTable.list(HospitalChargeItem.class, HospitalChargeItem.HOSPITALCHARGE_ID+"='"+charge.getId()+"'");
+                                                        charge.setItems(charge_items);
+                                                        if(charge_items.size()>0){
+                                                            Map<String,String> opts = GlobalOption.getMap("General");
+                                                            charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "ER", false);
+                                                        }
+                                                    }
+                                                } catch (Exception er) {
+                                                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                                } finally {
+                                                    Platform.runLater(()->{
+                                                        maskerPane.setVisible(false);
+                                                    });
+                                                }
+                                            }
+                                        };
+                                        Care.process(task);
                                     });
                                     
-                                    voidBtn.setTooltip(new Tooltip("Void"));
-                                    voidBtn.getStyleClass().add("btn-danger");
-                                    voidBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
-                                    voidBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                                    */
+                                    printBtn.setTooltip(new Tooltip("Print"));
+                                    printBtn.getStyleClass().add("btn-success");
+                                    printBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
+                                    printBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                                     container.setAlignment(Pos.CENTER_LEFT);
                                     container.getChildren().addAll(viewBtn);
 

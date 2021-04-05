@@ -28,6 +28,7 @@ public class JasperFrame extends javax.swing.JFrame {
         jPanel4.repaint();
         this.setExtendedState(JasperFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
+        this.requestFocusInWindow(true);
     }
 
     /**

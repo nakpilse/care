@@ -70,11 +70,11 @@
       </Label>
       <HBox alignment="CENTER_LEFT" layoutX="20.0" layoutY="591.0" prefHeight="45.0" prefWidth="200.0" spacing="10.0" styleClass="hover-panel" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
          <children>
-            <JFXTextField fx:id="medtechF" labelFloat="true" prefWidth="250.0" promptText="RAD Technologist" />
-            <JFXTextField fx:id="pathoF" labelFloat="true" layoutX="20.0" layoutY="18.0" prefWidth="250.0" promptText="Radiologist / Sonologist" />
-            <JFXTextField fx:id="orF" editable="false" labelFloat="true" layoutX="230.0" layoutY="18.0" prefWidth="100.0" promptText="OR #" />
-            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
-            <JFXButton fx:id="printBtn" contentDisplay="GRAPHIC_ONLY" graphicTextGap="6.0" layoutX="780.0" layoutY="10.0" maxHeight="45.0" maxWidth="45.0" minWidth="45.0" onAction="#formPrint" prefHeight="45.0" prefWidth="45.0" styleClass="btn-control" text="Save">
+            <JFXTextField fx:id="medtechF" labelFloat="true" minWidth="200.0" prefWidth="250.0" promptText="RAD Technologist" />
+            <JFXTextField fx:id="pathoF" labelFloat="true" layoutX="20.0" layoutY="18.0" minWidth="200.0" prefWidth="250.0" promptText="Radiologist / Sonologist" />
+            <JFXTextField fx:id="orF" editable="false" labelFloat="true" layoutX="230.0" layoutY="18.0" minWidth="100.0" prefWidth="100.0" promptText="OR #" />
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="10.0" visible="false" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="printBtn" graphicTextGap="6.0" layoutX="780.0" layoutY="10.0" maxHeight="45.0" minWidth="45.0" onAction="#formPrint" prefHeight="45.0" prefWidth="150.0" styleClass="btn-control" text="Print Result">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="16" />
                </graphic>

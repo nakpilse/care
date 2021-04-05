@@ -584,7 +584,7 @@ public class ERConsultationFormController implements Initializable,FormControlle
                 });
                 
             }else{
-                CHARGE = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.RECORDTABLEID,String.valueOf(record.getId()));
+                CHARGE = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.RECORDTABLEID+"="+String.valueOf(record.getId())+" AND "+HospitalCharge.RECORDTABLE+"'"+ERConsultation.TABLE_NAME+"'");
                 CHARGE_ITEMS = SQLTable.list(HospitalChargeItem.class, HospitalChargeItem.HOSPITALCHARGE_ID+"='"+CHARGE.getId()+"'");
                 CHARGE.setItems(CHARGE_ITEMS);
                 Platform.runLater(()->{

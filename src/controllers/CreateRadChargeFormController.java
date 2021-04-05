@@ -46,8 +46,8 @@ import models.HospitalCharge;
 import models.HospitalChargeItem;
 import models.HospitalPersonel;
 import models.HospitalService;
-import models.LaboratoryTest;
 import models.Patient;
+import models.RadiologyTest;
 import nse.dcfx.controls.FXButtonsBuilderFactory;
 import nse.dcfx.controls.FXDialog;
 import nse.dcfx.controls.FXDialogTask;
@@ -68,7 +68,7 @@ import org.controlsfx.control.textfield.TextFields;
  *
  * @author Nsoft
  */
-public class CreateLabChargeFormController implements Initializable,FormController<Object> {
+public class CreateRadChargeFormController implements Initializable,FormController<Object> {
 
     
     private static UIController UI_CONTROLLER = null;
@@ -219,15 +219,15 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                         CHARGE.setChargenumber(CHARGENUM);
                         CHARGE.setChargetime(CHARGETIME);
                         CHARGE.setChargeto(t2chargedtoF.getText());
-                        CHARGE.setChargefacility("Laboratory");
+                        CHARGE.setChargefacility("Radiology");
                         CHARGE.setChargetype("Walk-In");
                         CHARGE.setUser(Care.getUser().getName());
                         CHARGE.setUser_id(Care.getUser().getId());
                         CHARGE.setPatient_id(0);
                         CHARGE.setCareto(t2chargedtoF.getText());
-                        CHARGE.setChargenotes("Multiple Patient Laboratory Test");
+                        CHARGE.setChargenotes("Multiple Patient Radiology Exam");
                         
-                        int rec_num = SQLTable.getMaxValue(LaboratoryTest.class, LaboratoryTest.LABTESTNUMBER);   
+                        int rec_num = SQLTable.getMaxValue(RadiologyTest.class, RadiologyTest.RADTESTNUMBER);   
 
 
                         List<HospitalChargeItem> chargeItems = new ArrayList();
@@ -235,8 +235,8 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                             rec_num++;
                             HospitalService srv = selservices.get(i);
                             //Test
-                            LaboratoryTest test = new LaboratoryTest();
-                            test.setLabtestnumber((rec_num > 0)? String.valueOf(rec_num):"");
+                            RadiologyTest test = new RadiologyTest();
+                            test.setRadtestnumber((rec_num > 0)? String.valueOf(rec_num):"");
                             test.setPatient((String)srv.getResource("patientname"));
                             test.setGender((String)srv.getResource("patientgender"));
                             test.setAge(Integer.parseInt((String)srv.getResource("patientage")));
@@ -260,13 +260,13 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 labcharge.setSelling(srv.getPrice());
                                 labcharge.setQuantity(1);
                                 labcharge.setService(true);
-                                labcharge.setItemtype("Laboratory Charge");
-                                labcharge.setFacility("Laboratory");
+                                labcharge.setItemtype("Radiology Charge");
+                                labcharge.setFacility("Radiology");
                                 labcharge.setUser(Care.getUser().getName());
                                 labcharge.setChargeto((String)srv.getResource("patientname"));
                                 labcharge.setUser_id(Care.getUser().getId());
                                 labcharge.setPatient_id(0);     
-                                labcharge.setRecordtable(LaboratoryTest.TABLE_NAME);
+                                labcharge.setRecordtable(RadiologyTest.TABLE_NAME);
                                 labcharge.setRecordtableid(test_id);
                                 labcharge.setCareto(t2chargedtoF.getText());
                                 labcharge.setPhysician((String)srv.getResource("physician"));
@@ -275,7 +275,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 
                                 chargeItems.add(labcharge);
 
-                                CHARGE.setRecordtable(LaboratoryTest.TABLE_NAME);
+                                CHARGE.setRecordtable(RadiologyTest.TABLE_NAME);
                                 CHARGE.setRecordtableid(test_id);
                             }
                         }
@@ -286,9 +286,9 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                             Platform.runLater(()->{       
                                 dialog.close();
                                 postAction();
-                                FXDialog.showMessageDialog(stackPane, "Success", "New Laboratory records has been registered!", FXDialog.SUCCESS);
+                                FXDialog.showMessageDialog(stackPane, "Success", "New Radiology records has been registered!", FXDialog.SUCCESS);
                             });
-                            CHARGE.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Laboratory", true);
+                            CHARGE.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Radiology", true);
                         }
                         
                     }catch(Exception er){
@@ -334,7 +334,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                             CHARGE.setChargenumber(CHARGENUM);
                             CHARGE.setChargetime(CHARGETIME);
                             CHARGE.setChargeto(selPatient.getFullname());
-                            CHARGE.setChargefacility("Laboratory");
+                            CHARGE.setChargefacility("Radiology");
                             CHARGE.setChargetype((admission != null)? "Bill":"Walk-In");
                             CHARGE.setUser(Care.getUser().getName());
                             CHARGE.setUser_id(Care.getUser().getId());
@@ -343,7 +343,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 CHARGE.setAdmission_id(admission.getId());
                             }
 
-                            int rec_num = SQLTable.getMaxValue(LaboratoryTest.class, LaboratoryTest.LABTESTNUMBER);   
+                            int rec_num = SQLTable.getMaxValue(RadiologyTest.class, RadiologyTest.RADTESTNUMBER);   
 
 
                             List<HospitalChargeItem> chargeItems = new ArrayList();
@@ -351,8 +351,8 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 rec_num++;
                                 HospitalService srv = selservices.get(i);
                                 //Test
-                                LaboratoryTest test = new LaboratoryTest();
-                                test.setLabtestnumber((rec_num > 0)? String.valueOf(rec_num):"");
+                                RadiologyTest test = new RadiologyTest();
+                                test.setRadtestnumber((rec_num > 0)? String.valueOf(rec_num):"");
                                 test.setPatient(selPatient.getFullname());
                                 test.setGender(selPatient.getGender());
                                 test.setAge(selPatient.getAge());
@@ -373,32 +373,32 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 int test_id = test.save(true);
                                 if(test_id > 0){
                                     //Charge
-                                    HospitalChargeItem labcharge = new HospitalChargeItem();
-                                    labcharge.setChargenumber(CHARGENUM);
-                                    labcharge.setChargetime(CHARGETIME);
-                                    labcharge.setDescription(srv.getCategory()+"-"+srv.getDescription());
-                                    labcharge.setSelling(srv.getPrice());
-                                    labcharge.setQuantity(1);
-                                    labcharge.setService(true);
-                                    labcharge.setItemtype("Laboratory Charge");
-                                    labcharge.setFacility("Laboratory");
-                                    labcharge.setUser(Care.getUser().getName());
-                                    labcharge.setChargeto(selPatient.getFullname());
-                                    labcharge.setUser_id(Care.getUser().getId());
-                                    labcharge.setPatient_id(selPatient.getId());     
-                                    labcharge.setRecordtable(LaboratoryTest.TABLE_NAME);
-                                    labcharge.setRecordtableid(test_id);
-                                    labcharge.setPhysician(phys);
-                                    labcharge.setVatable(false);
-                                    labcharge.calculateNet(false);
+                                    HospitalChargeItem radcharge = new HospitalChargeItem();
+                                    radcharge.setChargenumber(CHARGENUM);
+                                    radcharge.setChargetime(CHARGETIME);
+                                    radcharge.setDescription(srv.getCategory()+"-"+srv.getDescription());
+                                    radcharge.setSelling(srv.getPrice());
+                                    radcharge.setQuantity(1);
+                                    radcharge.setService(true);
+                                    radcharge.setItemtype("Radiology Charge");
+                                    radcharge.setFacility("Radiology");
+                                    radcharge.setUser(Care.getUser().getName());
+                                    radcharge.setChargeto(selPatient.getFullname());
+                                    radcharge.setUser_id(Care.getUser().getId());
+                                    radcharge.setPatient_id(selPatient.getId());     
+                                    radcharge.setRecordtable(RadiologyTest.TABLE_NAME);
+                                    radcharge.setRecordtableid(test_id);
+                                    radcharge.setPhysician(phys);
+                                    radcharge.setVatable(false);
+                                    radcharge.calculateNet(false);
 
                                     if(admission != null){
-                                        labcharge.setAdmission_id(admission.getId());
+                                        radcharge.setAdmission_id(admission.getId());
                                     }
 
-                                    chargeItems.add(labcharge);
+                                    chargeItems.add(radcharge);
 
-                                    CHARGE.setRecordtable(LaboratoryTest.TABLE_NAME);
+                                    CHARGE.setRecordtable(RadiologyTest.TABLE_NAME);
                                     CHARGE.setRecordtableid(test_id);
                                 }
                             }
@@ -409,9 +409,9 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 Platform.runLater(()->{       
                                     dialog.close();
                                     postAction();
-                                    FXDialog.showMessageDialog(stackPane, "Success", "New Laboratory records has been registered!", FXDialog.SUCCESS);
+                                    FXDialog.showMessageDialog(stackPane, "Success", "New Radiology records has been registered!", FXDialog.SUCCESS);
                                 });
-                                CHARGE.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Laboratory", true);
+                                CHARGE.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Radiology", true);
                             }
                         }
                     }catch(Exception er){
@@ -436,7 +436,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                 t1Table.refresh();                
                 loadT1TableTotals();
             }else{
-                t1errorLb.setText("Laboratory Service not found!");
+                t1errorLb.setText("Radiology Service not found!");
             }
         }
     }
@@ -480,7 +480,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                 t2patientF.selectAll();
                 loadT2TableTotals();
             }else{
-                t2errorLb.setText("Laboratory Service not found!");
+                t2errorLb.setText("Radiology Service not found!");
             }
         }
     }
@@ -612,7 +612,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
             t2Table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             FXTable.addColumn(t2Table, "Patient", HospitalService::patienttempProperty, false,280,280,280);
             FXTable.addColumn(t2Table, "Category", HospitalService::categoryProperty, false,130,130,130);
-            FXTable.addColumn(t2Table, "Test", HospitalService::descriptionProperty, false);
+            FXTable.addColumn(t2Table, "Exam", HospitalService::descriptionProperty, false);
             FXTable.addCurrencyColumn(t2Table, "Price", HospitalService::priceProperty, false,80,80,80);
             TableColumn act2Col = FXTable.addColumn(t2Table, " ", HospitalService::descriptionProperty, false, 40, 40, 40);            
             
@@ -694,9 +694,9 @@ public class CreateLabChargeFormController implements Initializable,FormControll
     public void loadResources() {
         try{
             persons = SQLTable.list(HospitalPersonel.class, HospitalPersonel.OCCUPATION+"='Physician'");
-            services = SQLTable.list(HospitalService.class, HospitalService.FACILITY+"='LABORATORY' ORDER BY "+HospitalService.CATEGORY+" ASC,"+HospitalService.DESCRIPTION+" ASC");
+            services = SQLTable.list(HospitalService.class, HospitalService.FACILITY+"='RADIOLOGY' ORDER BY "+HospitalService.CATEGORY+" ASC,"+HospitalService.DESCRIPTION+" ASC");
             patients = SQLTable.list(Patient.class);
-            categories = SQLTable.distinct(HospitalService.class, HospitalService.CATEGORY,HospitalService.FACILITY+"='LABORATORY' ORDER BY "+HospitalService.CATEGORY+" ASC");
+            categories = SQLTable.distinct(HospitalService.class, HospitalService.CATEGORY,HospitalService.FACILITY+"='RADIOLOGY' ORDER BY "+HospitalService.CATEGORY+" ASC");
         }catch(Exception er){
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
         }
@@ -784,7 +784,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
         if (dialog == null || !dialog.isVisible()) {
             try {
                 dialog = new JFXDialog();
-                FXMLLoader LOADER = new FXMLLoader(FormController.class.getResource("/views/CreateLabChargeForm.fxml"));
+                FXMLLoader LOADER = new FXMLLoader(FormController.class.getResource("/views/CreateRadChargeForm.fxml"));
                 FXDialogTask task = new FXDialogTask(dialog, new Object(), ui_controller, 900, 600);
                 task.setLOADER(LOADER);
                 task.setDISABLED_NODES(nodes);
@@ -795,7 +795,7 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                 });
                 task.show(masker);
             } catch (Exception er) {
-                Logger.getLogger(CreateLabChargeFormController.class.getName()).log(Level.SEVERE, null, er);
+                Logger.getLogger(CreateRadChargeFormController.class.getName()).log(Level.SEVERE, null, er);
                 return null;
             }
         }

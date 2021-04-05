@@ -529,6 +529,7 @@ public class CashierUXController implements Initializable, UIController {
                 
                 FXField.addFocusValidationListener(empP,otdP);
                 
+                /*
                 if(patient != null && !patient.getSeniorid().isEmpty() && SC_PERCENT == 0 && PWD_PERCENT == 0){
                     double v = 0;
                     for(int i = 0;i < chargeItems.size();i++){
@@ -539,6 +540,7 @@ public class CashierUXController implements Initializable, UIController {
                     pwdDiscount.set(0);
                     pwdF.setText("");
                 }
+                */
                 
                 scF.focusedProperty().addListener((obs,oldVal,newVal)->{
                     if(!newVal){
@@ -724,7 +726,9 @@ public class CashierUXController implements Initializable, UIController {
             if(getSelectedHospitalCharges().size() > 0){                
                 String printName = getSelectedHospitalCharges().get(0).getChargeto();
                 
-                double netamt = Double.parseDouble(t1netLbl.getText().replaceAll(",", ""));
+                List<Double> nets = chargeItems.stream().map(obj->obj.getNetsales()).collect(Collectors.toList());                
+                final double netamt = nets.stream().collect(Collectors.summingDouble(Double::doubleValue));
+                
                 DoubleProperty payable = new SimpleDoubleProperty();
                 DoubleProperty tenderd = new SimpleDoubleProperty();
                 DoubleProperty change = new SimpleDoubleProperty();
@@ -789,12 +793,14 @@ public class CashierUXController implements Initializable, UIController {
                 FXField.addDoubleValidator(tenderF, netamt, 9999999.0, 0.0);
                 FXField.addFocusValidationListener(nameF,invoiceF,tenderF);
 
-                tenderd.addListener((obs,oldVal,newVal)->{
-                    if(newVal.doubleValue() <= payable.get()){
-                        change.setValue(0);
-                    }else{
-                        change.setValue(tenderd.getValue()-payable.getValue());
-                    }
+                tenderF.textProperty().addListener((obs,oldVal,newVal)->{
+                    Platform.runLater(()->{
+                        if(tenderd.get() <= payable.get()){
+                            change.setValue(0);
+                        }else{
+                            change.setValue(tenderd.getValue()-payable.getValue());
+                        }
+                    });                    
                 });
                 
                 payable.set(netamt);            
@@ -902,7 +908,10 @@ public class CashierUXController implements Initializable, UIController {
         try{                        
             if(getSelectedHospitalCharges().size() > 0){
                 String printName = getSelectedHospitalCharges().get(0).getChargeto();
-                double netamt = Double.parseDouble(t1netLbl.getText().replaceAll(",", ""));
+                
+                List<Double> nets = chargeItems.stream().map(obj->obj.getNetsales()).collect(Collectors.toList());                
+                final double netamt = nets.stream().collect(Collectors.summingDouble(Double::doubleValue));
+                
                 DoubleProperty payable = new SimpleDoubleProperty();
                 DoubleProperty tenderd = new SimpleDoubleProperty();
                 DoubleProperty change = new SimpleDoubleProperty();
@@ -985,12 +994,14 @@ public class CashierUXController implements Initializable, UIController {
                 FXField.addDoubleValidator(tenderF, netamt, 9999999.0, 0.0);
                 FXField.addFocusValidationListener(nameF,ornumF,tenderF);
 
-                tenderd.addListener((obs,oldVal,newVal)->{
-                    if(newVal.doubleValue() <= payable.get()){
-                        change.setValue(0);
-                    }else{
-                        change.setValue(tenderd.getValue()-payable.getValue());
-                    }
+                tenderF.textProperty().addListener((obs,oldVal,newVal)->{
+                    Platform.runLater(()->{
+                        if(tenderd.get() <= payable.get()){
+                            change.setValue(0);
+                        }else{
+                            change.setValue(tenderd.getValue()-payable.getValue());
+                        }
+                    });                    
                 });
                 
                 payable.set(netamt);
@@ -1107,12 +1118,13 @@ public class CashierUXController implements Initializable, UIController {
         try{                        
             if(getSelectedHospitalCharges().size() > 0){
                 String printName = getSelectedHospitalCharges().get(0).getChargeto();
-                double netamt = Double.parseDouble(t1netLbl.getText().replaceAll(",", ""));
+                
+                List<Double> nets = chargeItems.stream().map(obj->obj.getNetsales()).collect(Collectors.toList());                
+                final double netamt = nets.stream().collect(Collectors.summingDouble(Double::doubleValue));
+                
                 DoubleProperty payable = new SimpleDoubleProperty();
                 DoubleProperty tenderd = new SimpleDoubleProperty();
                 DoubleProperty change = new SimpleDoubleProperty();
-
-                        
 
                 VBox content = new VBox();
                 content.setMaxWidth(500);
@@ -1179,12 +1191,14 @@ public class CashierUXController implements Initializable, UIController {
                 FXField.addDoubleValidator(tenderF, netamt, 9999999.0, 0.0);
                 FXField.addFocusValidationListener(nameF,tenderF);
 
-                tenderd.addListener((obs,oldVal,newVal)->{
-                    if(newVal.doubleValue() <= payable.get()){
-                        change.setValue(0);
-                    }else{
-                        change.setValue(tenderd.getValue()-payable.getValue());
-                    }
+                tenderF.textProperty().addListener((obs,oldVal,newVal)->{
+                    Platform.runLater(()->{
+                        if(tenderd.get() <= payable.get()){
+                            change.setValue(0);
+                        }else{
+                            change.setValue(tenderd.getValue()-payable.getValue());
+                        }
+                    });                    
                 });
                 
                 payable.set(netamt);    
@@ -2278,13 +2292,43 @@ public class CashierUXController implements Initializable, UIController {
                                     printBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
                                     JFXButton voidBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.TIMES_CIRCLE, "14px", evt -> {
-                                        
+                                        JFXButton btn = new JFXButton("Yes, Void this Payment!");
+                                        btn.getStyleClass().add("btn-success");
+                                        JFXDialog dl = FXDialog.showConfirmDialog(mainStack, "Confirmation", new Label("Cancell & Void this transaction & payment ?"), FXDialog.WARNING,btn);
+                                        btn.setOnAction(voidevt->{
+                                            dl.close();
+                                            Care.process(()->{
+                                                try{
+                                                    LocalDateTime now = LocalDateTime.now();
+                                                    row_data.setCancelled(Care.getUser().getName());
+                                                    row_data.setCanceltime(now);
+                                                    if(row_data.update(true)){
+                                                        HospitalCharge chr = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.PAYMENT_ID, String.valueOf(row_data.getId()));
+                                                        List<HospitalChargeItem> items = SQLTable.list(HospitalChargeItem.class,HospitalChargeItem.HOSPITALCHARGE_ID+"='"+chr.getId()+"'");
+                                                        chr.setVoided(Care.getUser().getName());
+                                                        chr.setVoidtime(now);
+                                                        items.stream().forEach(itm->{                                                    
+                                                            itm.setVoided(Care.getUser().getName());
+                                                            itm.setVoidtime(now);
+                                                            itm.update();
+                                                        });                                                
+                                                        FXDialog.showMessageDialog(mainStack, "Voided", "Payment & Charges has been voided!", FXDialog.SUCCESS);
+                                                        loadPaymentList(null);                                                        
+                                                    }else{
+                                                        FXDialog.showMessageDialog(mainStack, "Failed", "Server Communication Failure", FXDialog.SUCCESS);
+                                                    }
+                                                }catch(Exception er){
+                                                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                                }
+                                            });
+                                        });
                                     });
                                     
                                     voidBtn.setTooltip(new Tooltip("Void"));
                                     voidBtn.getStyleClass().add("btn-danger");
                                     voidBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     voidBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                                    voidBtn.setDisable(row_data.getCanceltime() != null);
                                     
                                     container.setAlignment(Pos.CENTER_LEFT);
                                     container.getChildren().addAll(viewBtn,printBtn,voidBtn);

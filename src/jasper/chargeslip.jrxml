@@ -245,9 +245,7 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="0" y="34" width="46" height="9" uuid="185c8c08-3205-4366-bd7f-ebcf231303f0">
-					<printWhenExpression><![CDATA[$P{approved} != '']]></printWhenExpression>
-				</reportElement>
+				<reportElement x="0" y="34" width="46" height="9" uuid="185c8c08-3205-4366-bd7f-ebcf231303f0"/>
 				<textElement textAlignment="Right">
 					<font size="6" isBold="true"/>
 				</textElement>

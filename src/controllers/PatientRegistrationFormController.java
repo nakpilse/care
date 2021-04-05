@@ -498,7 +498,7 @@ public class PatientRegistrationFormController implements Initializable, FormCon
             FXField.setNameCharactersOnly(lastnameF);
             FXField.setNameCharactersOnly(firstnameF);
             FXField.setNameCharactersOnly(middlenameF);
-            FXField.addRequiredValidator(bdateF);
+            //FXField.addRequiredValidator(bdateF);
             FXField.addRequiredValidator(civilF);
 
             //Address
@@ -524,7 +524,7 @@ public class PatientRegistrationFormController implements Initializable, FormCon
             FXField.setCommonCharactersOnly(cprel2F);
 
             FXField.addTrimOnFocusLost(lastnameF, firstnameF, middlenameF, addressF, mobileF, landlineF, emailF, cpname1F, cpname2F, cpname3F, cprel1F, cprel2F, cprel3F);
-            FXField.addFocusValidationListener(lastnameF, firstnameF, bdateF, civilF, mobileF, landlineF, emailF, cpnum1F, cpnum2F, cpnum3F);
+            FXField.addFocusValidationListener(lastnameF, firstnameF, civilF, mobileF, landlineF, emailF, cpnum1F, cpnum2F, cpnum3F);
         } catch (Exception er) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
         }
