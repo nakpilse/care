@@ -275,8 +275,8 @@ public class CreateLabChargeFormController implements Initializable,FormControll
                                 
                                 chargeItems.add(labcharge);
 
-                                CHARGE.setRecordtable(LaboratoryTest.TABLE_NAME);
-                                CHARGE.setRecordtableid(test_id);
+                                //CHARGE.setRecordtable(LaboratoryTest.TABLE_NAME);
+                                //CHARGE.setRecordtableid(test_id);
                             }
                         }
                         CHARGE.setItems(chargeItems);

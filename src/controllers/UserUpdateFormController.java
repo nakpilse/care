@@ -184,7 +184,14 @@ public class UserUpdateFormController implements Initializable,FormController<Us
                             Roles.ACCOUNTING_MANAGER,
                             Roles.ACCOUNTING_STAFF,
                             Roles.BILLING_MANAGER,
-                            Roles.BILLING_STAFF
+                            Roles.BILLING_STAFF,
+                            Roles.OPD_STAFF,
+                            Roles.ER_STAFF,
+                            Roles.ADMISSION_STAFF,
+                            Roles.STATION_NURSE,
+                            Roles.PHYSICIAN,
+                            Roles.LABORATORY_STAFF,
+                            Roles.RADIOLOGY_STAFF
                     );
                     Thread.sleep(100);
                     roleF.getSelectionModel().select(record.getRole());

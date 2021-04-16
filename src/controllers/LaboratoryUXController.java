@@ -618,7 +618,7 @@ public class LaboratoryUXController implements Initializable,UIController {
             FXTable.addColumn(t1table, "Category", LaboratoryTest::testcategoryProperty, false);
             FXTable.addColumn(t1table, "Encoder", LaboratoryTest::encoderProperty, false);
             FXTable.addColumn(t1table, "OR #", LaboratoryTest::ornumberProperty, false);
-            TableColumn actCol = FXTable.addColumn(t1table, " ", LaboratoryTest::patientProperty, false, 44, 44, 44);
+            TableColumn actCol = FXTable.addColumn(t1table, " ", LaboratoryTest::patientProperty, false, 76, 76, 76);
             
             selCol.setCellFactory(column -> {
                 return new TableCell<LaboratoryTest, Boolean>() {
@@ -690,18 +690,67 @@ public class LaboratoryUXController implements Initializable,UIController {
                                     viewBtn.getStyleClass().add("btn-control");
                                     viewBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     viewBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                                    /*
+
                                     JFXButton voidBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.TIMES_CIRCLE, "14px", evt -> {
-                                        
+                                        JFXButton btn = new JFXButton("Yes, Delete this record & charge!");
+                                        btn.getStyleClass().add("btn-success");
+                                        JFXDialog dl = FXDialog.showConfirmDialog(mainStack, "Confirmation", new Label("Confirm deletion of record & charge ?"), FXDialog.WARNING,btn);
+                                        btn.setOnAction(voidevt->{
+                                            dl.close();
+                                            FXTask task = new FXTask(){
+                                                @Override
+                                                protected void load() {
+                                                    try{
+                                                        Platform.runLater(()->{
+                                                            maskerPane.setVisible(true);
+                                                            btn.setDisable(true);
+                                                        });
+                                                        HospitalChargeItem chitem = (HospitalChargeItem)SQLTable.get(HospitalChargeItem.class, HospitalChargeItem.RECORDTABLE+"='"+LaboratoryTest.TABLE_NAME+"' AND "+HospitalChargeItem.RECORDTABLEID+"="+row_data.getId());
+                                                        if(chitem != null){
+                                                            HospitalCharge ch = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.ID, String.valueOf(chitem.getHospitalcharge_id()));
+                                                            if(ch != null){
+                                                                List<HospitalChargeItem> items = SQLTable.list(HospitalChargeItem.class,HospitalChargeItem.HOSPITALCHARGE_ID+"='"+ch.getId()+"'");
+                                                                for(HospitalChargeItem chi:items){
+                                                                    if(chi.getId()== chitem.getId()){
+                                                                        items.remove(chi);
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                ch.setItems(items);
+                                                                ch.calculateTotal(items);
+                                                                if(ch.update()){
+                                                                    chitem.delete();
+                                                                    row_data.delete();
+                                                                    Platform.runLater(()->{
+                                                                        FXDialog.showMessageDialog(mainStack, "Deleted", "Laboratory Record/Charge has been deleted!", FXDialog.SUCCESS);
+                                                                        loadLabTestList(null);
+                                                                    });
+                                                                }
+                                                            }
+                                                        }else{
+
+                                                        }
+                                                    }catch(Exception er){
+                                                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                                    }finally {
+                                                        Platform.runLater(()->{
+                                                            maskerPane.setVisible(false);
+                                                            btn.setDisable(false);
+                                                        });
+                                                    }
+                                                }
+                                            };
+                                            Care.process(task);
+                                        });
                                     });
                                     
                                     voidBtn.setTooltip(new Tooltip("Void"));
                                     voidBtn.getStyleClass().add("btn-danger");
                                     voidBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     voidBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                                    */
+                                    
                                     container.setAlignment(Pos.CENTER_LEFT);
-                                    container.getChildren().addAll(viewBtn);
+                                    container.getChildren().addAll(viewBtn,voidBtn);
 
                                     setGraphic(container);
                                     setStyle("-fx-alightment : CENTER;");
@@ -745,21 +794,19 @@ public class LaboratoryUXController implements Initializable,UIController {
             t2table.setEditable(true);
             t2table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
             
-            TableColumn timeCol2 = FXTable.addColumn(t2table, "Timestamp", HospitalCharge::chargetimeProperty, false, 150, 150, 150);
-            FXTable.addColumn(t2table, "Charge #", HospitalCharge::chargenumberProperty, false, 150, 150, 150);
+            TableColumn timeCol2 = FXTable.addColumn(t2table, "Timestamp", HospitalCharge::chargetimeProperty, false, 130, 130, 130);
+            FXTable.addColumn(t2table, "Charge #", HospitalCharge::chargenumberProperty, false, 125, 125, 125);
             FXTable.addColumn(t2table, "Patient Name", HospitalCharge::chargetoProperty, false);
             FXTable.addColumn(t2table, "User", HospitalCharge::userProperty, false);
-            FXTable.addColumn(t2table, "Admission ID #", HospitalCharge::admission_idProperty, false);
+            FXTable.addColumn(t2table, "Admission ID #", HospitalCharge::admission_idProperty, false,100,100,100);
             FXTable.addColumn(t2table, "Cancelled", HospitalCharge::cancelledProperty, false);
-            TableColumn timeCol3 =  FXTable.addColumn(t2table, "Cancel Time", HospitalCharge::canceltimeProperty, false);
-            FXTable.addColumn(t2table, "Net Payable", HospitalCharge::netsalesProperty, false);
-            TableColumn timeCol4 =  FXTable.addColumn(t2table, "Paid to Date", HospitalCharge::paymenttimeProperty, false);
-            FXTable.addColumn(t2table, "OR #", HospitalCharge::ornumberProperty, false);
+            TableColumn timeCol3 =  FXTable.addColumn(t2table, "Cancel Time", HospitalCharge::canceltimeProperty, false,130,130,130);
+            FXTable.addColumn(t2table, "Net Payable", HospitalCharge::netsalesProperty, false,80,80,80);
+            FXTable.addColumn(t2table, "OR #", HospitalCharge::ornumberProperty, false,80,80,80);
             TableColumn actCol2 = FXTable.addColumn(t2table, " ", HospitalCharge::chargetoProperty, false, 76, 76, 76);
             
             FXTable.setTimestampColumn(timeCol2);
             FXTable.setTimestampColumn(timeCol3);
-            FXTable.setTimestampColumn(timeCol4);
             
             actCol2.setCellFactory(column -> {
                 return new TableCell<HospitalCharge, String>() {
@@ -797,7 +844,7 @@ public class LaboratoryUXController implements Initializable,UIController {
                                         Care.process(printTask);
                                     });
                                     
-                                    printBtn.setTooltip(new Tooltip("Void"));
+                                    printBtn.setTooltip(new Tooltip("Print"));
                                     printBtn.getStyleClass().add("btn-control");
                                     printBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     printBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

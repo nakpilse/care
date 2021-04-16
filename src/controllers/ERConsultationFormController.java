@@ -347,6 +347,7 @@ public class ERConsultationFormController implements Initializable,FormControlle
                         if(record.getId() <= 0){
                             record.setUser_id(Care.getUser().getId());
                             record.setEncoder(Care.getUser().getName());
+                            CHARGE.setOpt0(record.getPhysician());
                             if(dateF.getValue() != null && timeF.getValue() != null){
                                 record.setConsultationtime(LocalDateTime.of(dateF.getValue(), timeF.getValue()));
                             }
@@ -386,7 +387,7 @@ public class ERConsultationFormController implements Initializable,FormControlle
                             if(ttodateF.getValue() != null && ttotimeF.getValue() != null){
                                 record.setTransfertotime(LocalDateTime.of(ttodateF.getValue(), ttotimeF.getValue()));
                             }
-                            
+                            CHARGE.setOpt0(record.getPhysician());
                             if(record.update()){
                                 CHARGE.update();
                                 CHARGE_ITEMS.forEach(itm->{
@@ -466,7 +467,7 @@ public class ERConsultationFormController implements Initializable,FormControlle
     @Override
     public void postAction() {
         try{
-            if(UI_CONTROLLER instanceof OPDUXController){
+            if(UI_CONTROLLER instanceof ERUXController){
                 UI_CONTROLLER.reloadReferences(0);
             }else if(UI_CONTROLLER instanceof AdmissionUXController){
                 UI_CONTROLLER.reloadReferences(3);
@@ -584,7 +585,7 @@ public class ERConsultationFormController implements Initializable,FormControlle
                 });
                 
             }else{
-                CHARGE = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.RECORDTABLEID+"="+String.valueOf(record.getId())+" AND "+HospitalCharge.RECORDTABLE+"'"+ERConsultation.TABLE_NAME+"'");
+                CHARGE = (HospitalCharge)SQLTable.get(HospitalCharge.class, HospitalCharge.RECORDTABLEID+"="+String.valueOf(record.getId())+" AND "+HospitalCharge.RECORDTABLE+"='"+ERConsultation.TABLE_NAME+"'");
                 CHARGE_ITEMS = SQLTable.list(HospitalChargeItem.class, HospitalChargeItem.HOSPITALCHARGE_ID+"='"+CHARGE.getId()+"'");
                 CHARGE.setItems(CHARGE_ITEMS);
                 Platform.runLater(()->{

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" stylesheets="@Styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.ViewChargeFormController">
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="55.0" minHeight="55.0" style="-fx-background-color: info-gradient;" styleClass="form-title-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="titleLbl" graphicTextGap="10.0" maxHeight="55.0" minHeight="55.0" prefHeight="55.0" styleClass="form-title-label" text="CHARGE INFORMATION">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/About_48px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" visible="false" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeBtn" cancelButton="true" focusTraversable="false" onAction="#formClose" styleClass="btn-close" text="Close" />
+         </children>
+      </HBox>
+      <VBox prefHeight="200.0" prefWidth="125.0" styleClass="form-nav-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <JFXToggleNode contentDisplay="TOP" focusTraversable="false" maxHeight="85.0" maxWidth="1.7976931348623157E308" minHeight="85.0" onAction="#loadSingleTab" selected="true" text="Charge Information" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Check_50px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <toggleGroup>
+                  <ToggleGroup fx:id="menuGroup" />
+               </toggleGroup>
+               <styleClass>
+                  <String fx:value="vtab-toggle-btn" />
+                  <String fx:value="anton-font" />
+               </styleClass>
+            </JFXToggleNode>
+            <JFXToggleNode contentDisplay="TOP" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="85.0" maxWidth="1.7976931348623157E308" minHeight="85.0" onAction="#loadMultiTab" text="Items" textAlignment="CENTER" textFill="WHITE" toggleGroup="$menuGroup" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/Box_52px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="vtab-toggle-btn" />
+                  <String fx:value="anton-font" />
+               </styleClass>
+            </JFXToggleNode>
+            <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefHeight="200.0" visible="false" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+      <JFXTabPane layoutX="280.0" layoutY="158.0" styleClass="vtab-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <tabs>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane hgap="10.0" layoutX="84.0" layoutY="86.0" styleClass="hover-panel" vgap="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="35.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="55.0" minHeight="55.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXTextField editable="false" labelFloat="true" promptText="Charge #" />
+                              <JFXTextField editable="false" labelFloat="true" promptText="Timestamp" GridPane.columnIndex="3" />
+                              <JFXTextField editable="false" labelFloat="true" promptText="Facility" GridPane.columnIndex="1" />
+                              <JFXTextField editable="false" labelFloat="true" layoutX="30.0" layoutY="43.0" promptText="Charged To" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <JFXTextField editable="false" labelFloat="true" layoutX="30.0" layoutY="108.0" promptText="Encoded By" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <JFXTextField editable="false" layoutX="204.0" layoutY="43.0" promptText="Charge Type" GridPane.columnIndex="2" />
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Untitled Tab">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -433,7 +434,7 @@ public class PharmacyUXController implements Initializable, UIController {
     @FXML
     void chargeToPatient(ActionEvent event) {
         try {
-            if (!PURCHASE_MAP.isEmpty()) {
+            if (!PURCHASE_MAP.isEmpty()) {                
                 VBox content = new VBox();
                 content.setMaxWidth(500);
                 content.setMaxHeight(500);
@@ -478,11 +479,17 @@ public class PharmacyUXController implements Initializable, UIController {
                 addScanned.getStyleClass().add("btn-danger");
 
                 JFXDialog dialog = FXDialog.showConfirmDialog(mainStack, "Charge to Patient", content, FXDialog.PRIMARY, addScanned);
-                customerF.requestFocus();
+                
                 dialog.setOnDialogClosed(evt -> {
                     setChargingPatient(false);
                 });
                 setChargingPatient(true);
+                
+                dialog.setOnDialogOpened(evt ->{
+                    Platform.runLater(()->{
+                        customerF.requestFocus();
+                    });
+                });
 
                 Label warn = new Label();
                 warn.setText("");
@@ -537,7 +544,7 @@ public class PharmacyUXController implements Initializable, UIController {
                                         //Care.createNotification("Charge Info", "Your Charge to patient info has been saved!", 3000, true);
                                         System.out.println("Transaction Saved");
                                     });
-                                    //charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", false);
+                                    charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", false);
                                 } else {
                                     Platform.runLater(() -> {
                                         dialog.close();
@@ -667,7 +674,7 @@ public class PharmacyUXController implements Initializable, UIController {
                                         System.out.println("Transaction Saved");
                                     });
 
-                                    charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", false);
+                                    charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", true);
                                 } else {
                                     Platform.runLater(() -> {
                                         dialog.close();
@@ -1658,6 +1665,7 @@ public class PharmacyUXController implements Initializable, UIController {
                                                     itm.setVoided(Care.getUser().getName());
                                                     itm.setVoidtime(LocalDateTime.now());
                                                     itm.update();
+                                                    itm.addItemQuantity();
                                                 });
                                                 FXDialog.showMessageDialog(mainStack, "Voided", "Charge has been voided!", FXDialog.SUCCESS);
                                                 loadTransactionList(null);

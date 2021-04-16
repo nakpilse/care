@@ -227,7 +227,7 @@ public class OPDUXController implements Initializable,UIController {
             FXTable.addColumn(t1table, "Case", Consultation::casecodeProperty, false);
             FXTable.addColumn(t1table, "Encoder", Consultation::encoderProperty, false);
             FXTable.addColumn(t1table, "OR #", Consultation::ornumberProperty, false);
-            TableColumn actCol = FXTable.addColumn(t1table, " ", Consultation::patientnameProperty, false, 44, 44, 44);
+            TableColumn actCol = FXTable.addColumn(t1table, " ", Consultation::patientnameProperty, false, 76, 76, 76);
             
             actCol.setCellFactory(column -> {
                 return new TableCell<Consultation, String>() {

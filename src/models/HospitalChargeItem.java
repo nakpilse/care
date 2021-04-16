@@ -1348,10 +1348,43 @@ public class HospitalChargeItem extends SQLModel<HospitalChargeItem>{
             double ot_amt = 0;
             
             if(!this.isService()){
-                if(this.isVatable() && vat){     
-                    //Vatable Item
-                    if(sc > 0 || pwd > 0){
-                        //Vatable Item to non-vat due to SC/PWD
+                if(this.isVatable()){                    
+                    if(vat){
+                        //Vatable Item
+                        if(sc > 0 || pwd > 0){
+                            //Vatable Item to non-vat due to SC/PWD
+                            vsales = 0;
+                            nvsales = this.getTotalselling()/vat_div;
+                            zrsales = 0;
+                            vatamt = 0;
+                            lvatamt = this.getTotalselling()-nvsales;   
+
+                            sc_amt = nvsales * (sc/100);
+                            pwd_amt = nvsales * (pwd/100);
+                            emp_amt = (nvsales-(sc_amt+pwd_amt)) * (emp/100);
+                            ot_amt = (nvsales-(sc_amt+pwd_amt+emp_amt)) * (ot/100);
+
+                            this.setScdiscount(NumberKit.round(sc_amt, 3));
+                            this.setPwddiscount(NumberKit.round(pwd_amt, 3));
+                            this.setOtdiscount(NumberKit.round(ot_amt, 3));
+                            this.setEmpdiscount(NumberKit.round(emp_amt, 3));
+                        }else{
+                            vsales = this.getTotalselling()/vat_div;
+                            nvsales = 0;
+                            zrsales = 0;
+                            vatamt = this.getTotalselling()-vsales;
+                            lvatamt = 0;   
+
+
+                            emp_amt = this.getTotalselling() * (emp/100);
+                            ot_amt = (this.getTotalselling()-emp_amt) * (ot/100);
+
+                            this.setScdiscount(0);
+                            this.setPwddiscount(0);
+                            this.setOtdiscount(NumberKit.round(ot_amt, 3));
+                            this.setEmpdiscount(NumberKit.round(emp_amt, 3));
+                        }
+                    }else{                        
                         vsales = 0;
                         nvsales = this.getTotalselling()/vat_div;
                         zrsales = 0;
@@ -1366,29 +1399,14 @@ public class HospitalChargeItem extends SQLModel<HospitalChargeItem>{
                         this.setScdiscount(NumberKit.round(sc_amt, 3));
                         this.setPwddiscount(NumberKit.round(pwd_amt, 3));
                         this.setOtdiscount(NumberKit.round(ot_amt, 3));
-                        this.setEmpdiscount(NumberKit.round(emp_amt, 3));
-                    }else{
-                        vsales = this.getTotalselling()/vat_div;
-                        nvsales = 0;
-                        zrsales = 0;
-                        vatamt = this.getTotalselling()-vsales;
-                        lvatamt = 0;   
-
-
-                        emp_amt = vsales * (emp/100);
-                        ot_amt = (vsales-emp_amt) * (ot/100);
-
-                        this.setScdiscount(0);
-                        this.setPwddiscount(0);
-                        this.setOtdiscount(NumberKit.round(ot_amt, 3));
-                        this.setEmpdiscount(NumberKit.round(emp_amt, 3));
-                    }
+                        this.setEmpdiscount(NumberKit.round(emp_amt, 3));                        
+                    }                    
                 }else{
                     vsales = 0;
-                    nvsales = this.getTotalselling()/vat_div;
+                    nvsales = this.getTotalselling();
                     zrsales = 0;
                     vatamt = 0;
-                    lvatamt = this.getTotalselling()-nvsales;
+                    lvatamt = 0;//(this.getTotalselling()*vat_div)-this.getTotalselling();
 
                     sc_amt = nvsales * (sc/100);
                     pwd_amt = nvsales * (pwd/100);
@@ -1438,6 +1456,15 @@ public class HospitalChargeItem extends SQLModel<HospitalChargeItem>{
     public final boolean deductItemQuantity(){
         try{            
             return SQLTable.execute("UPDATE "+this.getItemtable()+" SET "+QUANTITY+"=("+QUANTITY+"-"+this.getQuantity()+") WHERE "+ID+"="+this.getItemtableid());
+        }catch(Exception er){
+            Logger.getLogger(HospitalChargeItem.class.getName()).log(Level.SEVERE, null, er);
+            return false;
+        }
+    }
+    
+    public final boolean addItemQuantity(){
+        try{            
+            return SQLTable.execute("UPDATE "+this.getItemtable()+" SET "+QUANTITY+"=("+QUANTITY+"+"+this.getQuantity()+") WHERE "+ID+"="+this.getItemtableid());
         }catch(Exception er){
             Logger.getLogger(HospitalChargeItem.class.getName()).log(Level.SEVERE, null, er);
             return false;

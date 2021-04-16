@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="gmfinvoice" language="groovy" pageWidth="388" pageHeight="568" columnWidth="358" leftMargin="20" rightMargin="10" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" isIgnorePagination="true" uuid="d88acf7f-4f26-490f-9763-0abb5dd987bf">
 	<property name="ireport.zoom" value="2.593742460100003"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="187"/>
+	<property name="ireport.y" value="119"/>
 	<parameter name="customer_name" class="java.lang.String"/>
 	<parameter name="customer_address" class="java.lang.String"/>
 	<parameter name="business_style" class="java.lang.String"/>
@@ -104,14 +104,14 @@
 				<textFieldExpression><![CDATA[$F{particulars}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="228" y="0" width="44" height="13" uuid="3e12a6c4-e5bc-4a7c-891e-3b63d0b5f9a4"/>
+				<reportElement x="228" y="0" width="37" height="13" uuid="3e12a6c4-e5bc-4a7c-891e-3b63d0b5f9a4"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{unit_price}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="271" y="0" width="63" height="13" uuid="d98c34aa-e82f-4644-b29c-2903e7499965"/>
+				<reportElement x="265" y="0" width="69" height="13" uuid="d98c34aa-e82f-4644-b29c-2903e7499965"/>
 				<textElement textAlignment="Right">
 					<font size="10"/>
 				</textElement>

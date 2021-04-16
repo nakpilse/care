@@ -371,7 +371,7 @@ public class BillingStatementFormController implements Initializable,FormControl
             NotedF.setLabelFloat(true);
             
             JFXTextField cashierF = new JFXTextField();
-            cashierF.setPromptText("Noted By");    
+            cashierF.setPromptText("Cashier");    
             cashierF.setMinHeight(28);
             cashierF.setMinWidth(250);
             cashierF.setMaxWidth(250);
@@ -395,6 +395,11 @@ public class BillingStatementFormController implements Initializable,FormControl
             JFXButton finalize = new JFXButton("Finalize & Save");
             finalize.getStyleClass().add("btn-danger");
             
+            FXField.addRequiredValidator(phlF);
+            FXField.addRequiredValidator(reviewF);
+            FXField.addRequiredValidator(NotedF);
+            FXField.addRequiredValidator(cashierF);
+            
             content.getChildren().addAll(phlF,reviewF,NotedF,cashierF);
             //new Label("Do you want to save changes?");
             JFXDialog dialogx = FXDialog.showConfirmDialog(stackPane, "Save Bill Statement", content, FXDialog.PRIMARY, finalize, save);
@@ -409,6 +414,11 @@ public class BillingStatementFormController implements Initializable,FormControl
                             Platform.runLater(()->{
                                 save.setDisable(true);
                             });
+                            
+                            record.setPhilhealthstaff(phlF.getText());
+                            record.setReviewedby(reviewF.getText());
+                            record.setNotedby(NotedF.getText());
+                            record.setCashier(cashierF.getText());
                             
                             List<BillStatementItem> items = new ArrayList();
                             items.addAll(ROOM_ITEMS);
@@ -563,7 +573,7 @@ public class BillingStatementFormController implements Initializable,FormControl
             
             content.getChildren().addAll(nameF,ageF,agesF,genF);
             //new Label("Do you want to save changes?");
-            JFXDialog dialogx = FXDialog.showConfirmDialog(stackPane, "Save Bill Statement", content, FXDialog.PRIMARY, save);
+            JFXDialog dialogx = FXDialog.showConfirmDialog(stackPane, "Edit Patient Info", content, FXDialog.PRIMARY, save);
             save.setOnAction(editEvt->{
                 if(nameF.getTextfieldComponent().validate() && ageF.getTextfieldComponent().validate() && agesF.getTextfieldComponent().validate() && genF.getTextfieldComponent().validate()){
                     record.setPatientname(nameV.get());
@@ -571,6 +581,7 @@ public class BillingStatementFormController implements Initializable,FormControl
                     record.setAgestring(agesV.get());
                     record.setGender(genV.get());
                     titleLbl.setText(record.getPatientname() +" - "+record.getGender()+" "+record.getAge()+" "+record.getAgestring());
+                    dialogx.close();
                 }
             });
         }catch(Exception er){
@@ -895,53 +906,7 @@ public class BillingStatementFormController implements Initializable,FormControl
             FXTable.addCurrencyColumn(t1table, "Other Benefits", BillCategorySummary::benefitdiscountProperty, false,80,80,80);
             FXTable.addCurrencyColumn(t1table, "FCR Amt", BillCategorySummary::firstcaserateProperty, false,80,80,80);
             FXTable.addCurrencyColumn(t1table, "SCR Amt", BillCategorySummary::secondcaserateProperty, false,80,80,80);
-            /*
-            TableColumn actCol = FXTable.addColumn(t1table, " ", BillCategorySummary::categoryProperty, false,40,40,40);
-            actCol.setCellFactory(column -> {
-                return new TableCell<BillCategorySummary, String>() {
-                    @Override
-                    protected void updateItem(String value, boolean empty) {
-                        super.updateItem(value, empty);
-                        if (empty || value == null) {
-                            setGraphic(null);
-                            setStyle("");
-                        } else {
-                            try {
-                                BillCategorySummary row_data = getTableView().getItems().get(getIndex());
-                                if (row_data != null) {
-                                    HBox container = new HBox();
-                                    container.setMinSize(40, 40);
-                                    container.setMaxSize(40, 40);
-                                    container.setPrefSize(40, 40);
-                                    container.setSpacing(4);
-
-                                    JFXButton viewBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.SIGN_OUT, "16px", evt -> {
-                                        
-                                    });
-                                    viewBtn.setTooltip(new Tooltip("View"));
-                                    viewBtn.getStyleClass().add("btn-control");
-                                    viewBtn.setStyle("-jfx-button-type : FLAT;");
-                                    viewBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-                                    
-                                    container.setAlignment(Pos.CENTER_LEFT);
-                                    container.getChildren().addAll(viewBtn);
-
-                                    setGraphic(container);
-                                    setStyle("-fx-alightment : CENTER_LEFT;");
-                                } else {
-                                    setGraphic(null);
-                                    setStyle("");
-                                }
-                            } catch (Exception er) {
-                                setGraphic(null);
-                                setStyle("");
-                            }
-                        }
-                    }
-                };
-            });
-            */
+            
         }catch(Exception er){
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
         }

@@ -404,6 +404,24 @@ public class Item extends SQLModel<Item>{
         }
     }
     
+    public static boolean addQuantity(int id,int qty){
+        try{            
+            return SQLTable.execute("UPDATE "+Item.TABLE_NAME+" SET "+Item.QUANTITY+"=("+Item.QUANTITY+"+"+qty+") WHERE "+Item.ID+"="+id);
+        }catch(Exception er){            
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, er);
+            return false;
+        }
+    }
+    
+    public static boolean reduceQuantity(int id,int qty){
+        try{            
+            return SQLTable.execute("UPDATE "+Item.TABLE_NAME+" SET "+Item.QUANTITY+"=("+Item.QUANTITY+"-"+qty+") WHERE "+Item.ID+"="+id);
+        }catch(Exception er){            
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, er);
+            return false;
+        }
+    }
+    
     public HospitalChargeItem purchase(int qty){
         HospitalChargeItem itm = new HospitalChargeItem();
         itm.setDescription(this.getDescription());

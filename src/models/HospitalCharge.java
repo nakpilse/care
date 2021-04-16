@@ -1059,7 +1059,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
     public void calculateTotal(){
         try{
             double net = (this.getVatsales()+this.getNonvatsales()+this.getZeroratedsales()+this.getInputvat())-(this.getScdiscount()+this.getPwddiscount()+this.getEmpdiscount()+this.getOtdiscount());
-            this.setNetsales(net);
+            this.setNetsales(NumberKit.round(net,3));
         }catch(Exception er){
             Logger.getLogger(HospitalCharge.class.getName()).log(Level.SEVERE, null, er);
         }
@@ -1105,7 +1105,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
             this.setOtdiscount(NumberKit.round(ot_amt,3));
             
             double net = (this.getVatsales()+this.getNonvatsales()+this.getZeroratedsales()+this.getInputvat())-(this.getScdiscount()+this.getPwddiscount()+this.getEmpdiscount()+this.getOtdiscount());
-            this.setNetsales(net);
+            this.setNetsales(NumberKit.round(net,3));
         }catch(Exception er){
             Logger.getLogger(HospitalCharge.class.getName()).log(Level.SEVERE, null, er);
         }
@@ -1140,7 +1140,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
                     Map<String, Object> m = new HashMap();
                     m.put("qty", item.getQuantity());
                     m.put("tr_item", item.getDescription()+((item.getQuantity() > 1)? " @ " + item.getSelling():""));
-                    m.put("amt", item.getTotalselling());
+                    m.put("amt", item.getNetsales());
                     datasource.add(m);
                 });
 
@@ -1157,7 +1157,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
                 datas.put("user", this.getUser());
                 datas.put("chargetime", DateTimeKit.toProperTimestamp(this.getChargetime()));
                 datas.put("chargenumber", this.getChargenumber());
-                datas.put("total", this.getTotalgross());
+                datas.put("total", this.getNetsales());
                 datas.put("physician", this.getOpt0());
                 
                 datas.put("requestor", this.getChargenotes());

@@ -229,7 +229,7 @@ public class ERUXController implements Initializable,UIController {
             FXTable.addColumn(t1table, "Case", ERConsultation::casecodeProperty, false);
             FXTable.addColumn(t1table, "Encoder", ERConsultation::encoderProperty, false);
             FXTable.addColumn(t1table, "OR #", ERConsultation::ornumberProperty, false);
-            TableColumn actCol = FXTable.addColumn(t1table, " ", ERConsultation::patientnameProperty, false, 44, 44, 44);
+            TableColumn actCol = FXTable.addColumn(t1table, " ", ERConsultation::patientnameProperty, false, 76, 76, 76);
             
             actCol.setCellFactory(column -> {
                 return new TableCell<ERConsultation, String>() {
@@ -292,7 +292,7 @@ public class ERUXController implements Initializable,UIController {
                                     printBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     printBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                                     container.setAlignment(Pos.CENTER_LEFT);
-                                    container.getChildren().addAll(viewBtn);
+                                    container.getChildren().addAll(viewBtn,printBtn);
 
                                     setGraphic(container);
                                     setStyle("-fx-alightment : CENTER;");

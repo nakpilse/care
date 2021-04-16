@@ -76,6 +76,7 @@ import models.Consultation;
 import models.ERConsultation;
 import models.HospitalCharge;
 import models.HospitalChargeItem;
+import models.Item;
 import models.LaboratoryTest;
 import models.Patient;
 import models.Payment;
@@ -542,8 +543,8 @@ public class CashierUXController implements Initializable, UIController {
                 }
                 */
                 
-                scF.focusedProperty().addListener((obs,oldVal,newVal)->{
-                    if(!newVal){
+                scF.textProperty().addListener((obs,oldVal,newVal)->{
+                    if(newVal != null){
                         if(!scF.getText().isEmpty()){                            
                             double v = 0;
                             for(int i = 0;i < chargeItems.size();i++){
@@ -560,8 +561,8 @@ public class CashierUXController implements Initializable, UIController {
                     }
                 });
                 
-                pwdF.focusedProperty().addListener((obs,oldVal,newVal)->{
-                    if(!newVal){
+                pwdF.textProperty().addListener((obs,oldVal,newVal)->{
+                    if(newVal != null){
                         if(!pwdF.getText().isEmpty()){
                             double v = 0;
                             for(int i = 0;i < chargeItems.size();i++){
@@ -578,9 +579,9 @@ public class CashierUXController implements Initializable, UIController {
                     }
                 });
                 
-                empP.focusedProperty().addListener((obs,oldVal,newVal)->{
-                    if(!newVal){
-                        if(empP.validate()){
+                empP.textProperty().addListener((obs,oldVal,newVal)->{
+                    if(newVal != null && !newVal.isEmpty()){
+                        Platform.runLater(()->{
                             try{
                                 double perc = empPerc.get();
                                 double v = 0;
@@ -593,24 +594,23 @@ public class CashierUXController implements Initializable, UIController {
                                     empDiscount.set(d);
                                 }else{
                                     for(int i = 0;i < chargeItems.size();i++){
-                                        v += chargeItems.get(i).getSelling();
+                                        v += chargeItems.get(i).getTotalselling();
                                     }
                                     double d = v*(perc/100);
                                     empDiscount.set(d);
                                 }
-                                
+
                                 ttDiscount.set(scDiscount.get()+pwdDiscount.get()+empDiscount.get()+otDiscount.get());
                             }catch(NumberFormatException er){
                                 System.out.println("Invalid Employee Discount Percentage");
-                            }
-                            
-                        }                        
+                            }                                 
+                        });
                     }
                 });
                 
-                otdP.focusedProperty().addListener((obs,oldVal,newVal)->{
-                    if(!newVal){
-                        if(otdP.validate()){
+                otdP.textProperty().addListener((obs,oldVal,newVal)->{
+                    if(newVal != null && !newVal.isEmpty()){
+                        Platform.runLater(()->{
                             try{
                                 double perc = otPerc.get();
                                 double v = 0;
@@ -623,7 +623,7 @@ public class CashierUXController implements Initializable, UIController {
                                     otDiscount.set(d);
                                 }else{
                                     for(int i = 0;i < chargeItems.size();i++){
-                                        v += chargeItems.get(i).getSelling();
+                                        v += chargeItems.get(i).getTotalselling();
                                     }
                                     v -= empDiscount.get();
                                     double d = v*(perc/100);
@@ -634,8 +634,7 @@ public class CashierUXController implements Initializable, UIController {
                             }catch(NumberFormatException er){
                                 System.out.println("Invalid Other Discount Percentage");
                             }
-                            
-                        }                        
+                        });                  
                     }
                 });
                 
@@ -814,85 +813,83 @@ public class CashierUXController implements Initializable, UIController {
                 invoiceF.requestFocus();
 
                 printBtn.setOnAction(pruchaseEvt->{
-                    if(invoiceF.validate() && tenderF.validate()){
-                        Platform.runLater(()->{
-                            t1invoiceBtn.setDisable(true);
-                            Care.process(()->{
+                    if(invoiceF.validate() && tenderF.validate()){                        
+                        Care.process(()->{
+                            try{
+                                
+                                Platform.runLater(()->{
+                                    t1invoiceBtn.setDisable(true);
+                                });
+                                
+                                LocalDateTime now = LocalDateTime.now();
+                                List<HospitalCharge> charges = getSelectedHospitalCharges();
+
+
+                                Payment payment = new Payment();
+                                payment.setPatient(charges.get(0).getChargeto());
+                                payment.setPaymenttype("Cash");
+                                payment.setAmount(netamt);
+                                payment.setPaidby(nameF.getText());
+                                payment.setInvoicenumber(invoiceF.getText());
+                                payment.setCashier(Care.getUser().getName());
+                                payment.setEncoder(Care.getUser().getName());
+                                payment.setPatient_id(charges.get(0).getPatient_id());
+                                payment.setPaymenttime(now);
+
+                                int pay_id = payment.save();
+
+                                charges.stream().forEach((charge) -> {
+                                    List<HospitalChargeItem> items = new ArrayList();
+                                    chargeItems.stream().forEach((item) -> {
+                                        if(item.getChargenumber().equals(charge.getChargenumber())){
+                                            items.add(item);                                        
+                                            item.setCashier(Care.getUser().getName());
+                                            item.setCashierid(Care.getUser().getId());                                            
+                                            charge.setScid(item.getScid());
+                                            charge.setPwdid(item.getPwdid());
+                                            charge.setEmpid(item.getEmpid());
+                                            charge.setOtdiscountremarks(item.getOtdiscountremarks());
+                                            item.update();
+                                        }
+                                    });
+
+                                    charge.setPayment_id(pay_id);
+                                    charge.setCashier(Care.getUser().getName());
+                                    charge.setCashierid(Care.getUser().getId());
+                                    charge.setInvoicenumber(invoiceF.getText());
+                                    charge.setPaymenttype("Cash");
+                                    charge.setPaymenttime(now);
+                                    charge.setPaidamount(charge.getNetsales());
+                                    charge.setItems(items);
+                                    charge.calculateTotal(items);     
+
+
+                                    charge.update();
+                                });
+
+
+                                Platform.runLater(()->{
+                                    maskerPane.setVisible(true);                                    
+                                    dialog.close();
+                                });
+
                                 try{
-                                    LocalDateTime now = LocalDateTime.now();
-                                    List<HospitalCharge> charges = getSelectedHospitalCharges();
-                                    
-                                    
-                                    Payment payment = new Payment();
-                                    payment.setPatient(charges.get(0).getChargeto());
-                                    payment.setPaymenttype("Cash");
-                                    payment.setAmount(netamt);
-                                    payment.setPaidby(nameF.getText());
-                                    payment.setInvoicenumber(invoiceF.getText());
-                                    payment.setCashier(Care.getUser().getName());
-                                    payment.setEncoder(Care.getUser().getName());
-                                    payment.setPatient_id(charges.get(0).getPatient_id());
-                                    payment.setPaymenttime(now);
-
-                                    int pay_id = payment.save();
-                                    
-                                    charges.stream().forEach((charge) -> {
-                                        List<HospitalChargeItem> items = new ArrayList();
-
-
-                                        chargeItems.stream().forEach((item) -> {
-                                            if(item.getChargenumber().equals(charge.getChargenumber())){
-                                                items.add(item);                                        
-                                                item.setCashier(Care.getUser().getName());
-                                                item.setCashierid(Care.getUser().getId());                                            
-                                                charge.setScid(item.getScid());
-                                                charge.setPwdid(item.getPwdid());
-                                                charge.setEmpid(item.getEmpid());
-                                                charge.setOtdiscountremarks(item.getOtdiscountremarks());
-                                                item.update();
-                                            }
-                                        });
-
-                                        charge.setPayment_id(pay_id);
-                                        charge.setCashier(Care.getUser().getName());
-                                        charge.setCashierid(Care.getUser().getId());
-                                        charge.setInvoicenumber(invoiceF.getText());
-                                        charge.setPaymenttype("Cash");
-                                        charge.setPaymenttime(now);
-                                        charge.setPaidamount(charge.getNetsales());
-                                        charge.setItems(items);
-                                        charge.calculateTotal(items);     
-
-
-                                        charge.update();
-                                    });
-
-
-                                    Platform.runLater(()->{
-                                        maskerPane.setVisible(true);
-                                        clearTransaction(event);
-                                        dialog.close();
-                                    });
-                                    
-                                    try{
-                                        printInvoice(false, chargeItems, invoiceF.getText(), nameF.getText(), now.toLocalDate());
-                                    }catch(Exception er){
-                                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
-                                    }
-
+                                    printInvoice(true, chargeItems, invoiceF.getText(), nameF.getText(), now.toLocalDate());
                                 }catch(Exception er){
                                     Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
-                                }finally {
-                                    loadUnpaidHospitalChargesCounter();
-                                    Platform.runLater(()->{
-                                        t1invoiceBtn.setDisable(false);
-                                        maskerPane.setVisible(false);
-                                    });
                                 }
-                            });
-                        });
-                    }else{
 
+                            }catch(Exception er){
+                                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                            }finally {
+                                loadUnpaidHospitalChargesCounter();
+                                Platform.runLater(()->{
+                                    t1invoiceBtn.setDisable(false);
+                                    maskerPane.setVisible(false);
+                                    clearTransaction(event);
+                                });
+                            }
+                        });
                     }             
                 });
 
@@ -1015,93 +1012,92 @@ public class CashierUXController implements Initializable, UIController {
                 ornumF.requestFocus();
 
                 confirmBtn.setOnAction(evt->{
-                    if(ornumF.validate() && tenderF.validate()){
-                        Platform.runLater(()->{
-                            t1orBtn.setDisable(true);
-                            Care.process(()->{
-                                try{
-                                    LocalDateTime now = LocalDateTime.now();
-                                    List<HospitalCharge> charges = getSelectedHospitalCharges();
-                                    
-                                    Payment payment = new Payment();
-                                    payment.setPatient(charges.get(0).getChargeto());
-                                    payment.setPaymenttype("Cash");
-                                    payment.setAmount(netamt);
-                                    payment.setPaidby(nameF.getText());
-                                    payment.setOrnumber(ornumF.getText());
-                                    payment.setCashier(Care.getUser().getName());
-                                    payment.setEncoder(Care.getUser().getName());
-                                    payment.setPatient_id(charges.get(0).getPatient_id());
-                                    payment.setPaymenttime(now);
+                    if(ornumF.validate() && tenderF.validate()){                            
+                        Care.process(()->{
+                            try{
+                                Platform.runLater(()->{
+                                    t1orBtn.setDisable(true);
+                                });
 
-                                    int pay_id = payment.save();
-                                    
-                                    charges.stream().forEach((charge) -> {
-                                        List<HospitalChargeItem> items = new ArrayList();
+                                LocalDateTime now = LocalDateTime.now();
+                                List<HospitalCharge> charges = getSelectedHospitalCharges();
+
+                                Payment payment = new Payment();
+                                payment.setPatient(charges.get(0).getChargeto());
+                                payment.setPaymenttype("Cash");
+                                payment.setAmount(netamt);
+                                payment.setPaidby(nameF.getText());
+                                payment.setOrnumber(ornumF.getText());
+                                payment.setCashier(Care.getUser().getName());
+                                payment.setEncoder(Care.getUser().getName());
+                                payment.setPatient_id(charges.get(0).getPatient_id());
+                                payment.setPaymenttime(now);
+
+                                int pay_id = payment.save();
+
+                                charges.stream().forEach((charge) -> {
+                                    List<HospitalChargeItem> items = new ArrayList();
 
 
-                                        chargeItems.stream().forEach((item) -> {
-                                            if(item.getChargenumber().equals(charge.getChargenumber())){
-                                                items.add(item);                                        
-                                                item.setCashier(Care.getUser().getName());
-                                                item.setCashierid(Care.getUser().getId());  
-                                                charge.setScid(item.getScid());
-                                                charge.setPwdid(item.getPwdid());
-                                                charge.setEmpid(item.getEmpid());
-                                                charge.setOtdiscountremarks(item.getOtdiscountremarks());                                       
-                                                item.update();
-                                            }
-                                        });
-                                        
-                                        charge.setPayment_id(pay_id);
-                                        charge.setCashier(Care.getUser().getName());
-                                        charge.setCashierid(Care.getUser().getId());
-                                        charge.setOrnumber(ornumF.getText());
-                                        charge.setPaymenttype("Cash");
-                                        charge.setPaymenttime(now);
-                                        charge.setPaidamount(charge.getNetsales());
-                                        charge.setItems(items);
-                                        charge.calculateTotal(items);     
-
-                                        charge.update();
-                                        
-                                        if(charge.getRecordtable().equals(LaboratoryTest.TABLE_NAME)){
-                                            SQLTable.execute("UPDATE "+LaboratoryTest.TABLE_NAME+" SET "+LaboratoryTest.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+LaboratoryTest.ID+"="+charge.getRecordtableid());
-                                        }else if(charge.getRecordtable().equals(RadiologyTest.TABLE_NAME)){
-                                            SQLTable.execute("UPDATE "+RadiologyTest.TABLE_NAME+" SET "+RadiologyTest.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+RadiologyTest.ID+"="+charge.getRecordtableid());
-                                        }else if(charge.getRecordtable().equals(Consultation.TABLE_NAME)){
-                                            SQLTable.execute("UPDATE "+Consultation.TABLE_NAME+" SET "+Consultation.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+Consultation.ID+"="+charge.getRecordtableid());
-                                        }else if(charge.getRecordtable().equals(ERConsultation.TABLE_NAME)){
-                                            SQLTable.execute("UPDATE "+ERConsultation.TABLE_NAME+" SET "+ERConsultation.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+ERConsultation.ID+"="+charge.getRecordtableid());
+                                    chargeItems.stream().forEach((item) -> {
+                                        if(item.getChargenumber().equals(charge.getChargenumber())){
+                                            items.add(item);                                        
+                                            item.setCashier(Care.getUser().getName());
+                                            item.setCashierid(Care.getUser().getId());  
+                                            charge.setScid(item.getScid());
+                                            charge.setPwdid(item.getPwdid());
+                                            charge.setEmpid(item.getEmpid());
+                                            charge.setOtdiscountremarks(item.getOtdiscountremarks());                                       
+                                            item.update();
                                         }
                                     });
 
+                                    charge.setPayment_id(pay_id);
+                                    charge.setCashier(Care.getUser().getName());
+                                    charge.setCashierid(Care.getUser().getId());
+                                    charge.setOrnumber(ornumF.getText());
+                                    charge.setPaymenttype("Cash");
+                                    charge.setPaymenttime(now);
+                                    charge.setPaidamount(charge.getNetsales());
+                                    charge.setItems(items);
+                                    charge.calculateTotal(items);     
 
-                                    Platform.runLater(()->{
-                                        maskerPane.setVisible(true);
-                                        clearTransaction(event);
-                                        dialog.close();
-                                    });
+                                    charge.update();
 
-                                    try{
-                                        printOfficialReciept(false, charges, ornumF.getText(), nameF.getText(), "", "", "", now.toLocalDate());
-                                    }catch(Exception er){
-                                        Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                    if(charge.getRecordtable().equals(LaboratoryTest.TABLE_NAME)){
+                                        SQLTable.execute("UPDATE "+LaboratoryTest.TABLE_NAME+" SET "+LaboratoryTest.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+LaboratoryTest.ID+"="+charge.getRecordtableid());
+                                    }else if(charge.getRecordtable().equals(RadiologyTest.TABLE_NAME)){
+                                        SQLTable.execute("UPDATE "+RadiologyTest.TABLE_NAME+" SET "+RadiologyTest.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+RadiologyTest.ID+"="+charge.getRecordtableid());
+                                    }else if(charge.getRecordtable().equals(Consultation.TABLE_NAME)){
+                                        SQLTable.execute("UPDATE "+Consultation.TABLE_NAME+" SET "+Consultation.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+Consultation.ID+"="+charge.getRecordtableid());
+                                    }else if(charge.getRecordtable().equals(ERConsultation.TABLE_NAME)){
+                                        SQLTable.execute("UPDATE "+ERConsultation.TABLE_NAME+" SET "+ERConsultation.ORNUMBER+"='"+ornumF.getText()+"' WHERE "+ERConsultation.ID+"="+charge.getRecordtableid());
                                     }
+                                });
 
+
+                                Platform.runLater(()->{
+                                    maskerPane.setVisible(true);
+                                    clearTransaction(event);
+                                    dialog.close();
+                                });
+
+                                try{
+                                    printOfficialReciept(false, charges, ornumF.getText(), nameF.getText(), "", "", "", now.toLocalDate());
                                 }catch(Exception er){
                                     Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
-                                }finally {
-                                    loadUnpaidHospitalChargesCounter();
-                                    Platform.runLater(()->{
-                                        t1orBtn.setDisable(false);
-                                        maskerPane.setVisible(false);
-                                    });
                                 }
-                            });
-                        });
-                    }else{
 
+                            }catch(Exception er){
+                                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                            }finally {
+                                loadUnpaidHospitalChargesCounter();
+                                Platform.runLater(()->{
+                                    t1orBtn.setDisable(false);
+                                    maskerPane.setVisible(false);
+                                });
+                            }
+                        });
                     }    
                 });
 
@@ -1443,11 +1439,15 @@ public class CashierUXController implements Initializable, UIController {
             t1chargeF.setOnKeyReleased(keyevt ->{
                 if(keyevt.getCode() == KeyCode.ENTER){
                     t1chargeBtn.fire();
+                    t1invoiceBtn.setDisable(false);
+                    t1orBtn.setDisable(false);
                 }
             });
             t1patientF.setOnKeyReleased(keyevt ->{
                 if(keyevt.getCode() == KeyCode.ENTER){
                     t1patientBtn.fire();
+                    t1invoiceBtn.setDisable(false);
+                    t1orBtn.setDisable(false);
                 }
             });
             
@@ -1526,6 +1526,15 @@ public class CashierUXController implements Initializable, UIController {
                         Care.process(()->{                            
                             try{
                                 System.out.println("Selected : "+newVal);
+                                Platform.runLater(()->{
+                                    if(newVal.intValue() == 2){
+                                        t1invoiceBtn.setDisable(false);
+                                        t1orBtn.setDisable(true);
+                                    }else{
+                                        t1invoiceBtn.setDisable(true);
+                                        t1orBtn.setDisable(false);
+                                    }
+                                });
                                 if(newVal.intValue() <= 1){
                                     List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
                                     if(!records.isEmpty()){
@@ -1715,18 +1724,21 @@ public class CashierUXController implements Initializable, UIController {
                                     //hcontainer1.minWidthProperty().bind(desCol.widthProperty());
 
                                     Label cname = new Label(row_data.getChargeto());
-                                    cname.setPrefSize(200,18);
+                                    cname.setPrefSize(Double.MAX_VALUE,18);
+                                    cname.setMaxWidth(350);
                                     cname.setTextAlignment(TextAlignment.LEFT);
                                     cname.setAlignment(Pos.CENTER_LEFT);
+                                    cname.setStyle("-fx-font-weight: bold;");
                                     
                                     Label optcharge = new Label(row_data.getCareto());
-                                    optcharge.setPrefSize(200,18);
+                                    optcharge.setPrefSize(Double.MAX_VALUE,18);
                                     optcharge.setTextAlignment(TextAlignment.LEFT);
                                     optcharge.setAlignment(Pos.CENTER_LEFT);
                                     optcharge.setStyle("-fx-text-fill:danger-color;");
                                     
                                     Label ctotal = new Label(NumberKit.toCurrency(row_data.getNetsales()));
-                                    ctotal.setPrefSize(120,18);
+                                    ctotal.setPrefSize(90,18);
+                                    ctotal.setMinSize(90,18);
                                     ctotal.setTextAlignment(TextAlignment.RIGHT);
                                     ctotal.setAlignment(Pos.CENTER_RIGHT);
                                     ctotal.setStyle("-fx-text-fill:primary-color;-fx-font-weight:bold;-fx-cursor:HAND;");
@@ -1737,7 +1749,9 @@ public class CashierUXController implements Initializable, UIController {
                                     });
                                     
                                     HBox.setHgrow(ctime, Priority.ALWAYS);
-                                    HBox.setHgrow(ctotal, Priority.ALWAYS);                                    
+                                    //HBox.setHgrow(ctotal, Priority.ALWAYS);     
+                                    HBox.setHgrow(cname, Priority.ALWAYS);
+                                    HBox.setHgrow(optcharge, Priority.ALWAYS);
                                     
                                     hcontainer1.getChildren().addAll(cname,ctotal);
                                     
@@ -1849,7 +1863,12 @@ public class CashierUXController implements Initializable, UIController {
                                     d1.setPrefSize(Double.MAX_VALUE,18);
                                     d1.setTextAlignment(TextAlignment.LEFT);
                                     d1.setAlignment(Pos.CENTER_LEFT);    
-                                    d1.setStyle("-fx-font-weight : bold;");
+                                    if(row_data.getItemtable().equals(Item.TABLE_NAME) && !row_data.isVatable()){
+                                        d1.setStyle("-fx-font-weight : bold;-fx-text-fill:danger-color;");
+                                    }else{
+                                        d1.setStyle("-fx-font-weight : bold;");
+                                    }
+                                    
                                     
                                     Label d2 = new Label("Qty : "+row_data.getQuantity()+" * Price : "+NumberKit.toCurrency(row_data.getSelling())+" = Amount : "+NumberKit.toCurrency(row_data.getTotalselling()));
                                     d2.setPrefSize(Double.MAX_VALUE,18);
@@ -2005,6 +2024,9 @@ public class CashierUXController implements Initializable, UIController {
                     selCharges.add(recs.get(i).getModelClone());
                     count++;
                 }
+                if(recs.get(i).getChargefacility().equalsIgnoreCase("Pharmacy")){
+                    
+                }
             }
             chargeNums = new String[count];
             count = 0;
@@ -2020,6 +2042,7 @@ public class CashierUXController implements Initializable, UIController {
             EMP_PERCENT = 0;
             OT_PERCENT = 0;
             */
+            
             if(selList.contains(true)){
                 Care.process(()->{
                     try{
@@ -2170,6 +2193,9 @@ public class CashierUXController implements Initializable, UIController {
                                                     itm.setVoided(Care.getUser().getName());
                                                     itm.setVoidtime(LocalDateTime.now());
                                                     itm.update();
+                                                    if(itm.getItemtable().equals(Item.TABLE_NAME)){
+                                                        itm.addItemQuantity();
+                                                    }
                                                 });                                                
                                                 FXDialog.showMessageDialog(mainStack, "Voided", "Charge has been voided!", FXDialog.SUCCESS);
                                                 loadChargesList(HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAYMENTTIME+" IS NULL AND "+HospitalCharge.VOIDTIME+" IS NULL");
@@ -2267,7 +2293,7 @@ public class CashierUXController implements Initializable, UIController {
                                                 List<HospitalChargeItem> items = new ArrayList();
                                                 if(!ref_or.isEmpty()){
                                                     charges = SQLTable.list(HospitalCharge.class, HospitalCharge.PAYMENT_ID+"='"+row_data.getId()+"'");
-                                                    printOfficialReciept(true, charges, row_data.getOrnumber(), row_data.getPaidby(), "", "", "", row_data.getPaymenttime().toLocalDate());
+                                                    printOfficialReciept(false, charges, row_data.getOrnumber(), row_data.getPaidby(), "", "", "", row_data.getPaymenttime().toLocalDate());
                                                 }else{
                                                     charges = SQLTable.list(HospitalCharge.class, HospitalCharge.PAYMENT_ID+"='"+row_data.getId()+"'");
                                                     charges.stream().forEach(charge->{
@@ -2277,7 +2303,7 @@ public class CashierUXController implements Initializable, UIController {
                                                         }
                                                     });
                                                     if(items.size() > 0){
-                                                        printInvoice(true, items, row_data.getInvoicenumber(), row_data.getPaidby(), row_data.getPaymenttime().toLocalDate());
+                                                        printInvoice(false, items, row_data.getInvoicenumber(), row_data.getPaidby(), row_data.getPaymenttime().toLocalDate());
                                                     }
                                                 }
                                             }catch(Exception er){
@@ -2311,6 +2337,9 @@ public class CashierUXController implements Initializable, UIController {
                                                             itm.setVoided(Care.getUser().getName());
                                                             itm.setVoidtime(now);
                                                             itm.update();
+                                                            if(itm.getItemtable().equals(Item.TABLE_NAME)){
+                                                                itm.addItemQuantity();
+                                                            }
                                                         });                                                
                                                         FXDialog.showMessageDialog(mainStack, "Voided", "Payment & Charges has been voided!", FXDialog.SUCCESS);
                                                         loadPaymentList(null);                                                        

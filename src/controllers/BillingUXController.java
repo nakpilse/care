@@ -438,7 +438,7 @@ public class BillingUXController implements Initializable,UIController {
             FXTable.addColumn(t1table, "Paid Amount", BillStatement::paidamountProperty, false,100,100,100);
             FXTable.addColumn(t1table, "Cancelled", BillStatement::cancelledProperty, false,125,125,125);
             FXTable.addColumn(t1table, "Finalized", BillStatement::finalizedProperty, false);
-            TableColumn actCol = FXTable.addColumn(t1table, " ", BillStatement::patientnameProperty, false,112,112,112);
+            TableColumn actCol = FXTable.addColumn(t1table, " ", BillStatement::patientnameProperty, false,120,120,120);
             
             FXTable.setTimestampColumn(timeCol);
             
@@ -455,9 +455,9 @@ public class BillingUXController implements Initializable,UIController {
                                 BillStatement row_data = getTableView().getItems().get(getIndex());
                                 if (row_data != null) {
                                     HBox container = new HBox();
-                                    container.setMinSize(112, 40);
-                                    container.setMaxSize(112, 40);
-                                    container.setPrefSize(112, 40);
+                                    container.setMinSize(120, 40);
+                                    container.setMaxSize(120, 40);
+                                    container.setPrefSize(120, 40);
                                     container.setSpacing(4);
 
                                     JFXButton viewBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.EYE, "16px", evt -> {
@@ -553,9 +553,9 @@ public class BillingUXController implements Initializable,UIController {
                                 HospitalCharge row_data = getTableView().getItems().get(getIndex());
                                 if (row_data != null) {
                                     HBox container = new HBox();
-                                    container.setMinSize(158, 40);
-                                    container.setMaxSize(158, 40);
-                                    container.setPrefSize(158, 40);
+                                    container.setMinSize(120, 40);
+                                    container.setMaxSize(120, 40);
+                                    container.setPrefSize(120, 40);
                                     container.setSpacing(4);
 
                                     JFXButton viewBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.EYE, "16px", evt -> {
@@ -1413,7 +1413,7 @@ public class BillingUXController implements Initializable,UIController {
             });
             
             
-            FXTable.addCustomTableMenu(t1table, filterLb, unfinalLb,finalIcon, exportLb);
+            FXTable.addCustomTableMenu(t1table, filterLb, unfinalLb,finalLb, exportLb);
         } catch (Exception er) {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
         }

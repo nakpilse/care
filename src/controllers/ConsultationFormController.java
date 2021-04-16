@@ -320,6 +320,7 @@ public class ConsultationFormController implements Initializable,FormController<
                             record.setUser_id(Care.getUser().getId());
                             record.setEncoder(Care.getUser().getName());
                             record.setConsultationtime(LocalDateTime.of(dateF.getValue(), timeF.getValue()));
+                            CHARGE.setOpt0(record.getPhysician());
                             int id = record.save(true);
                             if(id > 0){
                                 CHARGE.setRecordtable(Consultation.TABLE_NAME);
@@ -341,6 +342,7 @@ public class ConsultationFormController implements Initializable,FormController<
                                 });
                             }
                         }else{
+                            CHARGE.setOpt0(record.getPhysician());
                             if(record.update()){
                                 CHARGE.update();
                                 CHARGE_ITEMS.forEach(itm->{
@@ -540,8 +542,7 @@ public class ConsultationFormController implements Initializable,FormController<
                 CHARGE.setUser(Care.getUser().getName());
                 CHARGE.setUser_id(Care.getUser().getId());
                 CHARGE.setPatient_id(record.getPatient_id());
-                CHARGE_ITEMS.add(doc);
-                CHARGE_ITEMS.add(hospi);
+                CHARGE_ITEMS.add(consulfee);
                 CHARGE.setItems(CHARGE_ITEMS);
                 CHARGE.calculateTotal(CHARGE_ITEMS);
                 Platform.runLater(()->{
