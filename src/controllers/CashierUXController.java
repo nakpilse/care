@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,6 +200,9 @@ public class CashierUXController implements Initializable, UIController {
 
     @FXML
     private Label t1netLbl;
+    
+    @FXML
+    private JFXButton t1accrecBtn;
 
     @FXML
     private JFXButton t1invoiceBtn;
@@ -718,6 +722,108 @@ public class CashierUXController implements Initializable, UIController {
             Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
         }
     }
+    
+    
+    @FXML
+    void addToAccountsRecievables(ActionEvent event) {
+        try{                        
+            if(getSelectedHospitalCharges().size() > 0){
+                String printName = getSelectedHospitalCharges().get(0).getChargeto();
+                
+                List<Double> nets = chargeItems.stream().map(obj->obj.getNetsales()).collect(Collectors.toList());       
+
+                //payable.set(netamt);            
+
+                VBox content = new VBox();
+                content.setMaxWidth(500);
+                content.setMaxHeight(500);
+                content.setAlignment(Pos.CENTER);
+                content.setSpacing(25);
+                content.setPadding(new Insets(35,25,25,25));                               
+
+                
+                JFXTextField nameF = new JFXTextField(printName);
+                nameF.setPromptText("Account To");    
+                nameF.setMinHeight(24);
+                nameF.setMinWidth(250);
+                nameF.setMaxWidth(250);
+                nameF.setPrefWidth(250);   
+                nameF.setLabelFloat(true);
+
+                FXField.addRequiredValidator(nameF);
+                
+
+                content.getChildren().addAll(nameF);
+
+                JFXButton confirmBtn = new JFXButton("Confirm");                                    
+                confirmBtn.getStyleClass().add("btn-danger");
+
+                JFXDialog dialog = FXDialog.showConfirmDialog(mainStack,"Accounts Recievable",content,FXDialog.DANGER,confirmBtn);
+                nameF.requestFocus();
+
+                confirmBtn.setOnAction(evt->{
+                    if(nameF.validate()){                            
+                        Care.process(()->{
+                            try{
+                                Platform.runLater(()->{
+                                    t1orBtn.setDisable(true);
+                                });
+
+                                LocalDateTime now = LocalDateTime.now();
+                                List<HospitalCharge> charges = getSelectedHospitalCharges();
+
+                                charges.stream().forEach((charge) -> {
+                                    List<HospitalChargeItem> items = new ArrayList();
+
+
+                                    chargeItems.stream().forEach((item) -> {
+                                        if(item.getChargenumber().equals(charge.getChargenumber())){
+                                            items.add(item);                                        
+                                            item.setCashier(Care.getUser().getName());
+                                            item.setCashierid(Care.getUser().getId());  
+                                            charge.setScid(item.getScid());
+                                            charge.setPwdid(item.getPwdid());
+                                            charge.setEmpid(item.getEmpid());
+                                            charge.setOtdiscountremarks(item.getOtdiscountremarks());                                       
+                                            item.update();
+                                        }
+                                    });
+
+                                    charge.setChargetype("Accounts Recievable");
+                                    charge.setCashier(Care.getUser().getName());
+                                    charge.setCashierid(Care.getUser().getId());
+                                    charge.setItems(items);
+                                    charge.calculateTotal(items);     
+
+                                    charge.update();
+                                    
+                                });
+                                
+                                Platform.runLater(()->{
+                                    maskerPane.setVisible(true);
+                                    clearTransaction(event);
+                                    dialog.close();
+                                });
+
+                            }catch(Exception er){
+                                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                            }finally {
+                                loadUnpaidHospitalChargesCounter();
+                                Platform.runLater(()->{
+                                    t1orBtn.setDisable(false);
+                                    maskerPane.setVisible(false);
+                                });
+                            }
+                        });
+                    }    
+                });
+
+            }
+            
+        }catch(Exception er){
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+        }
+    }
 
     @FXML
     void printPayInvoice(ActionEvent event) {
@@ -815,15 +921,13 @@ public class CashierUXController implements Initializable, UIController {
                 printBtn.setOnAction(pruchaseEvt->{
                     if(invoiceF.validate() && tenderF.validate()){                        
                         Care.process(()->{
-                            try{
-                                
+                            try{                                
                                 Platform.runLater(()->{
                                     t1invoiceBtn.setDisable(true);
                                 });
                                 
                                 LocalDateTime now = LocalDateTime.now();
                                 List<HospitalCharge> charges = getSelectedHospitalCharges();
-
 
                                 Payment payment = new Payment();
                                 payment.setPatient(charges.get(0).getChargeto());
@@ -861,8 +965,7 @@ public class CashierUXController implements Initializable, UIController {
                                     charge.setPaymenttime(now);
                                     charge.setPaidamount(charge.getNetsales());
                                     charge.setItems(items);
-                                    charge.calculateTotal(items);     
-
+                                    charge.calculateTotal(items);   
 
                                     charge.update();
                                 });
@@ -874,7 +977,7 @@ public class CashierUXController implements Initializable, UIController {
                                 });
 
                                 try{
-                                    printInvoice(true, chargeItems, invoiceF.getText(), nameF.getText(), now.toLocalDate());
+                                    printInvoice(false, chargeItems, invoiceF.getText(), nameF.getText(), now.toLocalDate());
                                 }catch(Exception er){
                                     Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
                                 }
@@ -1075,18 +1178,16 @@ public class CashierUXController implements Initializable, UIController {
                                     }
                                 });
 
-
-                                Platform.runLater(()->{
-                                    maskerPane.setVisible(true);
-                                    clearTransaction(event);
-                                    dialog.close();
-                                });
-
                                 try{
                                     printOfficialReciept(false, charges, ornumF.getText(), nameF.getText(), "", "", "", now.toLocalDate());
                                 }catch(Exception er){
                                     Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
                                 }
+                                Platform.runLater(()->{
+                                    maskerPane.setVisible(true);
+                                    clearTransaction(event);
+                                    dialog.close();
+                                });
 
                             }catch(Exception er){
                                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
@@ -1199,7 +1300,7 @@ public class CashierUXController implements Initializable, UIController {
                 
                 payable.set(netamt);    
 
-                content.getChildren().addAll(netpayF,invF,ornumF,nameF,tenderF,changeF);
+                content.getChildren().addAll(netpayF,ornumF,invF,nameF,tenderF,changeF);
 
                 JFXButton confirmBtn = new JFXButton("Confirm");                                    
                 confirmBtn.getStyleClass().add("btn-danger");
@@ -1535,86 +1636,99 @@ public class CashierUXController implements Initializable, UIController {
                                         t1orBtn.setDisable(false);
                                     }
                                 });
-                                if(newVal.intValue() <= 1){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else if(newVal.intValue() <= 2){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Pharmacy' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else if(newVal.intValue() <= 3){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='OPD' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else if(newVal.intValue() <= 4){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Laboratory' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else if(newVal.intValue() <= 5){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Radiology' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else if(newVal.intValue() <= 2){
-                                    List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='ER' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETIME+" DESC");    
-                                    if(!records.isEmpty()){
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, records);    
-                                            t1resultsLbl.setText(String.valueOf(records.size()));
-                                        });
-                                    }else{
-                                        Platform.runLater(()->{
-                                            FXTable.setList(t1resultsTbl, new ArrayList());
-                                            t1resultsLbl.setText("0");
-                                        });
-                                    }
-                                }else{
-                                    
+                                switch (newVal.intValue()) {
+                                    case 1:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    case 2:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Pharmacy' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    case 3:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='OPD' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    case 4:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Laboratory' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    case 5:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='Radiology' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    case 6:
+                                        {
+                                            List<HospitalCharge> records = SQLTable.list(HospitalCharge.class,HospitalCharge.CHARGEFACILITY+"='ER' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' AND "+HospitalCharge.PAIDAMOUNT+"<=0 AND "+HospitalCharge.VOIDTIME+" IS NULL ORDER BY "+HospitalCharge.CHARGETO+" ASC");
+                                            if(!records.isEmpty()){
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, records);
+                                                    t1resultsLbl.setText(String.valueOf(records.size()));
+                                                });
+                                            }else{
+                                                Platform.runLater(()->{
+                                                    FXTable.setList(t1resultsTbl, new ArrayList());
+                                                    t1resultsLbl.setText("0");
+                                                });
+                                            }       break;
+                                        }
+                                    default:
+                                        break;
                                 }
                             }catch(Exception er){
                                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
@@ -1736,7 +1850,7 @@ public class CashierUXController implements Initializable, UIController {
                                     optcharge.setAlignment(Pos.CENTER_LEFT);
                                     optcharge.setStyle("-fx-text-fill:danger-color;");
                                     
-                                    Label ctotal = new Label(NumberKit.toCurrency(row_data.getNetsales()));
+                                    Label ctotal = new Label(NumberKit.toCurrency(row_data.getTotalgross()));
                                     ctotal.setPrefSize(90,18);
                                     ctotal.setMinSize(90,18);
                                     ctotal.setTextAlignment(TextAlignment.RIGHT);
@@ -1881,7 +1995,7 @@ public class CashierUXController implements Initializable, UIController {
                                     d3.setTextAlignment(TextAlignment.LEFT);
                                     d3.setAlignment(Pos.CENTER_LEFT);
                                     d3.setStyle("-fx-font-style : italic;");
-                                    d3.textProperty().bind(Bindings.concat("VAT Sales : ",row_data.vatsalesProperty().asString("%,.2f")," / Non-VAT Sales : ",row_data.nonvatsalesProperty().asString("%,.2f")," / VAT : ",row_data.inputvatProperty().asString("%,.2f")));
+                                    d3.textProperty().bind(Bindings.concat("VAT Sales : ",row_data.vatsalesProperty().asString("%,.2f")," / Non-VAT Sales : ",row_data.nonvatsalesProperty().asString("%,.2f")," / VAT : ",row_data.inputvatProperty().asString("%,.2f")," / LESS-VAT : ",row_data.lessvatProperty().asString("%,.2f")));
                                     
                                     container.setFillWidth(true);
                                     container.setAlignment(Pos.CENTER_LEFT);
@@ -2042,6 +2156,10 @@ public class CashierUXController implements Initializable, UIController {
             EMP_PERCENT = 0;
             OT_PERCENT = 0;
             */
+            
+            boolean hasPharmacy = selCharges.stream().anyMatch(t -> t.getChargefacility().equals("Pharmacy"));            
+            t1orBtn.setDisable(hasPharmacy);
+            t1invoiceBtn.setDisable(!hasPharmacy);
             
             if(selList.contains(true)){
                 Care.process(()->{
@@ -2952,6 +3070,15 @@ public class CashierUXController implements Initializable, UIController {
                     tto.setMinWidth(250);
                     tto.setMaxWidth(250);
                     tto.setPrefWidth(250);
+                    
+                    JFXComboBox<String> typeC = new JFXComboBox();
+                    typeC.setPromptText("Charge Type");
+                    typeC.setMinHeight(28);
+                    typeC.setMinWidth(250);
+                    typeC.setMaxWidth(250);
+                    typeC.setPrefWidth(250);
+                    typeC.getItems().setAll(Arrays.asList(new String[]{"Walk-In","Bill","Internal","Accounts Recievable"}));
+                    typeC.getSelectionModel().selectFirst();
 
                     Label warning = new Label("Invalid Time Range!");
                     warning.setTextFill(Color.RED);
@@ -2961,7 +3088,7 @@ public class CashierUXController implements Initializable, UIController {
                     warning.setPrefWidth(250);
                     warning.setVisible(false);
 
-                    content.getChildren().addAll(dfrom, tfrom, dto, tto, warning);
+                    content.getChildren().addAll(dfrom, tfrom, dto, tto,typeC, warning);
 
                     JFXButton filter = new JFXButton("Filter");
                     filter.getStyleClass().add("btn-info");
@@ -2980,11 +3107,13 @@ public class CashierUXController implements Initializable, UIController {
 
                         LocalDateTime ts1 = LocalDateTime.of(d1, t1);
                         LocalDateTime ts2 = LocalDateTime.of(d2, t2);
+                        
+                        String chtype = typeC.getSelectionModel().getSelectedItem();
                         if (ts1.isBefore(ts2)) {
                             dialog.close();
                             java.sql.Timestamp sqT1 = java.sql.Timestamp.valueOf(ts1);
                             java.sql.Timestamp sqT2 = java.sql.Timestamp.valueOf(ts2);
-                            loadChargesList(HospitalCharge.CHARGETIME + ">='" + sqT1 + "' AND " + HospitalCharge.CHARGETIME + "<='" + sqT2 + "' AND "+HospitalCharge.CHARGETYPE+"='Walk-In' ORDER BY " + HospitalCharge.CHARGETIME + " DESC");
+                            loadChargesList(HospitalCharge.CHARGETIME + ">='" + sqT1 + "' AND " + HospitalCharge.CHARGETIME + "<='" + sqT2 + "' AND "+HospitalCharge.CHARGETYPE+"='"+chtype+"' ORDER BY " + HospitalCharge.CHARGETIME + " DESC");
                         } else {
                             warning.setVisible(true);
                         }

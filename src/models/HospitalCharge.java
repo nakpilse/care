@@ -1140,7 +1140,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
                     Map<String, Object> m = new HashMap();
                     m.put("qty", item.getQuantity());
                     m.put("tr_item", item.getDescription()+((item.getQuantity() > 1)? " @ " + item.getSelling():""));
-                    m.put("amt", item.getNetsales());
+                    m.put("amt", item.getTotalselling());
                     datasource.add(m);
                 });
 
@@ -1157,7 +1157,7 @@ public class HospitalCharge extends SQLModel<HospitalCharge>{
                 datas.put("user", this.getUser());
                 datas.put("chargetime", DateTimeKit.toProperTimestamp(this.getChargetime()));
                 datas.put("chargenumber", this.getChargenumber());
-                datas.put("total", this.getNetsales());
+                datas.put("total", this.getTotalgross());
                 datas.put("physician", this.getOpt0());
                 
                 datas.put("requestor", this.getChargenotes());

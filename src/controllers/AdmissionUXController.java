@@ -1298,6 +1298,7 @@ public class AdmissionUXController implements Initializable,UIController  {
                                                                 record.setStateprovince(phoneV.get());
                                                                 record.setStateprovince(emailV.get());
                                                                 if(record.update()){
+                                                                    Patient.updateAllPatientReferrenceNames(record.getId(), record.getFirstname(), record.getMiddlename(), record.getLastname());
                                                                     Platform.runLater(()->{
                                                                         dialogx.close();
                                                                         FXDialog.showMessageDialog(mainStack, "Successful", "Patient Info has been updated!", FXDialog.SUCCESS);

@@ -141,9 +141,8 @@
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="24.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                          <RowConstraints maxHeight="1.7976931348623157E308" minHeight="5.0" prefHeight="5.0" vgrow="ALWAYS" />
                                         <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="24.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="24.0" minHeight="24.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -188,17 +187,22 @@
                                           <Label fx:id="t1netLbl" alignment="CENTER_RIGHT" layoutX="8.0" layoutY="20.0" maxHeight="35.0" prefHeight="35.0" style="-fx-font-size: 24;" styleClass="anton-font" text="0.00" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="20.0" />
                                        </children>
                                     </AnchorPane>
-                                    <JFXButton fx:id="t1invoiceBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayInvoice" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-success" text="PAY / PRINT INVOICE">
+                                    <JFXButton fx:id="t1accrecBtn" graphicTextGap="10.0" layoutX="10.0" layoutY="421.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#addToAccountsRecievables" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-control" text="ACCOUNTS RECIEVABLE">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="USER" size="18" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="t1invoiceBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayInvoice" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-success" text="PAY / PRINT INVOICE   ">
                                        <graphic>
                                           <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="18" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="t1orBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayOR" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-danger" text="PAY / PRINT OR        ">
+                                    <JFXButton fx:id="t1orBtn" graphicTextGap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#printPayOR" prefHeight="32.0" style="-fx-background-radius: 0; -jfx-button-type: FLAT;" styleClass="btn-danger" text="PAY / PRINT OR           ">
                                        <graphic>
                                           <FontAwesomeIconView fill="WHITE" glyphName="PRINT" size="18" />
                                        </graphic>
                                     </JFXButton>
-                                    <JFXButton fx:id="t1payBtn" graphicTextGap="10.0" layoutX="10.0" layoutY="473.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#doPaymentOnly" prefHeight="32.0" style="-fx-background-radius: 0 0 8 8; -jfx-button-type: FLAT;" styleClass="btn-primary" text="PAYMENT ONLY       ">
+                                    <JFXButton fx:id="t1payBtn" graphicTextGap="10.0" layoutX="10.0" layoutY="473.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#doPaymentOnly" prefHeight="32.0" style="-fx-background-radius: 0 0 8 8; -jfx-button-type: FLAT;" styleClass="btn-primary" text="PAYMENT ONLY          ">
                                        <graphic>
                                           <FontAwesomeIconView fill="WHITE" glyphName="SAVE" size="18" />
                                        </graphic>
@@ -334,7 +338,7 @@
                   <Insets left="15.0" />
                </padding>
             </JFXToggleNode>
-            <JFXToggleNode fx:id="advancesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="320.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showAdvances" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Cash Advances" toggleGroup="$menuGroup" wrapText="true">
+            <JFXToggleNode fx:id="advancesBtn" alignment="CENTER_LEFT" focusTraversable="false" graphicTextGap="8.0" layoutX="320.0" layoutY="23.0" maxHeight="60.0" maxWidth="140.0" onAction="#showAdvances" prefHeight="60.0" prefWidth="140.0" style="-fx-font-size: 13px;" styleClass="tab-toggle-btn" text="Partial Payments" toggleGroup="$menuGroup" wrapText="true">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -1403,10 +1403,10 @@ public class HospitalChargeItem extends SQLModel<HospitalChargeItem>{
                     }                    
                 }else{
                     vsales = 0;
-                    nvsales = this.getTotalselling();
+                    nvsales = this.getTotalselling()/vat_div;
                     zrsales = 0;
                     vatamt = 0;
-                    lvatamt = 0;//(this.getTotalselling()*vat_div)-this.getTotalselling();
+                    lvatamt = this.getTotalselling()-nvsales;   
 
                     sc_amt = nvsales * (sc/100);
                     pwd_amt = nvsales * (pwd/100);

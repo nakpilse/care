@@ -560,6 +560,32 @@ public class Patient extends SQLModel<Patient>{
         }
     }
     
+    public static boolean updateAllPatientReferrenceNames(int id,String firstname,String middlename,String lastname){
+        try{
+            Patient p = new Patient();
+            p.setFirstname(firstname);
+            p.setMiddlename(middlename);
+            p.setLastname(lastname);
+            p.setId(id);
+            
+            p.update(Patient.FIRSTNAME,Patient.MIDDLENAME,Patient.LASTNAME);
+            SQLTable.execute("UPDATE "+Consultation.TABLE_NAME+" SET "+Consultation.PATIENTNAME+"='"+p.getFullname()+"' WHERE "+Consultation.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+ERConsultation.TABLE_NAME+" SET "+ERConsultation.PATIENTNAME+"='"+p.getFullname()+"' WHERE "+ERConsultation.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+LaboratoryTest.TABLE_NAME+" SET "+LaboratoryTest.PATIENT+"='"+p.getFullname()+"' WHERE "+LaboratoryTest.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+RadiologyTest.TABLE_NAME+" SET "+RadiologyTest.PATIENT+"='"+p.getFullname()+"' WHERE "+RadiologyTest.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+Admission.TABLE_NAME+" SET "+Admission.PATIENTNAME+"='"+p.getFullname()+"' WHERE "+Admission.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+HospitalCharge.TABLE_NAME+" SET "+HospitalCharge.CHARGETO+"='"+p.getFullname()+"' WHERE "+HospitalCharge.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+HospitalChargeItem.TABLE_NAME+" SET "+HospitalChargeItem.CHARGETO+"='"+p.getFullname()+"' WHERE "+HospitalChargeItem.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+BillStatement.TABLE_NAME+" SET "+BillStatement.PATIENTNAME+"='"+p.getFullname()+"' WHERE "+BillStatement.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+CashAdvance.TABLE_NAME+" SET "+CashAdvance.PATIENT+"='"+p.getFullname()+"' WHERE "+CashAdvance.PATIENT_ID+"="+id);
+            SQLTable.execute("UPDATE "+Payment.TABLE_NAME+" SET "+Payment.PATIENT+"='"+p.getFullname()+"' WHERE "+Payment.PATIENT_ID+"="+id);
+            return true;
+        }catch(Exception er){
+            Logger.getLogger(Item.class.getName()).log(Level.SEVERE, null, er);
+            return false;
+        }
+    }
+    
     public static void main(String args[]){
         
     }

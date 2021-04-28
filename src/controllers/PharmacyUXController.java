@@ -674,7 +674,7 @@ public class PharmacyUXController implements Initializable, UIController {
                                         System.out.println("Transaction Saved");
                                     });
 
-                                    charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", true);
+                                    charge.printChargeSlip(maskerPane, opts.get("FACILITYNAME"), "Pharmacy", false);
                                 } else {
                                     Platform.runLater(() -> {
                                         dialog.close();
@@ -984,7 +984,7 @@ public class PharmacyUXController implements Initializable, UIController {
                         Platform.runLater(() -> {
                             String searccode = t1odeF.getText();
                             Care.process(() -> {
-                                List<Item> res = SQLTable.list(Item.class, Item.CODE + " ='" + searccode + "' AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
+                                List<Item> res = SQLTable.list(Item.class, Item.CODE + " ='" + searccode + "' AND " +Item.QUANTITY + ">0 AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
                                 Platform.runLater(() -> {
                                     FXTable.setList(t1sTbl, res);
                                 });
@@ -1030,7 +1030,7 @@ public class PharmacyUXController implements Initializable, UIController {
                         Platform.runLater(() -> {
                             String searccode = t1keyF.getText();
                             Care.process(() -> {
-                                List<Item> res = SQLTable.list(Item.class, "(" + Item.DESCRIPTION + " LIKE '%" + searccode + "%' OR " + Item.GENERICNAME + " LIKE '%" + searccode + "%') AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
+                                List<Item> res = SQLTable.list(Item.class, "(" + Item.DESCRIPTION + " LIKE '%" + searccode + "%' OR " + Item.GENERICNAME + " LIKE '%" + searccode + "%') AND " + Item.AVAILABLE + "=1 AND " +Item.QUANTITY + ">0 ORDER BY " + Item.DESCRIPTION + " ASC");
                                 Platform.runLater(() -> {
                                     FXTable.setList(t1sTbl, res);
                                 });
@@ -1075,7 +1075,7 @@ public class PharmacyUXController implements Initializable, UIController {
                     Platform.runLater(() -> {
                         String searccode = t1odeF.getText();
                         Care.process(() -> {
-                            List<Item> res = SQLTable.list(Item.class, Item.CODE + " ='" + searccode + "' AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
+                            List<Item> res = SQLTable.list(Item.class, Item.CODE + " ='" + searccode + "' AND " + Item.QUANTITY + ">0 AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
                             FXTable.setList(t1sTbl, res);
                         });
                     });
@@ -1087,7 +1087,7 @@ public class PharmacyUXController implements Initializable, UIController {
                     Platform.runLater(() -> {
                         String searccode = t1keyF.getText();
                         Care.process(() -> {
-                            List<Item> res = SQLTable.list(Item.class, "(" + Item.DESCRIPTION + " LIKE '%" + searccode + "%' OR " + Item.GENERICNAME + " LIKE '%" + searccode + "%') AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
+                            List<Item> res = SQLTable.list(Item.class, "(" + Item.DESCRIPTION + " LIKE '%" + searccode + "%' OR " + Item.GENERICNAME + " LIKE '%" + searccode + "%') AND " + Item.QUANTITY + ">0 AND " + Item.AVAILABLE + "=1 ORDER BY " + Item.DESCRIPTION + " ASC");
                             FXTable.setList(t1sTbl, res);
                         });
                     });

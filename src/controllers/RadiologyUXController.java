@@ -26,6 +26,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -71,6 +75,8 @@ import org.controlsfx.control.ListSelectionView;
 import org.controlsfx.control.MaskerPane;
 import org.controlsfx.control.textfield.TextFields;
 import utils.ExcelManager;
+import utils.FXDateEntry;
+import utils.FXTextEntry;
 
 /**
  * FXML Controller class
@@ -196,7 +202,7 @@ public class RadiologyUXController implements Initializable,UIController {
             FXTable.addColumn(t1table, "Category", RadiologyTest::testcategoryProperty, false);
             FXTable.addColumn(t1table, "Encoder", RadiologyTest::encoderProperty, false);
             FXTable.addColumn(t1table, "OR #", RadiologyTest::ornumberProperty, false);
-            TableColumn actCol = FXTable.addColumn(t1table, " ", RadiologyTest::patientProperty, false, 76, 76, 76);
+            TableColumn actCol = FXTable.addColumn(t1table, " ", RadiologyTest::patientProperty, false, 112, 112, 112);
             
             selCol.setCellFactory(column -> {
                 return new TableCell<RadiologyTest, Boolean>() {
@@ -255,9 +261,9 @@ public class RadiologyUXController implements Initializable,UIController {
                                 RadiologyTest row_data = getTableView().getItems().get(getIndex());
                                 if (row_data != null) {
                                     HBox container = new HBox();
-                                    container.setMinSize(76, 40);
-                                    container.setMaxSize(76, 40);
-                                    container.setPrefSize(76, 40);
+                                    container.setMinSize(112, 40);
+                                    container.setMaxSize(112, 40);
+                                    container.setPrefSize(112, 40);
                                     container.setSpacing(4);
                                     
                                     JFXButton viewBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.EDIT, "14px", evt -> {
@@ -268,6 +274,123 @@ public class RadiologyUXController implements Initializable,UIController {
                                     viewBtn.getStyleClass().add("btn-control");
                                     viewBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
                                     viewBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                                    
+                                    JFXButton patientBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.USER, "14px", evt -> {
+                                        try{
+                                            Patient record = (Patient)SQLTable.get(Patient.class, row_data.getPatient_id());
+                                            if(record != null){
+                                                VBox content = new VBox();
+                                                content.setMaxWidth(500);
+                                                content.setMaxHeight(500);
+                                                content.setAlignment(Pos.CENTER);
+                                                content.setSpacing(10);
+                                                content.setPadding(new Insets(35,25,25,25));
+
+                                                FXTextEntry fnameF = new FXTextEntry("Firstname");
+                                                FXTextEntry mnameF = new FXTextEntry("Middlename");
+                                                FXTextEntry lnameF = new FXTextEntry("Lastname");
+                                                FXTextEntry genF = new FXTextEntry("Gender");
+                                                FXDateEntry dateF = new FXDateEntry("Birthdate");
+                                                FXTextEntry addressF = new FXTextEntry("Address");
+                                                FXTextEntry municipalityF = new FXTextEntry("Municipality");
+                                                FXTextEntry provinceF = new FXTextEntry("Province");
+                                                FXTextEntry civilF = new FXTextEntry("Civil Status");
+                                                FXTextEntry relF = new FXTextEntry("Religion");
+                                                FXTextEntry mobileF = new FXTextEntry("Mobile");
+                                                FXTextEntry phoneF = new FXTextEntry("Landline");
+                                                FXTextEntry emailF = new FXTextEntry("Email");
+
+                                                StringProperty fnameV = new SimpleStringProperty(record.getFirstname());
+                                                StringProperty mnameV = new SimpleStringProperty(record.getMiddlename());
+                                                StringProperty lnameV = new SimpleStringProperty(record.getLastname());
+                                                StringProperty genV = new SimpleStringProperty(record.getGender());
+                                                ObjectProperty<LocalDate> dateV = new SimpleObjectProperty(record.getBirthdate());
+                                                StringProperty addressV = new SimpleStringProperty(record.getAddress());
+                                                StringProperty muniV = new SimpleStringProperty(record.getCitymunicipality());
+                                                StringProperty proviV = new SimpleStringProperty(record.getStateprovince());
+                                                StringProperty civilV = new SimpleStringProperty(record.getCivilstatus());
+                                                StringProperty relV = new SimpleStringProperty(record.getReligion());
+                                                StringProperty mobileV = new SimpleStringProperty(record.getMobile());
+                                                StringProperty phoneV = new SimpleStringProperty(record.getLandline());
+                                                StringProperty emailV = new SimpleStringProperty(record.getEmail());
+
+                                                fnameF.getTextfieldComponent().textProperty().bindBidirectional(fnameV);
+                                                mnameF.getTextfieldComponent().textProperty().bindBidirectional(mnameV);
+                                                lnameF.getTextfieldComponent().textProperty().bindBidirectional(lnameV);
+                                                genF.getTextfieldComponent().textProperty().bindBidirectional(genV);
+                                                dateF.getTextfieldComponent().valueProperty().bindBidirectional(dateV);
+                                                addressF.getTextfieldComponent().textProperty().bindBidirectional(addressV);
+                                                municipalityF.getTextfieldComponent().textProperty().bindBidirectional(muniV);
+                                                provinceF.getTextfieldComponent().textProperty().bindBidirectional(proviV);
+                                                civilF.getTextfieldComponent().textProperty().bindBidirectional(civilV);
+                                                relF.getTextfieldComponent().textProperty().bindBidirectional(relV);
+                                                mobileF.getTextfieldComponent().textProperty().bindBidirectional(mobileV);
+                                                phoneF.getTextfieldComponent().textProperty().bindBidirectional(phoneV);
+                                                emailF.getTextfieldComponent().textProperty().bindBidirectional(emailV);
+
+                                                FXField.addRequiredValidator(fnameF.getTextfieldComponent());
+                                                //FXField.addRequiredValidator(mnameF.getTextfieldComponent());
+                                                FXField.addRequiredValidator(lnameF.getTextfieldComponent());
+                                                FXField.addRequiredValidator(genF.getTextfieldComponent());
+                                                FXField.addRequiredValidator(dateF.getTextfieldComponent());
+
+                                                FXField.addFocusValidationListener(fnameF.getTextfieldComponent(),lnameF.getTextfieldComponent(),dateF.getTextfieldComponent(),genF.getTextfieldComponent());
+
+                                                JFXButton save = new JFXButton("Update");
+                                                save.getStyleClass().add("btn-success");
+
+                                                content.getChildren().addAll(fnameF,mnameF,lnameF,genF,dateF,addressF,municipalityF,provinceF,civilF,relF,mobileF,phoneF,emailF);
+                                                //new Label("Do you want to save changes?");
+                                                JFXDialog dialogx = FXDialog.showConfirmDialog(mainStack, "Update Patient Info", content, FXDialog.PRIMARY, save);
+                                                save.setOnAction(editEvt->{
+                                                    if(fnameF.getTextfieldComponent().validate() && lnameF.getTextfieldComponent().validate() && genF.getTextfieldComponent().validate() && dateF.getTextfieldComponent().validate()){
+                                                        FXTask task = new FXTask() {
+                                                            @Override
+                                                            protected void load() {      
+                                                                try{
+
+                                                                    record.setFirstname(fnameV.get());
+                                                                    record.setMiddlename(mnameV.get());
+                                                                    record.setLastname(lnameV.get());
+                                                                    record.setGender(genV.get());
+                                                                    record.setBirthdate(dateV.get());
+                                                                    record.setAddress(addressV.get());
+                                                                    record.setCitymunicipality(muniV.get());
+                                                                    record.setStateprovince(proviV.get());
+                                                                    record.setStateprovince(civilV.get());
+                                                                    record.setStateprovince(relV.get());
+                                                                    record.setStateprovince(mobileV.get());
+                                                                    record.setStateprovince(phoneV.get());
+                                                                    record.setStateprovince(emailV.get());
+
+                                                                    if(record.update()){
+                                                                        Patient.updateAllPatientReferrenceNames(record.getId(), record.getFirstname(), record.getMiddlename(), record.getLastname());
+                                                                        Platform.runLater(()->{
+                                                                            dialogx.close();
+                                                                            FXDialog.showMessageDialog(mainStack, "Successful", "Patient Info has been updated!", FXDialog.SUCCESS);
+                                                                            loadRadTestList(null);
+                                                                        });
+                                                                    }
+                                                                }catch(Exception er){
+                                                                    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                                                }
+                                                            }
+                                                        };
+                                                        Care.process(task);
+                                                    }
+                                                });
+                                            }
+                                            
+                                        }catch(Exception er){
+                                            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, er);
+                                        }
+                                    });
+                                    
+                                    patientBtn.setTooltip(new Tooltip("Edit Patient Info"));
+                                    patientBtn.getStyleClass().add("btn-primary");
+                                    patientBtn.setStyle("-jfx-button-type : FLAT;-fx-padding:0;");
+                                    patientBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                                    patientBtn.setDisable(row_data.getPatient_id() <= 0);
                                     
                                     JFXButton voidBtn = FXButtonsBuilderFactory.createButton("", 32, 32, "cell-btn", FontAwesomeIcon.TIMES_CIRCLE, "14px", evt -> {
                                         JFXButton btn = new JFXButton("Yes, Delete this record & charge!");
@@ -328,7 +451,7 @@ public class RadiologyUXController implements Initializable,UIController {
                                     voidBtn.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                                     
                                     container.setAlignment(Pos.CENTER_LEFT);
-                                    container.getChildren().addAll(viewBtn);
+                                    container.getChildren().addAll(patientBtn,viewBtn);
 
                                     setGraphic(container);
                                     setStyle("-fx-alightment : CENTER;");

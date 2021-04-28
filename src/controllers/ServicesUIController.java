@@ -147,8 +147,10 @@ public class ServicesUIController implements Initializable,UIController {
     private JFXToggleNode packagesBtn;
 
     @FXML
-    void addLabService(ActionEvent event) {
-
+    void addLabService(ActionEvent event) {        
+        HospitalService srv = new HospitalService();
+        srv.setFacility("LABORATORY");
+        ServiceFormController.showDialog(srv, mainStack, maskerPane, this);
     }
 
     @FXML
@@ -158,7 +160,9 @@ public class ServicesUIController implements Initializable,UIController {
 
     @FXML
     void addRadService(ActionEvent event) {
-
+        HospitalService srv = new HospitalService();
+        srv.setFacility("RADIOLOGY");
+        ServiceFormController.showDialog(srv, mainStack, maskerPane, this);
     }
 
     @FXML
@@ -419,6 +423,7 @@ public class ServicesUIController implements Initializable,UIController {
                                             
                                         });
                                     });
+                                    
                                     delBtn.setTooltip(new Tooltip("Delete"));
                                     delBtn.getStyleClass().add("btn-danger");
                                     delBtn.setStyle("-jfx-button-type : FLAT;");
